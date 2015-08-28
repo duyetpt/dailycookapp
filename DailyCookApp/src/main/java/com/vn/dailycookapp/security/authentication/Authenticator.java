@@ -9,27 +9,24 @@ import com.vn.dailycookapp.utils.ErrorCodeConstant;
  * login process is here
  */
 
-public class Authenticator {
+public final class Authenticator {
 	
-	public DCAResponse<CurrentUser> login(String username, String password) {
+	public static DCAResponse login(String username, String password) {
 		// TODO
 		return null;
 	}
 	
-	public DCAResponse<CurrentUser> loginByFb(String fbId, String refreshToken) {
+	public static DCAResponse loginByFb(String fbId, String refreshToken) {
 		FbToken fbToken = new FbToken();
 		fbToken.setFbId(fbId);
 		fbToken.setRefreshToken(refreshToken);
 		
-		DCAResponse<CurrentUser> response = new DCAResponse<>();
+		DCAResponse response = new DCAResponse();
 		try {
 			CurrentUser cUser = new CurrentUser();
 			cUser.login(fbToken);
 			response.setData(cUser);
 			response.setError(ErrorCodeConstant.SUCCESSUL.getErrorCode());
-			
-			// TODO
-			// UPDATE TO DATABASE
 		} catch (FbAuthException ex) {
 			response.setError(ex.getErrorCode());
 		}

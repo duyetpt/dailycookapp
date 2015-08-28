@@ -6,7 +6,6 @@ import javax.annotation.Priority;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 import org.slf4j.Logger;
@@ -25,10 +24,7 @@ public class RequestHandler implements ContainerRequestFilter{
 		logger.error("Processing authentization ...");
 		
 		if (requestContext.getUriInfo().getPath().equals("user/login")) {
-			// TODO
-			// LOGIN API
-			requestContext
-					.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity("User is not authorized!").build());
+			
 		} else {
 			// TODO
 			// Other api

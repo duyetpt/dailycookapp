@@ -12,17 +12,26 @@ public class Validator {
 	private Validator() {
 		pattern = Pattern.compile(EMAIL_PATTEN);
 	}
+	
+	private static Validator validator;
+	public static Validator getInstance() {
+		if (validator == null) {
+			validator = new Validator();
+		}
+		
+		return validator;
+	}
 
 	/**
 	 * @param obj
 	 * @return
 	 * @throws ValidateException
 	 */
-	public boolean isNotNull(Object obj) throws ValidateException {
+	public boolean isNotNull(Object obj) {
 		return obj != null;
 	}
 
-	/**
+	/**	
 	 * @param obj
 	 * @return
 	 */
@@ -36,7 +45,7 @@ public class Validator {
 	 * @param msg
 	 * @return
 	 */
-	public boolean isValidEmail(String email, int errorCode, String msg) {
+	public boolean isValidEmail(String email) {
 		matcher = pattern.matcher(email);
 		return matcher.matches();
 	}

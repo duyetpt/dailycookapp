@@ -7,7 +7,8 @@ public class APIDispatcher {
 	@SuppressWarnings("rawtypes")
 	private static Hashtable<ApiDefine, AbstractAPI> mapedApi;
 	static {
-		
+		mapedApi = new Hashtable<>();
+		mapedApi.put(ApiDefine.LOGIN, new LoginAPI());
 	}
 	
 	@SuppressWarnings("rawtypes")

@@ -1,6 +1,6 @@
 package com.vn.dailycookapp.security.session;
 
-class Session {
+public final class Session {
 	
 	static final long	TTL	= 10 * 24 * 60 * 60 * 1000;		// ten day
 																

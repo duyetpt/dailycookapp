@@ -10,9 +10,10 @@ public enum ErrorCodeConstant {
 	LOGIN_FB_FAIL(-100, "Login in facebook fail"),
 	PASSWORD_INCORRECT(-101, "Password is incorrect"),
 	USERNAME_INCORRECT(-102, "User name is incorrect"),
+	INVALID_PARAM(-103, "Incorrect param"),
 	
-	TOKEN_INVALID(-201, "token is invalid"),
-	SESSION_CLOSED(-202, "Session is closed");
+	INVALID_TOKEN(-201, "token is invalid"),
+	CLOSED_SESSION(-202, "Session is closed");
 	
 	@JsonProperty("error_code")
 	private int errorCode;

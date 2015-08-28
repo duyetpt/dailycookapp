@@ -9,16 +9,14 @@ public abstract class AbstractAPI<T> {
 	
 	protected T	t;
 	
-	protected abstract void preExecute(String... data);
+	protected abstract void preExecute(String... data) throws Exception;
 	
-	@SuppressWarnings("rawtypes")
-	protected abstract DCAResponse execute();
+	protected abstract DCAResponse execute() throws Exception;
 	
-	@SuppressWarnings("rawtypes")
-	public String doProcess() {
+	public String doProcess(String... data) {
 		DCAResponse response = null;
 		try {
-			preExecute();
+			preExecute(data);
 			response = execute();
 		} catch (Exception ex) {
 			if (ex instanceof ValidateException) {
