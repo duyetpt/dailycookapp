@@ -2,13 +2,13 @@ package com.vn.dailycookapp.restapi.response;
 
 import com.vn.dailycookapp.utils.json.JsonProperty;
 
-public class DCAResponse<T> {
+public class DCAResponse {
 	
 	@JsonProperty("error_no")
 	private int	error;
 	
 	@JsonProperty("data")
-	private T	data;
+	private Object	data;
 	
 	public DCAResponse() {
 	}
@@ -25,11 +25,11 @@ public class DCAResponse<T> {
 		this.error = error;
 	}
 	
-	public T getData() {
+	public Object getData() {
 		return data;
 	}
 	
-	public void setData(T data) {
+	public void setData(Object data) {
 		this.data = data;
 	}
 }

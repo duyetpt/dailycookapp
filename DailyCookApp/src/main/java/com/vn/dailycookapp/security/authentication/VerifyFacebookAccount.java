@@ -13,10 +13,11 @@ import com.vn.dailycookapp.entity.AccountInfo;
 
 class VerifyFacebookAccount {
 	
-	final Logger							logger			= LoggerFactory.getLogger(getClass());
+	final Logger							logger					= LoggerFactory.getLogger(getClass());
 	
-	private static String					fb_graph_path	= "https://graph.facebook.com/me?fields=id,name,picture{url},cover,about,address,birthday&access_token=";
-	private final String					USER_AGENT		= "Mozilla/5.0";
+	private static String					fb_graph_path			= "https://graph.facebook.com/me?fields=id,name,picture{url},cover,about,address,birthday&access_token=";
+	private static String					fb_graph_path_checked	= "https://graph.facebook.com/me?fields=id&access_token=";
+	private final String					USER_AGENT				= "Mozilla/5.0";
 	
 	private static VerifyFacebookAccount	instance;
 	
@@ -96,4 +97,41 @@ class VerifyFacebookAccount {
 		return null;
 	}
 	
+	String checkedValidToken(String token) {
+		try {
+			URL obj = new URL(fb_graph_path_checked + token);
+			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+			con.setRequestMethod("GET");
+			
+			// add request header
+			con.setRequestProperty("User-Agent", USER_AGENT);
+			
+			int responseCode = con.getResponseCode();
+			if (responseCode != 200) {
+				logger.error("Check fb account active error: " + responseCode + ". token= " + token);
+				return null;
+			}
+			
+			// read response data
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String inputLine;
+			StringBuilder response = new StringBuilder();
+			
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+			
+			// extract infor
+			JSONObject jsonObj = new JSONObject(response.toString());
+			// get fb_id
+			String id = jsonObj.getString("id");
+			
+			return id;
+		} catch (Exception ex) {
+			logger.error("Check fb account active error", ex);
+		}
+		
+		return null;
+	}
 }

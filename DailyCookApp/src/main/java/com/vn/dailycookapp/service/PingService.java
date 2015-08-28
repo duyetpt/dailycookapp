@@ -13,7 +13,7 @@ import com.vn.dailycookapp.restapi.response.DCAResponse;
 import com.vn.dailycookapp.utils.json.JsonTransformer;
 
 @Path("/dailycook")
-public class Ping {
+public class PingService {
 	
 	@GET
 	@Path("/ping")
@@ -22,7 +22,7 @@ public class Ping {
 	public Response ping() {
 		
 		String msg = "t-" + System.currentTimeMillis();
-		DCAResponse<String> dcaResponse = new DCAResponse<String>(0);
+		DCAResponse dcaResponse = new DCAResponse(0);
 		dcaResponse.setData(msg);
 		
 		return Response.ok(JsonTransformer.getInstance().marshall(dcaResponse)).status(Response.Status.OK).build();
@@ -34,7 +34,7 @@ public class Ping {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response sayHello(@QueryParam(value = "name") String name) {
 		String msg = "Hello, " + name + ". " + HelloMessageDAO.getInstance().getMessage();
-		DCAResponse<String> dcaResponse = new DCAResponse<String>(0);
+		DCAResponse dcaResponse = new DCAResponse(0);
 		dcaResponse.setData(msg);
 		
 		return Response.ok(JsonTransformer.getInstance().marshall(dcaResponse)).status(Response.Status.OK).build();

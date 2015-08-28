@@ -1,12 +1,9 @@
 package com.vn.dailycookapp.dao;
 
-import org.mongodb.morphia.Datastore;
-
 import com.vn.dailycookapp.entity.HelloMessage;
 
-public class HelloMessageDAO {
+public class HelloMessageDAO extends AbstractDAO{
 	
-	private final Datastore datastore = ConnectionDAO.getDataStore();
 	private static HelloMessageDAO instance;
 	
 	private HelloMessageDAO	(){
@@ -20,12 +17,6 @@ public class HelloMessageDAO {
 		
 		return instance;
 	}
-	
-//	public void addMessage(String msg) {
-//		HelloMessage hm = new HelloMessage();
-//		hm.setMessage(msg);
-//		datastore.save(hm);
-//	}
 	
 	public String getMessage() {
 		HelloMessage hm = datastore.createQuery(HelloMessage.class).get();

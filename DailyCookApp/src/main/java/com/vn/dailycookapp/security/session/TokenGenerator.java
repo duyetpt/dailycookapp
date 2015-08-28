@@ -1,4 +1,4 @@
-package com.vn.dailycookapp.security.authentication;
+package com.vn.dailycookapp.security.session;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
