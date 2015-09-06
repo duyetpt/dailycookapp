@@ -16,8 +16,8 @@ public class UserService {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/login")
-	public Response login(@HeaderParam(HeaderField.AUTHORIZATION) String authInfo) {
-		String data = APIDispatcher.getApi(ApiDefine.LOGIN).doProcess(authInfo);
+	public Response login(@HeaderParam(HeaderField.AUTHORIZATION) String authInfo, @HeaderParam(HeaderField.LOGIN_METHOD) String loginMethod) {
+		String data = APIDispatcher.getApi(ApiDefine.LOGIN).doProcess(authInfo, loginMethod);
 		
 		return Response.ok(data).build();
 	}

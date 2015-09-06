@@ -39,4 +39,5 @@ public class PingService {
 		
 		return Response.ok(JsonTransformer.getInstance().marshall(dcaResponse)).status(Response.Status.OK).build();
 	}
+		
 }

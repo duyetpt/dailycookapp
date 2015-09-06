@@ -16,6 +16,7 @@ public class CurrentUser {
 	public void login(FbToken fbToken) throws FbAuthException {
 		// get data into database
 		User user = UserDAO.getInstance().getUserInfoByFbId(fbToken.getFbId());
+//		User user = null;
 		if (user == null) {
 			AccountInfo acc = VerifyFacebookAccount.getInstance().sentGet(fbToken.getRefreshToken());
 			if (acc == null) {

@@ -1,7 +1,10 @@
 package com.vn.dailycookapp.dao;
 
+import java.util.List;
+
 import org.mongodb.morphia.query.Query;
 
+import com.mongodb.BasicDBObject;
 import com.vn.dailycookapp.entity.User;
 
 public class UserDAO extends AbstractDAO {
@@ -31,8 +34,9 @@ public class UserDAO extends AbstractDAO {
 	
 	public User getUserInfoByFbId(String fbId) {
 		Query<User> query = datastore.createQuery(User.class).field("fb_id").equal(fbId);
-		User user = query.get();
+		datastore.getCollection(User.class).findOne(new BasicDBObject("fb_id", fbId));
+		List<User> users = query.asList();
 		
-		return user;
+		return users == null || users.isEmpty() ? null : users.get(0);
 	}
 }

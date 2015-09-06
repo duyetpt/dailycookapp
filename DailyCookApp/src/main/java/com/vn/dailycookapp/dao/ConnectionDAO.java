@@ -6,12 +6,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.mongodb.MongoClient;
+import com.vn.dailycookapp.utils.ConfigurationLoader;
 
 class ConnectionDAO {
 	
 	private final static Logger logger = LoggerFactory.getLogger(ConnectionDAO.class);
 	
-	private static final String DBNAME = "dailycook";
+	private static final String DBNAME = ConfigurationLoader.getInstance().getDbName();
 	private static Morphia morphia;
 	private static Datastore datastore;
 	

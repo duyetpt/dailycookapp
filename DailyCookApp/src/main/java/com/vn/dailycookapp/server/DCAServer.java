@@ -7,6 +7,8 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
+import com.vn.dailycookapp.utils.ConfigurationLoader;
+
 public class DCAServer {
 	
 	public static void main(String[] args) {
@@ -25,21 +27,8 @@ public class DCAServer {
 		contextHandler.setContextPath("/");
 		contextHandler.addServlet(holder, "/*");
 		
-//		InetSocketAddress inetSocket = new InetSocketAddress("localhost", 8189);
-//		Server server = new Server(inetSocket);
-//		server.setHandler(contextHandler);
-		
-		Server server = new Server(8181);
+		Server server = new Server(ConfigurationLoader.getInstance().getServerPort());
 		server.setHandler(contextHandler);
-		
-//		ServerConnector sConnector = new ServerConnector(server);
-//		sConnector.setHost("localhost");
-//		sConnector.setPort(2134);
-//		sConnector.setIdleTimeout(1800); // set timeout (second) before close connect
-//		sConnector.setAcceptQueueSize(1500);  // max request in queue
-		
-//		server.setConnectors(new Connector[]{sConnector});
-		
 		
 		try {
 			server.start();
