@@ -38,4 +38,5 @@ public class UserServiceTest extends JerseyTest{
 		assertEquals(26, user.getToken().length());
 	}
 	
+	
 }

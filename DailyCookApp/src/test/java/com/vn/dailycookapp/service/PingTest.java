@@ -21,7 +21,6 @@ public class PingTest extends JerseyTest {
 	@Test
 	public void test() {
 		final String helloYou = target("dailycook/ping").request().get(String.class);
-		// System.out.println(helloYou);
 		assertNotNull(helloYou);
 	}
 }

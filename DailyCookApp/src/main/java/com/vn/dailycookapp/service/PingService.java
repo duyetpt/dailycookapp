@@ -18,7 +18,6 @@ public class PingService {
 	@GET
 	@Path("/ping")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response ping() {
 		
 		String msg = "t-" + System.currentTimeMillis();
@@ -31,7 +30,6 @@ public class PingService {
 	@GET
 	@Path("/hello")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response sayHello(@QueryParam(value = "name") String name) {
 		String msg = "Hello, " + name + ". " + HelloMessageDAO.getInstance().getMessage();
 		DCAResponse dcaResponse = new DCAResponse(0);
