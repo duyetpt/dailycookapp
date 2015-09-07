@@ -1,11 +1,11 @@
-package com.vn.dailycookapp.restapi;
+package com.vn.dailycookapp.restmodel;
 
-public enum ApiDefine {
+public enum ModelDefine {
 	
 	LOGIN("login");
 	
 	private final String name;
-	private ApiDefine(String name) {
+	private ModelDefine(String name) {
 		this.name = name;
 	}
 	public String getName() {

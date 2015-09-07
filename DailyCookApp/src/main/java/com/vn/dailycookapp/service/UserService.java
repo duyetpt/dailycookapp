@@ -7,8 +7,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.vn.dailycookapp.restapi.APIDispatcher;
-import com.vn.dailycookapp.restapi.ApiDefine;
+import com.vn.dailycookapp.restmodel.ModelDefine;
+import com.vn.dailycookapp.restmodel.ModelResolver;
 
 @Path("/dailycook/user")
 public class UserService {
@@ -17,7 +17,7 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/login")
 	public Response login(@HeaderParam(HeaderField.AUTHORIZATION) String authInfo, @HeaderParam(HeaderField.LOGIN_METHOD) String loginMethod) {
-		String data = APIDispatcher.getApi(ApiDefine.LOGIN).doProcess(authInfo, loginMethod);
+		String data = ModelResolver.getApi(ModelDefine.LOGIN).doProcess(authInfo, loginMethod);
 		
 		return Response.ok(data).build();
 	}

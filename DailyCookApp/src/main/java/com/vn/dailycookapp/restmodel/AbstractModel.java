@@ -1,14 +1,14 @@
-package com.vn.dailycookapp.restapi;
+package com.vn.dailycookapp.restmodel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.vn.dailycookapp.restapi.response.DCAResponse;
+import com.vn.dailycookapp.restmodel.response.DCAResponse;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
 import com.vn.dailycookapp.utils.ValidateException;
 import com.vn.dailycookapp.utils.json.JsonTransformer;
 
-public abstract class AbstractAPI {
+public abstract class AbstractModel {
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
 	
 	protected abstract void preExecute(String... data) throws Exception;
