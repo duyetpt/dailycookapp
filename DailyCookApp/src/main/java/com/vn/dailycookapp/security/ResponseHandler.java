@@ -18,7 +18,7 @@ public class ResponseHandler implements ContainerResponseFilter {
 	public void filter(ContainerRequestContext reqeust, ContainerResponseContext responseContext) throws IOException {
 		
 		responseContext.setStatusInfo(Status.OK);
-		responseContext.getHeaders().add("Content-Type", "text/plain;charset=UTF-8");
+//		responseContext.getHeaders().add("Content-Type", "text/plain;charset=UTF-8");
 		responseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
 		responseContext.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
 		responseContext.getHeaders().add("Access-Control-Allow-Credentials", "true");

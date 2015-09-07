@@ -6,12 +6,16 @@ import java.io.InputStream;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
+import com.vn.dailycookapp.restmodel.response.DCAResponse;
+import com.vn.dailycookapp.utils.ErrorCodeConstant;
 import com.vn.dailycookapp.utils.StreamUtils;
+import com.vn.dailycookapp.utils.json.JsonTransformer;
 
 @Path("/dailycook/file")
 public class ImageService {
@@ -26,9 +30,12 @@ public class ImageService {
 	@POST
 	@Path("/upload")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Produces(MediaType.APPLICATION_JSON)
 	// @FormDataParam("image") FormDataContentDisposition contentDisposition
 	public Response addImage(@FormDataParam("image") InputStream inputStream) {
-		StreamUtils.saveImage(inputStream, "png");
-		return Response.ok().build();
+		String pathFile = StreamUtils.saveImage(inputStream, "png");
+		DCAResponse response = new DCAResponse(ErrorCodeConstant.SUCCESSUL.getErrorCode());
+		response.setData(pathFile);
+		return Response.ok(JsonTransformer.getInstance().marshall(response)).build();
 	}
 }

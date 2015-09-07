@@ -17,7 +17,7 @@ public class DCAServer {
 		// regist for @Path and @Provider with SPI
 		resourceConfig.packages("com.vn.dailycookapp.service", 
 								"com.vn.dailycookapp.auth",
-								"com.vn.dailycookapp.ResponseHandler");
+								"com.vn.dailycookapp.security");
 		resourceConfig.register(MultiPartFeature.class);	// Enable Multipart/form-data feature
 
 		ServletContainer container = new ServletContainer(resourceConfig);
