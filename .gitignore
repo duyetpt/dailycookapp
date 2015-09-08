@@ -2,3 +2,6 @@ DailyCookApp/.classpath
 *.class
 DailyCookApp/target/
 DailyCookApp/.metadata/
+Servers/
+RemoteSystemsTempFiles/
+.metadata/
