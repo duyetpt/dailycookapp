@@ -27,20 +27,6 @@ public class PingService {
 		return Response.ok(JsonTransformer.getInstance().marshall(dcaResponse)).status(Response.Status.OK).build();
 	}
 	
-	@POST
-	@Path("ping/post")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String pingPostTest(String data) {
-		return "Recived data: " + data;
-	}
-	
-	@GET
-	@Path("ping/get")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String pingGetTest(@QueryParam("data") String data) {
-		return "Recived data: " + data;
-	}
-	
 	@GET
 	@Path("/hello")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -51,5 +37,11 @@ public class PingService {
 		
 		return Response.ok(JsonTransformer.getInstance().marshall(dcaResponse)).status(Response.Status.OK).build();
 	}
-		
+	
+	@GET
+	@Path("/demo")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response demo(){
+		return Response.ok("demo").status(Response.Status.OK).build();
+	}
 }

@@ -2,7 +2,9 @@ package com.vn.dailycookapp.restmodel;
 
 public enum ModelDefine {
 	
-	LOGIN("login");
+	LOGIN("login"),
+	REGISTER("register");
+	
 	
 	private final String name;
 	private ModelDefine(String name) {
