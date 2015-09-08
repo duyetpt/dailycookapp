@@ -1,5 +1,7 @@
 package com.vn.dailycookapp.restmodel.model;
 
+import java.security.InvalidParameterException;
+
 import org.glassfish.jersey.internal.util.Base64;
 
 import com.vn.dailycookapp.restmodel.AbstractModel;
@@ -7,8 +9,8 @@ import com.vn.dailycookapp.restmodel.response.DCAResponse;
 import com.vn.dailycookapp.security.authentication.Authenticator;
 import com.vn.dailycookapp.security.authentication.CurrentUser;
 import com.vn.dailycookapp.security.authentication.LoginMethod;
+import com.vn.dailycookapp.utils.DCAException;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
-import com.vn.dailycookapp.utils.ValidateException;
 
 public class LoginModel extends AbstractModel {
 	
@@ -16,9 +18,9 @@ public class LoginModel extends AbstractModel {
 	private String	loginMethod;
 	
 	@Override
-	protected void preExecute(String... data) throws Exception {
+	protected void preExecute(String... data) throws DCAException {
 		if (data == null || data.length < 2) {
-			throw new ValidateException(ErrorCodeConstant.INVALID_PARAM);
+			throw new InvalidParameterException();
 		}
 		accountInfo = data[0];
 		loginMethod = data[1];
@@ -29,12 +31,12 @@ public class LoginModel extends AbstractModel {
 		DCAResponse response = null;
 		String[] infors = accountInfo.split(" ");
 		if (infors.length != 2) {
-			response = new DCAResponse(ErrorCodeConstant.INVALID_PARAM.getErrorCode());
+			response = new DCAResponse(ErrorCodeConstant.INVALID_DATA.getErrorCode());
 		} else {
 			String accString = Base64.decodeAsString(infors[1]);
 			String[] m_username_pass = accString.split(":");
 			if (m_username_pass.length != 2) {
-				response = new DCAResponse(ErrorCodeConstant.INVALID_PARAM.getErrorCode());
+				response = new DCAResponse(ErrorCodeConstant.INVALID_DATA.getErrorCode());
 			} else {
 				CurrentUser cUser = null;
 				switch (loginMethod) {

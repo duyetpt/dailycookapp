@@ -5,6 +5,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.vn.dailycookapp.utils.validate.InvalidEmailFormatException;
+import com.vn.dailycookapp.utils.validate.Validator;
+
 public class TestValidator {
 	
 	static Validator validtor;
@@ -27,20 +30,17 @@ public class TestValidator {
 	}
 	
 	@Test
-	public void testValidateEmail() {
-		assertEquals(true, validtor.isValidEmail("duyept@gmail.com"));
-		assertEquals(true, validtor.isValidEmail("duyept12@gmail.com"));
-		assertEquals(true, validtor.isValidEmail("duyepsdft@gmail.com"));
-		assertEquals(true, validtor.isValidEmail("duyept@hotmail.com"));
-		assertEquals(true, validtor.isValidEmail("duyept@yahoo.com"));
+	public void testValidateEmail() throws InvalidEmailFormatException {
+		validtor.validateEmail("duyept@gmail.com");
 	}
 	
-	@Test
-	public void testInvalidateEmail() {
-		assertEquals(false, validtor.isValidEmail(""));
-		assertEquals(false, validtor.isValidEmail("duyetpt@"));
-		assertEquals(false, validtor.isValidEmail("@xxxxx"));
-		assertEquals(false, validtor.isValidEmail("abcabc"));
-		assertEquals(false, validtor.isValidEmail("ac@abc@"));
+	@Test(expected = InvalidEmailFormatException.class)
+	public void testValidateEmail1() throws InvalidEmailFormatException {
+		validtor.validateEmail("duyeptil.com");
+	}
+	
+	@Test(expected = InvalidEmailFormatException.class)
+	public void testValidateEmail2() throws InvalidEmailFormatException {
+		validtor.validateEmail(null);
 	}
 }

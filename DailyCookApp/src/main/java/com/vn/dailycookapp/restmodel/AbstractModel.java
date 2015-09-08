@@ -4,12 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.vn.dailycookapp.restmodel.response.DCAResponse;
+import com.vn.dailycookapp.utils.DCAException;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
-import com.vn.dailycookapp.utils.ValidateException;
 import com.vn.dailycookapp.utils.json.JsonTransformer;
 
 public abstract class AbstractModel {
-	protected final Logger logger = LoggerFactory.getLogger(getClass());
+	protected final Logger	logger	= LoggerFactory.getLogger(getClass());
 	
 	protected abstract void preExecute(String... data) throws Exception;
 	
@@ -21,9 +21,9 @@ public abstract class AbstractModel {
 			preExecute(data);
 			response = execute();
 		} catch (Exception ex) {
-			if (ex instanceof ValidateException) {
-				ValidateException vEx = (ValidateException) ex;
-				response = new DCAResponse(vEx.getError().getErrorCode());
+			if (ex instanceof DCAException) {
+				DCAException vEx = (DCAException) ex;
+				response = new DCAResponse(vEx.getErrorCode());
 			} else {
 				response = new DCAResponse(ErrorCodeConstant.UNKNOW_ERROR.getErrorCode());
 			}

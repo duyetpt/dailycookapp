@@ -1,11 +1,10 @@
 package com.vn.dailycookapp.dao;
 
-import java.util.List;
-
 import org.mongodb.morphia.query.Query;
 
-import com.mongodb.BasicDBObject;
 import com.vn.dailycookapp.entity.User;
+import com.vn.dailycookapp.utils.DCAException;
+import com.vn.dailycookapp.utils.ErrorCodeConstant;
 
 public class UserDAO extends AbstractDAO {
 	
@@ -19,24 +18,36 @@ public class UserDAO extends AbstractDAO {
 		return instance;
 	}
 	
-	public void save(User user) {
-		synchronized (user) {
-			datastore.save(user);
+	public void save(User user) throws DCAException {
+		try {
+			synchronized (user) {
+				datastore.save(user);
+			}
+		} catch (Exception ex) {
+			throw new DAOException(ErrorCodeConstant.DAO_EXCEPTION);
+		}
+		
+	}
+	
+	public User getUserInfoByEmail(String email) throws DAOException {
+		try {
+			Query<User> query = datastore.createQuery(User.class).field("email").equal(email);
+			User user = query.get();
+			
+			return user;
+		} catch (Exception ex) {
+			throw new DAOException(ErrorCodeConstant.DAO_EXCEPTION);
 		}
 	}
 	
-	public User getUserInfoByEmail(String email) {
-		Query<User> query = datastore.createQuery(User.class).field("email").equal(email);
-		User user = query.get();
-		
-		return user;
-	}
-	
-	public User getUserInfoByFbId(String fbId) {
-		Query<User> query = datastore.createQuery(User.class).field("fb_id").equal(fbId);
-		datastore.getCollection(User.class).findOne(new BasicDBObject("fb_id", fbId));
-		List<User> users = query.asList();
-		
-		return users == null || users.isEmpty() ? null : users.get(0);
+	public User getUserInfoByFbId(String fbId) throws DAOException {
+		try {
+			Query<User> query = datastore.createQuery(User.class).field("fb_id").equal(fbId);
+			User user = query.get();
+			
+			return user;
+		} catch (Exception ex) {
+			throw new DAOException(ErrorCodeConstant.DAO_EXCEPTION);
+		}
 	}
 }

@@ -4,7 +4,10 @@ import com.vn.dailycookapp.dao.UserDAO;
 import com.vn.dailycookapp.entity.AccountInfo;
 import com.vn.dailycookapp.entity.User;
 import com.vn.dailycookapp.security.session.SessionManager;
+import com.vn.dailycookapp.utils.DCAException;
+import com.vn.dailycookapp.utils.EncryptHelper;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
+import com.vn.dailycookapp.utils.validate.Validator;
 
 public class CurrentUser {
 	private String	displayName;
@@ -13,14 +16,14 @@ public class CurrentUser {
 	private String	dob;
 	private String	token;
 	
-	public void login(FbToken fbToken) throws FbAuthException {
+	public void login(FbToken fbToken) throws DCAException {
 		// get data into database
 		User user = UserDAO.getInstance().getUserInfoByFbId(fbToken.getFbId());
-//		User user = null;
+		// User user = null;
 		if (user == null) {
 			AccountInfo acc = VerifyFacebookAccount.getInstance().sentGet(fbToken.getRefreshToken());
 			if (acc == null) {
-				throw new FbAuthException(ErrorCodeConstant.LOGIN_FB_FAIL.getErrorCode());
+				throw new LoginFailException(ErrorCodeConstant.LOGIN_FB_FAIL);
 			} else {
 				if (fbToken.getFbId().equals(acc.getFbId())) {
 					displayName = acc.getDisplayName();
@@ -31,6 +34,8 @@ public class CurrentUser {
 					// Update DATABASE
 					String userId = saveToDB(fbToken);
 					token = SessionManager.getInstance().addSession(userId);
+				} else {
+					throw new LoginFailException(ErrorCodeConstant.LOGIN_FB_FAIL);
 				}
 			}
 		} else {
@@ -43,7 +48,7 @@ public class CurrentUser {
 		
 	}
 	
-	private String saveToDB(FbToken fbToken) {
+	private String saveToDB(FbToken fbToken) throws DCAException{
 		User user = new User();
 		user = new User();
 		user.setDisplayName(displayName);
@@ -56,8 +61,25 @@ public class CurrentUser {
 		return user.getId();
 	}
 	
-	public void login(UsernamePasswordToken token) {
+	public void login(UsernamePasswordToken token) throws DCAException {
+		Validator.getInstance().validateEmail(token.getUsername());
+		Validator.getInstance().validatePassword(token.getPassword());
 		
+		User user = UserDAO.getInstance().getUserInfoByEmail(token.getUsername());
+		if (user != null) {
+			String password = EncryptHelper.encrypt(token.getPassword());
+			if (password.equals(user.getPassword())) {
+				displayName = user.getDisplayName();
+				avatarUrl = user.getAvatarUrl();
+				coverUrl = user.getCoverUrl();
+				dob = user.getDob();
+				this.token = SessionManager.getInstance().addSession(user.getId());
+			} else {
+				throw new LoginFailException(ErrorCodeConstant.PASSWORD_INCORRECT);
+			}
+		} else {
+			throw new LoginFailException(ErrorCodeConstant.USER_NOT_FOUND);
+		}
 	}
 	
 	public String getDisplayName() {
