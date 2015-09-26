@@ -6,6 +6,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -24,11 +25,11 @@ public class RecipeService {
 	}
 	
 	@GET
-	@Path("/{lang}/{parentId}/categories")
+	@Path("/{lang}/categories")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getCategories(@PathParam("parentId") String parentCat) {
-		// TODO
-		return null;
+	public Response getCategories(@PathParam("lang")String language, @QueryParam("parentId") String parentId) {
+		String data = ModelResolver.getApi(ModelDefine.GET_CATEGORY).doProcess(language, parentId);
+		return Response.ok().entity(data).build();
 	}
 	
 	@GET

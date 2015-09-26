@@ -37,7 +37,7 @@ public class RequestHandler implements ContainerRequestFilter {
 		String url = requestContext.getUriInfo().getPath();// .equals("user/login")
 		String query = requestContext.getUriInfo().getRequestUri().getQuery();
 		System.out.println(query);
-		if (query.equals("testMode=true")) {
+		if (query.endsWith("testMode=true")) {
 			logger.info("run in test mode...");
 		} else {
 			if (url.equals("user/login") || url.equals("user/register")) {

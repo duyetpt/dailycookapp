@@ -1,12 +1,13 @@
 package com.vn.dailycookapp.restmodel;
 
+import com.vn.dailycookapp.restmodel.model.GetCategories;
 import com.vn.dailycookapp.restmodel.model.GetIngredientTypesModel;
 import com.vn.dailycookapp.restmodel.model.LoginModel;
 
 public enum ModelDefine {
 	
 	GET_INGREDIENT_TYPE("get_ingredient_type", GetIngredientTypesModel.class),
-//	GET_CATEGORY("get_category", null),
+	GET_CATEGORY("get_category", GetCategories.class),
 //	CREATE_RECIPE("create_recipe", null),
 //	REGISTER("register", null);
 	LOGIN("login", LoginModel.class);
