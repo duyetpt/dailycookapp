@@ -17,7 +17,7 @@ class ConnectionDAO {
 	private static Datastore datastore;
 	
 	private static void config() {
-		logger.info("Connect mongoDB...");
+		logger.info(("Connect mongoDB..."));
 		
 		morphia = new Morphia();
 		
@@ -30,7 +30,7 @@ class ConnectionDAO {
 		// create the Datastore connecting to the default port on the local host
 		datastore = morphia.createDatastore(mongoClient, DBNAME);
 		
-		logger.info("Connect " + DBNAME + "database success ...");
+		logger.info(("Connect " + DBNAME + "database success ..."));
 	}
 	
 	public static Datastore getDataStore() {

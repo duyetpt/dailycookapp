@@ -12,14 +12,17 @@ import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JsonTransformer {
+	private final Logger	logger	= LoggerFactory.getLogger(getClass());
 	
 	public <T> String marshall(T t) {
-//		long s = System.currentTimeMillis();
+		// long s = System.currentTimeMillis();
 		JSONObject jsonObj = marshallChild(t);
-//		long e = System.currentTimeMillis();
-//		System.out.println(e-s);
+		// long e = System.currentTimeMillis();
+		// System.out.println(e-s);
 		return jsonObj == null ? null : jsonObj.toString();
 	}
 	
@@ -100,7 +103,7 @@ public class JsonTransformer {
 			}
 			return obj;
 		} catch (Exception ex) {
-			// TODO LOG HERE
+			logger.error(ex.getMessage(), ex);
 		}
 		return null;
 	}
@@ -119,7 +122,7 @@ public class JsonTransformer {
 			}
 			return jsonObj;
 		} catch (Exception ex) {
-			// TODO LOG HERE
+			logger.error(ex.getMessage(), ex);
 		}
 		
 		return null;
@@ -142,7 +145,7 @@ public class JsonTransformer {
 			return jsonArr;
 			
 		} catch (Exception ex) {
-			// TODO
+			logger.error(ex.getMessage(), ex);
 		}
 		return null;
 	}
@@ -164,7 +167,7 @@ public class JsonTransformer {
 			// System.out.println(jsonArr.toJSONString());
 			return jsonArr;
 		} catch (Exception ex) {
-			// TODO
+			logger.error(ex.getMessage(), ex);
 		}
 		
 		return null;
@@ -203,8 +206,7 @@ public class JsonTransformer {
 			
 			return list;
 		} catch (Exception ex) {
-			// TODO
-			ex.printStackTrace();
+			logger.error(ex.getMessage(), ex);
 		}
 		
 		return null;
@@ -308,8 +310,7 @@ public class JsonTransformer {
 			}
 			return t;
 		} catch (Exception ex) {
-			// TODO LOG HERE
-			ex.printStackTrace();
+			logger.error(ex.getMessage(), ex);
 		}
 		
 		return null;

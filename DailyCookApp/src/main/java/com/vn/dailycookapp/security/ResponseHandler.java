@@ -14,11 +14,13 @@ import javax.ws.rs.ext.Provider;
 @Priority(Priorities.HEADER_DECORATOR)
 public class ResponseHandler implements ContainerResponseFilter {
 	
+//	private final Logger	logger	= LoggerFactory.getLogger(getClass());
+	
 	@Override
 	public void filter(ContainerRequestContext reqeust, ContainerResponseContext responseContext) throws IOException {
 		
 		responseContext.setStatusInfo(Status.OK);
-//		responseContext.getHeaders().add("Content-Type", "text/plain;charset=UTF-8");
+
 		responseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
 		responseContext.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
 		responseContext.getHeaders().add("Access-Control-Allow-Credentials", "true");

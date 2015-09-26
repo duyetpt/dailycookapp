@@ -54,7 +54,7 @@ class VerifyFacebookAccount {
 			
 			int responseCode = con.getResponseCode();
 			if (responseCode != 200) {
-				logger.error("get acc info from facebook error: " + responseCode + ". token= " + token);
+				logger.error(("get acc info from facebook error: " + responseCode + ". token= " + token));
 				return null;
 			}
 			
@@ -80,7 +80,12 @@ class VerifyFacebookAccount {
 			JSONObject picture = jsonObj.getJSONObject("picture");
 			String avatarUrl = picture.getJSONObject("data").getString("url");
 			// get dob MM-dd-YYYY
-			String dob = jsonObj.getString("birthday");
+			String dob = null;
+			try {
+				dob = jsonObj.getString("birthday");
+			} catch (Exception ex) {
+				logger.error(("can't get dob of this user"));
+			}
 			
 			AccountInfo acc = new AccountInfo();
 			acc.setFbId(id);
@@ -91,7 +96,7 @@ class VerifyFacebookAccount {
 			
 			return acc;
 		} catch (Exception ex) {
-			logger.error("get facebook infor error", ex);
+			logger.error(("get facebook infor error"), ex);
 		}
 		
 		return null;
@@ -108,7 +113,7 @@ class VerifyFacebookAccount {
 			
 			int responseCode = con.getResponseCode();
 			if (responseCode != 200) {
-				logger.error("Check fb account active error: " + responseCode + ". token= " + token);
+				logger.error(("Check fb account active error: " + responseCode + ". token= " + token));
 				return null;
 			}
 			
@@ -129,7 +134,7 @@ class VerifyFacebookAccount {
 			
 			return id;
 		} catch (Exception ex) {
-			logger.error("Check fb account active error", ex);
+			logger.error(("Check fb account active error"), ex);
 		}
 		
 		return null;

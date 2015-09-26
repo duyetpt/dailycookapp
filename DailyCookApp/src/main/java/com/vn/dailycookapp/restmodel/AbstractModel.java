@@ -16,6 +16,7 @@ public abstract class AbstractModel {
 	protected abstract DCAResponse execute() throws Exception;
 	
 	public String doProcess(String... data) {
+		logger.info("AbstractModel:doProcess = " + data.toString());
 		DCAResponse response = null;
 		try {
 			preExecute(data);

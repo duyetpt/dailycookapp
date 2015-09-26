@@ -4,7 +4,6 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
-import org.mongodb.morphia.utils.IndexDirection;
 
 @Entity(noClassnameStored=true)
 //@Indexes({ @Index(fields = @Field("email"), options = @IndexOptions(unique = true, background = true)),
@@ -17,9 +16,9 @@ public class User {
 	@Property("display_name")
 	private String	displayName;
 	
-	@Property("fb_id")
-	@Indexed(unique=true, name="_fb_id", value=IndexDirection.ASC)
-	private String	fbId;
+//	@Property("fb_id")
+//	@Indexed(unique=true, name="_fb_id", value=IndexDirection.ASC)
+//	private String	fbId;
 	
 	@Property("email")
 	@Indexed(background=true, unique=true)
@@ -80,13 +79,13 @@ public class User {
 		this.displayName = displayName;
 	}
 	
-	public String getFbId() {
-		return fbId;
-	}
-	
-	public void setFbId(String fbId) {
-		this.fbId = fbId;
-	}
+//	public String getFbId() {
+//		return fbId;
+//	}
+//	
+//	public void setFbId(String fbId) {
+//		this.fbId = fbId;
+//	}
 	
 	public String getEmail() {
 		return email;

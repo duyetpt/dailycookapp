@@ -1,5 +1,6 @@
 package com.vn.dailycookapp.service;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -15,6 +16,7 @@ public class UserService {
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Path("/login")
 	public Response login(@HeaderParam(HeaderField.AUTHORIZATION) String authInfo, @HeaderParam(HeaderField.LOGIN_METHOD) String loginMethod) {
 		String data = ModelResolver.getApi(ModelDefine.LOGIN).doProcess(authInfo, loginMethod);

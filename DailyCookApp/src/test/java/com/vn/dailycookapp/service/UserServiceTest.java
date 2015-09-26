@@ -24,8 +24,8 @@ public class UserServiceTest extends JerseyTest{
 	
 	@Test
 	public void testLogin() {
-		String fbToken = "CAACEdEose0cBALlRqLRvo104ufl6Wx6lOZB1LxNMsJ91OPHNhwQ0rcbPxz2EQALD8Dr1BORnq0XLxefrWCE8L4D8d1L8Xkaip7VjwpZASRMvxZAORJtdP61WGn6gegYMaxtenfCcOSkmgjGOpfMUAmJksW9KsZApT98cwrJx4W7tR0ZBmuNJAFihLitKYIYeZBXgiAXzYNnAZDZD";
-		String token = "685194628264728:" + fbToken;
+		String fbToken = "CAAXZBgLezzHwBAN70QlkJyXxlarZCfa2Mc4LGZCCxfF1Bsp1A3Hd1fdlJZCBRe7ZAXDhCIdnf3WfNjPEXYE2yv5kJvMLxjfYxVZC3kl61x3rAbfZAxrfjOkcSwKi7NBkEFPwVRBM7ZCYPhAJZBeEJVZC25OgfJtHYFnNtorvSogJ2T2ouDDcUowqNTWWPsXI0s2rNZC9nD58IwgOW5euVkgXCnKxAiuvzlTbksoiRjFaYontQZDZD";
+		String token = "979565268772394:" + fbToken;
 		String token64 = Base64.encodeAsString(token);
 		String authInfo = "Basic " + token64;
 		

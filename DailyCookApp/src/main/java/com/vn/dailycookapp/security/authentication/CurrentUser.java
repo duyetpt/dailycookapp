@@ -18,7 +18,7 @@ public class CurrentUser {
 	
 	public void login(FbToken fbToken) throws DCAException {
 		// get data into database
-		User user = UserDAO.getInstance().getUserInfoByFbId(fbToken.getFbId());
+		User user = UserDAO.getInstance().getUserInfoByEmail(fbToken.getFbId());
 		// User user = null;
 		if (user == null) {
 			AccountInfo acc = VerifyFacebookAccount.getInstance().sentGet(fbToken.getRefreshToken());
@@ -55,7 +55,7 @@ public class CurrentUser {
 		user.setAvatarUrl(avatarUrl);
 		user.setCoverUrl(coverUrl);
 		user.setDob(dob);
-		user.setFbId(fbToken.getFbId());
+		user.setEmail(fbToken.getFbId());
 		
 		UserDAO.getInstance().save(user);
 		return user.getId();

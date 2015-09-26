@@ -22,7 +22,6 @@ public class ImageService {
 	
 	/**
 	 * Add image
-	 * 
 	 * @param inputStream
 	 * @return
 	 * @throws FileNotFoundException
@@ -33,7 +32,7 @@ public class ImageService {
 	@Produces(MediaType.APPLICATION_JSON)
 	// @FormDataParam("image") FormDataContentDisposition contentDisposition
 	public Response addImage(@FormDataParam("image") InputStream inputStream) {
-		String pathFile = StreamUtils.saveImage(inputStream, "png");
+		String pathFile = StreamUtils.saveImage(inputStream, "jpg");
 		DCAResponse response = new DCAResponse(ErrorCodeConstant.SUCCESSUL.getErrorCode());
 		response.setData(pathFile);
 		return Response.ok(JsonTransformer.getInstance().marshall(response)).build();

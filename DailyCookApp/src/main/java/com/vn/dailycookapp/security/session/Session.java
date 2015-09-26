@@ -1,5 +1,7 @@
 package com.vn.dailycookapp.security.session;
 
+import com.vn.dailycookapp.utils.TimeUtils;
+
 public final class Session {
 	
 	static final long	TTL	= 10 * 24 * 60 * 60 * 1000;		// ten day
@@ -32,4 +34,7 @@ public final class Session {
 		this.lastActiveTime = lastActiveTime;
 	}
 	
+	public void updateLastActiveTime() {
+		this.lastActiveTime = TimeUtils.getCurrentGMTTime();
+	}
 }

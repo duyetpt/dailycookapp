@@ -7,6 +7,7 @@ import org.junit.Test;
 
 public class TimeUtilsTest {
 	
+	@SuppressWarnings("deprecation")
 	@Test
 	public void test() {
 		Date date = new Date(TimeUtils.getCurrentGMTTime());

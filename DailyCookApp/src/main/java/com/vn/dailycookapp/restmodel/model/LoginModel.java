@@ -24,6 +24,9 @@ public class LoginModel extends AbstractModel {
 		}
 		accountInfo = data[0];
 		loginMethod = data[1];
+		if (accountInfo == null || loginMethod == null) {
+			throw new InvalidParameterException();
+		}
 	}
 	
 	@Override

@@ -40,14 +40,4 @@ public class UserDAO extends AbstractDAO {
 		}
 	}
 	
-	public User getUserInfoByFbId(String fbId) throws DAOException {
-		try {
-			Query<User> query = datastore.createQuery(User.class).field("fb_id").equal(fbId);
-			User user = query.get();
-			
-			return user;
-		} catch (Exception ex) {
-			throw new DAOException(ErrorCodeConstant.DAO_EXCEPTION);
-		}
-	}
 }
