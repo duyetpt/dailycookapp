@@ -14,7 +14,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.vn.dailycookapp.entity.response.DCAResponse;
+import com.vn.dailycookapp.restmodel.response.DCAResponse;
 import com.vn.dailycookapp.security.authorization.AuthorizationException;
 import com.vn.dailycookapp.security.authorization.Authorizer;
 import com.vn.dailycookapp.service.HeaderField;
@@ -28,7 +28,6 @@ public class RequestHandler implements ContainerRequestFilter {
 	private final Logger	logger	= LoggerFactory.getLogger(RequestHandler.class);
 	
 	public void filter(ContainerRequestContext requestContext) throws IOException {
-		requestContext.getHeaders().add("Accept", "*/*");
 		logger.info("Processing authentization ...");
 		
 		MultivaluedMap<String, String> headers = requestContext.getHeaders();
@@ -37,15 +36,15 @@ public class RequestHandler implements ContainerRequestFilter {
 		
 		String url = requestContext.getUriInfo().getPath();// .equals("user/login")
 		String query = requestContext.getUriInfo().getRequestUri().getQuery();
-//		System.out.println(query);
-		if (query != null && query.endsWith("testMode=true")) {
+		System.out.println(query);
+		if (query.endsWith("testMode=true")) {
 			logger.info("run in test mode...");
 		} else {
-			if (url.equals("dailycook/user/login") || url.equals("dailycook/user/register")) {
+			if (url.equals("user/login") || url.equals("user/register")) {
 				logger.info("user login or register...");
 			} else {
 				logger.info("authorzation...");
-				String token = requestContext.getHeaderString(HeaderField.TOKEN);
+				String token = requestContext.getHeaderString(HeaderField.AUTHORIZATION);
 				try {
 					String userId = Authorizer.getInstance().authorize(token);
 					requestContext.getHeaders().add(HeaderField.USER_ID, userId);

@@ -2,10 +2,9 @@ package com.vn.dailycookapp.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,6 @@ import org.slf4j.LoggerFactory;
 public class FileUtils {
 	
 	private final Logger	logger	= LoggerFactory.getLogger(getClass());
-	
 	public String readFile(String path) {
 		if (path == null || path.isEmpty()) {
 			logger.error("file not exist");
@@ -24,9 +22,7 @@ public class FileUtils {
 		String result = null;
 		try {
 			StringBuilder sb = new StringBuilder();
-			br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF8"));
-			// br.mark(1);
-			// br.reset();
+			br = new BufferedReader(new FileReader(path));
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				sb.append(line);
@@ -56,7 +52,7 @@ public class FileUtils {
 		String result = null;
 		try {
 			StringBuilder sb = new StringBuilder();
-			br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+			br = new BufferedReader(new FileReader(file));
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				sb.append(line);
@@ -78,18 +74,6 @@ public class FileUtils {
 				}
 			}
 		}
-		result = removeUTF8BOM(result);
-		
 		return result;
-	}
-	
-	private static final String	UTF8_BOM	= "\u00EF" + "\u00BB" + "\u00BF";
-	
-	private static String removeUTF8BOM(String s) {
-		if (s.startsWith(UTF8_BOM)) {
-//			System.out.println(s);
-			s = s.substring(UTF8_BOM.length());
-		}
-		return s;
 	}
 }

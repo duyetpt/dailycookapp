@@ -6,34 +6,13 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.vn.dailycookapp.utils.ConfigurationLoader;
 
 public class DCAServer {
-	private final static Logger logger = LoggerFactory.getLogger(DCAServer.class);
-	/**
-	 * 
-	 * @param args : args[0] : multi language folder
-	 */
+	
 	public static void main(String[] args) {
-		logger.info("starting config server...");
-		if (args == null || args.length == 0) {
-			logger.error("not has language folder, please add it as the first arguments !");
-			logger.warn("\\//=== Server stoped! ==\\//");
-			return;
-		}
-		String languageFolder = args[0];
-		if (languageFolder == null || languageFolder.isEmpty()) {
-			logger.error("not has language folder, please add it as the first arguments !");
-			logger.warn("\\//=== Server stoped! ==\\//");
-			return;
-		}
-		logger.warn("language_path: " + languageFolder);
-		ConfigurationLoader.getInstance().setLanguagePath(languageFolder);
 		
-		// config for jetty server
 		ResourceConfig resourceConfig = new ResourceConfig();
 		// regist for @Path and @Provider with SPI
 		resourceConfig.packages("com.vn.dailycookapp.service", 

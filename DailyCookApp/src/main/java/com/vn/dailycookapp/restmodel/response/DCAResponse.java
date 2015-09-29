@@ -1,4 +1,4 @@
-package com.vn.dailycookapp.entity.response;
+package com.vn.dailycookapp.restmodel.response;
 
 import com.vn.dailycookapp.utils.json.JsonProperty;
 

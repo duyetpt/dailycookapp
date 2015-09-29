@@ -8,7 +8,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.vn.dailycookapp.entity.response.DCAResponse;
+import com.vn.dailycookapp.restmodel.response.DCAResponse;
 import com.vn.dailycookapp.utils.json.JsonTransformer;
 
 @Path("/dailycook")

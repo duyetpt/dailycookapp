@@ -17,7 +17,6 @@ public class ConfigurationLoader {
 	private String								dbName;
 	private String								imageDirectory;
 	private int									serverPort;
-	private String								languagePath;
 	
 	private static final ConfigurationLoader	instance			= new ConfigurationLoader();
 	
@@ -52,14 +51,6 @@ public class ConfigurationLoader {
 	
 	public int getServerPort() {
 		return serverPort;
-	}
-	
-	public String getLanguagePath() {
-		return languagePath;
-	}
-	
-	public void setLanguagePath(String languagePath) {
-		this.languagePath = languagePath;
 	}
 	
 }

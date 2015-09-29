@@ -4,8 +4,6 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -39,18 +37,14 @@ public class JsonTransformer {
 			// get all field private, protected, public
 			Field[] fields = pClass.getDeclaredFields();
 			for (Field field : fields) {
-				if (!Modifier.isStatic(field.getModifiers())) {
-					lField.add(field);
-				}
+				lField.add(field);
 			}
 			
 			Class superClass = pClass.getSuperclass();
 			if (!superClass.equals(Object.class)) {
 				Field[] superFields = superClass.getDeclaredFields();
 				for (Field field : superFields) {
-					if (!Modifier.isStatic(field.getModifiers())) {
-						lField.add(field);
-					}
+					lField.add(field);
 				}
 			}
 			
@@ -253,41 +247,33 @@ public class JsonTransformer {
 				// check ignore empty
 				JsonIgnoreEmpty jsonIEP = field.getAnnotation(JsonIgnoreEmpty.class);
 				
-				Object valueOfField = null;
-				try {
-					valueOfField = obj.get(jsonKey);
-				} catch (Exception ex) {
-					// TODO
-				}
+				Object valueOfField = obj.get(jsonKey);
 				if (jsonIEP == null) {
 					if (valueOfField == null) {
 						continue;
 					} else {
 						// check primitive, String, JsonArray, JsonObject
-						// Class<? extends Object> classOfValue =
-						// valueOfField.getClass();
-						if (field.getType().isArray()) {
+						Class<? extends Object> classOfValue = valueOfField.getClass();
+						if (classOfValue.equals(JSONArray.class)) {
 							JSONArray arr = (JSONArray) valueOfField;
-							Class<?> itemListClass = arr.get(0).getClass();
-							List<? extends Object> list = unmarshallList(arr, itemListClass);
-							if (!field.isAccessible()) {
-								field.setAccessible(true);
+							List<? extends Object> list = unmarshallList(arr, arr.get(0).getClass());
+							if (field.getType().isArray()) {
+								if (!field.isAccessible()) {
+									field.setAccessible(true);
+								}
+								Object arrUnknow = Array.newInstance(list.get(0).getClass(), list.size());
+								for (int i = 0; i < list.size(); i++) {
+									Array.set(arrUnknow, i, list.get(i));
+								}
+								
+								Object[] oo = (Object[]) arrUnknow;
+								
+								setValue(t, tClass, field, oo, fieldName);
+							} else {
+								setValue(t, tClass, field, unmarshallList(arr, arr.get(0).getClass()), fieldName);
 							}
-							Object arrUnknow = Array.newInstance(list.get(0).getClass(), list.size());
-							for (int i = 0; i < list.size(); i++) {
-								Array.set(arrUnknow, i, list.get(i));
-							}
-							
-							Object[] oo = (Object[]) arrUnknow;
-							
-							setValue(t, tClass, field, oo, fieldName);
-						} else if (field.getType().isAssignableFrom(List.class)) {
-							JSONArray arr = (JSONArray) valueOfField;
-							ParameterizedType listType = (ParameterizedType) field.getGenericType();
-							Class<?> itemListClass = (Class<?>) listType.getActualTypeArguments()[0];
-							setValue(t, tClass, field, unmarshallList(arr, itemListClass), fieldName);
 							// unmarshallMap(jsonObj, classOfValue);
-						} else if (field.getType().isAssignableFrom(Map.class)) {
+						} else if (classOfValue.equals(JSONObject.class)) {
 							JSONObject jsonObj = (JSONObject) valueOfField;
 							
 							if (field.getType().isAssignableFrom(Map.class)) {
@@ -316,13 +302,6 @@ public class JsonTransformer {
 						} else {
 							setValue(t, tClass, field, valueOfField, fieldName);
 						}
-						// if (classOfValue.equals(JSONArray.class)) {
-						//
-						// } else if (classOfValue.equals(JSONObject.class)) {
-						//
-						// } else {
-						//
-						// }
 						
 					}
 				} else {

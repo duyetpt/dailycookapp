@@ -5,75 +5,63 @@ import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
 
-import com.vn.dailycookapp.utils.lang.Language;
-
-@Entity(value="User", noClassnameStored = true)
-// @Indexes({ @Index(fields = @Field("email"), options = @IndexOptions(unique =
-// true, background = true)),
-// @Index(fields = @Field("fbId"), options = @IndexOptions(unique = true,
-// background = true)) })
+@Entity(noClassnameStored=true)
+//@Indexes({ @Index(fields = @Field("email"), options = @IndexOptions(unique = true, background = true)),
+//		@Index(fields = @Field("fbId"), options = @IndexOptions(unique = true, background = true)) })
 public class User {
 	
-	public static final String	NORMAL_USER_ROLE	= "normal_user";
-	public static final String	SUPER_ADMIN_ROLE	= "super_admin";
-	public static final String	ADMIN_ROLE			= "admin";
-	
-	public static final int		ACTIVE_FLAG			= 1;
-	public static final int		BAN_FLAG			= 0;
-	public static final int		DELETED_FLAG		= -1;
-	
 	@Id
-	private String				id;
+	private String	id;
 	
 	@Property("display_name")
-	private String				displayName;
+	private String	displayName;
 	
-	// @Property("fb_id")
-	// @Indexed(unique=true, name="_fb_id", value=IndexDirection.ASC)
-	// private String fbId;
+//	@Property("fb_id")
+//	@Indexed(unique=true, name="_fb_id", value=IndexDirection.ASC)
+//	private String	fbId;
 	
 	@Property("email")
-	@Indexed(background = true, unique = true)
-	private String				email;
+	@Indexed(background=true, unique=true)
+	private String	email;
 	
 	@Property("pass")
-	private String				password;
+	private String	password;
 	
 	@Property("login_method")
-	private String				loginMethod;
+	private String	loginMethod;
 	
 	@Property("n_recipes")
-	private int					numberRecipes;
+	private int		numberRecipes;
 	
 	@Property("n_follower")
-	private int					numberFollower;
+	private int		numberFollower;
 	
 	@Property("n_following")
-	private int					numberFollowing;
+	private int		numberFollowing;
 	
 	@Property("avatar_url")
-	private String				avatarUrl;
+	private String	avatarUrl;
 	
 	@Property("cover_url")
-	private String				coverUrl;
+	private String	coverUrl;
 	
 	@Property("introduce")
-	private String				introduce;
+	private String	introduce;
 	
 	@Property("role")
-	private String				role				= NORMAL_USER_ROLE;
+	private int		role;
 	
 	@Property("registered_time")
-	private long				registeredTime;
+	private long	registeredTime;
 	
 	@Property("lang")
-	private String				language			= Language.ENGLISH;
+	private String	language;
 	
 	@Property("active_flag")
-	private int					activeFlag			= ACTIVE_FLAG;
+	private int		activeFlag;
 	
 	@Property("dob")
-	private String				dob;
+	private String	dob;
 	
 	public String getId() {
 		return id;
@@ -91,13 +79,13 @@ public class User {
 		this.displayName = displayName;
 	}
 	
-	// public String getFbId() {
-	// return fbId;
-	// }
-	//
-	// public void setFbId(String fbId) {
-	// this.fbId = fbId;
-	// }
+//	public String getFbId() {
+//		return fbId;
+//	}
+//	
+//	public void setFbId(String fbId) {
+//		this.fbId = fbId;
+//	}
 	
 	public String getEmail() {
 		return email;
@@ -171,11 +159,11 @@ public class User {
 		this.introduce = introduce;
 	}
 	
-	public String getRole() {
+	public int getRole() {
 		return role;
 	}
 	
-	public void setRole(String role) {
+	public void setRole(int role) {
 		this.role = role;
 	}
 	

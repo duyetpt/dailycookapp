@@ -2,13 +2,11 @@ package com.vn.dailycookapp.restmodel.model;
 
 import java.util.List;
 
-import org.bson.types.ObjectId;
-
 import com.vn.dailycookapp.dao.CategoryDAO;
 import com.vn.dailycookapp.entity.Category;
-import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.restmodel.AbstractModel;
 import com.vn.dailycookapp.restmodel.InvalidParamException;
+import com.vn.dailycookapp.restmodel.response.DCAResponse;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
 import com.vn.dailycookapp.utils.lang.Language;
 
@@ -22,7 +20,6 @@ public class GetCategories extends AbstractModel {
 		try {
 			language = data[0];
 			parentId = data[1];
-			validateData();
 		} catch (Exception ex) {
 			throw new InvalidParamException();
 		}
@@ -43,13 +40,4 @@ public class GetCategories extends AbstractModel {
 		return response;
 	}
 	
-	private void validateData() throws InvalidParamException {
-		if (parentId == null || parentId.isEmpty()) {
-			parentId = null;
-			return;
-		}
-		if (!ObjectId.isValid(parentId)) {
-			throw new InvalidParamException();
-		}
-	}
 }

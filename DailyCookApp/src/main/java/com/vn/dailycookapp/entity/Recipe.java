@@ -2,66 +2,53 @@ package com.vn.dailycookapp.entity;
 
 import java.util.List;
 
-import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Transient;
 
-import com.vn.dailycookapp.utils.json.JsonIgnoreEmpty;
-import com.vn.dailycookapp.utils.json.JsonIgnoreProperty;
-
-@Entity(value = "Recipe", noClassnameStored = true)
 public class Recipe {
-	public static final int			APPROVED_FLAG	= 1;
-	public static final int			REPORTED_FLAG	= 0;
-	public static final int			REMOVED_FLAG	= -1;
-	
 	@Id
-	@JsonIgnoreEmpty
-	private String					id;
+	private String				id;
 	
-	private String					title;
+	private String				title;
 	
 	@Property(value = "normalize_title")
-	@JsonIgnoreProperty
-	private String					normalizedTitle;
+	private String				normalizedTitle;
 	
-	private String					owner;
+	private String				owner;
 	
 	@Property(value = "comment_number")
-	private int						commentNumber;
+	private int					commentNumber;
 	
 	@Property(value = "favorite_number")
-	private int						favoriteNumber;
+	private int					favoriteNumber;
 	
 	@Property(value = "picture_url")
-	private String					pictureUrl;
+	private String				pictureUrl;
 	
 	@Property(value = "categories")
-	private String[]				categoryIds;
+	private String[]			categoryIds;
 	
 	@Property(value = "status_flag")
-	@JsonIgnoreProperty
-	private int						statusFlag		= APPROVED_FLAG;
+	private int					statusFlag;
 	
 	@Property(value = "interval_cook")
-	private int						intervalCook;
+	private int					intervalCook;
 	
-	private String					story;
+	private String				story;
 	
-	private boolean					selected		= false;
+	private boolean				selected;
 	
 	@Property(value = "deleted_time")
-	@JsonIgnoreProperty
-	private Long					deletedTime;
+	private Long				deletedTime;
 	
 	@Property(value = "created_time")
-	private Long					createdTime;
+	private Long				createdTime;
 	
-	private List<Recipe.Ingredient>	ingredients;
+	private List<Ingredient>	ingredients;
 	
-	private List<Recipe.Step>		steps;
+	private List<Step>			steps;
 	
 	public String getId() {
 		return id;
@@ -151,7 +138,7 @@ public class Recipe {
 		this.story = story;
 	}
 	
-	public boolean getSelected() {
+	public boolean isSelected() {
 		return selected;
 	}
 	
@@ -202,15 +189,7 @@ public class Recipe {
 	@Transient
 	private boolean	isFavorite;
 	
-	public boolean getIsFavorite() {
-		return isFavorite;
-	}
-	
-	public void setIsFavorite(boolean favorite) {
-		this.isFavorite = favorite;
-	}
-	
-	public static class Ingredient {
+	public class Ingredient {
 		private String	name;
 		
 		@Property(value = "normalize_name")
@@ -263,7 +242,7 @@ public class Recipe {
 		
 	}
 	
-	public static class Step {
+	public class Step {
 		private int		stepNo;
 		private String	description;
 		@Property(value = "picture_url")

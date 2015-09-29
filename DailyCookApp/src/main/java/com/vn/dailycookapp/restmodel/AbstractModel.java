@@ -3,7 +3,7 @@ package com.vn.dailycookapp.restmodel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.vn.dailycookapp.entity.response.DCAResponse;
+import com.vn.dailycookapp.restmodel.response.DCAResponse;
 import com.vn.dailycookapp.utils.DCAException;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
 import com.vn.dailycookapp.utils.json.JsonTransformer;
