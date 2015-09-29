@@ -4,8 +4,8 @@ import java.security.InvalidParameterException;
 
 import org.glassfish.jersey.internal.util.Base64;
 
+import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.restmodel.AbstractModel;
-import com.vn.dailycookapp.restmodel.response.DCAResponse;
 import com.vn.dailycookapp.security.authentication.Authenticator;
 import com.vn.dailycookapp.security.authentication.CurrentUser;
 import com.vn.dailycookapp.security.authentication.LoginMethod;

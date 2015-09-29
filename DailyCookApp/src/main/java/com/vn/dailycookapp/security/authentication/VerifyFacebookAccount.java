@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.vn.dailycookapp.entity.AccountInfo;
+import com.vn.dailycookapp.entity.response.AccountInfo;
 
 class VerifyFacebookAccount {
 	
