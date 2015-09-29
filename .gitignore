@@ -6,3 +6,4 @@ Servers/
 RemoteSystemsTempFiles/
 .metadata/
 *.prefs
+DailyCookApp/opt/dailycook/logs/recipe.txt
