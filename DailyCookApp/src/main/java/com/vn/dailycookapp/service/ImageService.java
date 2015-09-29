@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
-import com.vn.dailycookapp.restmodel.response.DCAResponse;
+import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
 import com.vn.dailycookapp.utils.StreamUtils;
 import com.vn.dailycookapp.utils.json.JsonTransformer;

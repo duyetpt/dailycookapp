@@ -1,4 +1,4 @@
-package com.vn.dailycookapp.entity;
+package com.vn.dailycookapp.entity.response;
 
 public class AccountInfo {
 	

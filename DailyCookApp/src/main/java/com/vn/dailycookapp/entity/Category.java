@@ -7,7 +7,7 @@ import org.mongodb.morphia.annotations.Property;
 
 import com.vn.dailycookapp.utils.json.JsonIgnoreProperty;
 
-@Entity(noClassnameStored = true, value = "category")
+@Entity(noClassnameStored = true, value = "Category")
 public class Category {
 	@Id
 	private String	id;

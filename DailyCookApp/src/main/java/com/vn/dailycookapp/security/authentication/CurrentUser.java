@@ -1,24 +1,28 @@
 package com.vn.dailycookapp.security.authentication;
 
 import com.vn.dailycookapp.dao.UserDAO;
-import com.vn.dailycookapp.entity.AccountInfo;
 import com.vn.dailycookapp.entity.User;
+import com.vn.dailycookapp.entity.response.AccountInfo;
 import com.vn.dailycookapp.security.session.SessionManager;
 import com.vn.dailycookapp.utils.DCAException;
 import com.vn.dailycookapp.utils.EncryptHelper;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
+import com.vn.dailycookapp.utils.lang.Language;
 import com.vn.dailycookapp.utils.validate.Validator;
 
 public class CurrentUser {
+	private static final String FB_EMAIL = "@facebook.com";
+	
 	private String	displayName;
 	private String	avatarUrl;
 	private String	coverUrl;
 	private String	dob;
+	private String	language;
 	private String	token;
 	
 	public void login(FbToken fbToken) throws DCAException {
 		// get data into database
-		User user = UserDAO.getInstance().getUserInfoByEmail(fbToken.getFbId());
+		User user = UserDAO.getInstance().getUserInfoByEmail(fbToken.getFbId() + FB_EMAIL);
 		// User user = null;
 		if (user == null) {
 			AccountInfo acc = VerifyFacebookAccount.getInstance().sentGet(fbToken.getRefreshToken());
@@ -30,7 +34,7 @@ public class CurrentUser {
 					avatarUrl = acc.getAvatarUrl();
 					coverUrl = acc.getCoverUrl();
 					dob = acc.getDob();
-					
+					language = Language.ENGLISH;
 					// Update DATABASE
 					String userId = saveToDB(fbToken);
 					token = SessionManager.getInstance().addSession(userId);
@@ -43,19 +47,20 @@ public class CurrentUser {
 			avatarUrl = user.getAvatarUrl();
 			coverUrl = user.getCoverUrl();
 			dob = user.getDob();
+			language = user.getLanguage();
 			token = SessionManager.getInstance().addSession(user.getId());
 		}
 		
 	}
 	
-	private String saveToDB(FbToken fbToken) throws DCAException{
+	private String saveToDB(FbToken fbToken) throws DCAException {
 		User user = new User();
 		user = new User();
 		user.setDisplayName(displayName);
 		user.setAvatarUrl(avatarUrl);
 		user.setCoverUrl(coverUrl);
 		user.setDob(dob);
-		user.setEmail(fbToken.getFbId());
+		user.setEmail(fbToken.getFbId()+ FB_EMAIL);
 		
 		UserDAO.getInstance().save(user);
 		return user.getId();
@@ -69,10 +74,15 @@ public class CurrentUser {
 		if (user != null) {
 			String password = EncryptHelper.encrypt(token.getPassword());
 			if (password.equals(user.getPassword())) {
-				displayName = user.getDisplayName();
+				if (user.getDisplayName() != null) {
+					displayName = user.getDisplayName();
+				} else {
+					displayName = user.getEmail().split("@")[0];
+				}
 				avatarUrl = user.getAvatarUrl();
 				coverUrl = user.getCoverUrl();
 				dob = user.getDob();
+				language = user.getLanguage();
 				this.token = SessionManager.getInstance().addSession(user.getId());
 			} else {
 				throw new LoginFailException(ErrorCodeConstant.PASSWORD_INCORRECT);
@@ -120,6 +130,14 @@ public class CurrentUser {
 	
 	public void setToken(String token) {
 		this.token = token;
+	}
+	
+	public String getLanguage() {
+		return language;
+	}
+	
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 	
 }
