@@ -18,7 +18,7 @@ import com.vn.dailycookapp.utils.FileUtils;
 public class Language {
 	
 	public static final String			ENGLISH		= "en";
-	public static final String			VIETNAMESE	= "vn";
+	public static final String			VIETNAMESE	= "vi";
 	
 	private Map<String, List<String>>	ingredientTypes;
 	private Map<String, JSONObject>		categories;
