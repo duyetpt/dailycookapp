@@ -8,6 +8,7 @@ import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Transient;
 
+import com.vn.dailycookapp.utils.TimeUtils;
 import com.vn.dailycookapp.utils.json.JsonIgnoreEmpty;
 import com.vn.dailycookapp.utils.json.JsonIgnoreProperty;
 
@@ -16,6 +17,8 @@ public class Recipe {
 	public static final int			APPROVED_FLAG	= 1;
 	public static final int			REPORTED_FLAG	= 0;
 	public static final int			REMOVED_FLAG	= -1;
+	
+	public static final int MAX_CATEGORY_NUMBER = 5;
 	
 	@Id
 	@JsonIgnoreEmpty
@@ -39,7 +42,7 @@ public class Recipe {
 	private String					pictureUrl;
 	
 	@Property(value = "categories")
-	private String[]				categoryIds;
+	private List<String>			categoryIds;
 	
 	@Property(value = "status_flag")
 	@JsonIgnoreProperty
@@ -57,7 +60,7 @@ public class Recipe {
 	private Long					deletedTime;
 	
 	@Property(value = "created_time")
-	private Long					createdTime;
+	private Long					createdTime = TimeUtils.getCurrentGMTTime();
 	
 	private List<Recipe.Ingredient>	ingredients;
 	
@@ -119,11 +122,11 @@ public class Recipe {
 		this.pictureUrl = pictureUrl;
 	}
 	
-	public String[] getCategoryIds() {
+	public List<String> getCategoryIds() {
 		return categoryIds;
 	}
 	
-	public void setCategoryIds(String[] categoryIds) {
+	public void setCategoryIds(List<String> categoryIds) {
 		this.categoryIds = categoryIds;
 	}
 	

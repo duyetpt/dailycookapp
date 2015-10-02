@@ -25,8 +25,8 @@ public class EncryptHelper {
 		
 	}
 	
-	// public static void main(String[] args) throws DCAException {
-	// System.out.println(encrypt("xxxx"));
-	// }
+//	 public static void main(String[] args) throws DCAException {
+//	 System.out.println(encrypt("123456789"));
+//	 }
 	
 }

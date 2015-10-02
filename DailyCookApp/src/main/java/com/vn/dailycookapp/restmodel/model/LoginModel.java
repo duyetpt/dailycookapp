@@ -45,8 +45,10 @@ public class LoginModel extends AbstractModel {
 				switch (loginMethod) {
 					case LoginMethod.EMAIL_PASSWORD:
 						cUser = Authenticator.login(m_username_pass[0], m_username_pass[1]);
+						break;
 					case LoginMethod.FACEBOOK:
 						cUser = Authenticator.loginByFb(m_username_pass[0], m_username_pass[1]);
+						break;
 				}
 				
 				response = new DCAResponse(ErrorCodeConstant.SUCCESSUL.getErrorCode());

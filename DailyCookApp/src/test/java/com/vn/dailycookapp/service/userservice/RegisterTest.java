@@ -11,7 +11,6 @@ import org.junit.Test;
 import com.vn.dailycookapp.AbstractTest;
 import com.vn.dailycookapp.entity.request.RegisterInfo;
 import com.vn.dailycookapp.security.authentication.CurrentUser;
-import com.vn.dailycookapp.service.UserService;
 import com.vn.dailycookapp.utils.json.JsonTransformer;
 import com.vn.dailycookapp.utils.lang.Language;
 
@@ -37,10 +36,5 @@ public class RegisterTest extends AbstractTest{
 		JSONObject jsonObj = getResponse();
 		CurrentUser user =JsonTransformer.getInstance().unmarshall(jsonObj.getJSONObject("data").toString(), CurrentUser.class);
 		assertEquals(26, user.getToken().length());
-	}
-
-	@Override
-	public Class<?> getService() {
-		return UserService.class;
-	}
+	}	
 }

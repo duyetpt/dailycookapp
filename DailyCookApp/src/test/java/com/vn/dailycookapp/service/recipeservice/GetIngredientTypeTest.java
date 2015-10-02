@@ -7,11 +7,11 @@ import javax.ws.rs.core.MediaType;
 import org.json.JSONObject;
 
 import com.vn.dailycookapp.AbstractTest;
-import com.vn.dailycookapp.service.RecipeService;
 import com.vn.dailycookapp.utils.lang.Language;
 
 public class GetIngredientTypeTest extends AbstractTest {
 	
+	@SuppressWarnings("unused")
 	@Override
 	public void test() {
 		String lang = Language.VIETNAMESE;
@@ -24,10 +24,4 @@ public class GetIngredientTypeTest extends AbstractTest {
 		JSONObject jsonObj = getResponse();
 		System.out.println(responseData);
 	}
-	
-	@Override
-	public Class<?> getService() {
-		return RecipeService.class;
-	}
-	
 }

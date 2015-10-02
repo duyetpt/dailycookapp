@@ -6,15 +6,15 @@ public enum ErrorCodeConstant {
 
 	SUCCESSUL(0, "Ok"),
 	UNKNOW_ERROR(-1, "External server is error"),
-	INVALID_EMAIL(-2, "Email invalid"),
-	INVALID_PASSWORD(-3, "invalid password"),
-	LOGIN_FB_FAIL(-100, "Login in facebook fail"),
-	USER_NOT_FOUND(-101, "not found user in db"),
 	
-	PASSWORD_INCORRECT(-101, "Password is incorrect"),
-	USERNAME_INCORRECT(-102, "User name is incorrect"),
-	INVALID_DATA(-103, "Incorrect param"),
+	INVALID_EMAIL(-100, "Email invalid"),
+	INVALID_PASSWORD(-101, "invalid password"),
+	LOGIN_FB_FAIL(-102, "Login in facebook fail"),
+	USER_NOT_FOUND(-103, "not found user in db"),
+	PASSWORD_INCORRECT(-104, "Password is incorrect"),
+	USERNAME_INCORRECT(-105, "User name is incorrect"),
 	
+	INVALID_DATA(-203, "Incorrect param"),
 	INVALID_TOKEN(-201, "token is invalid"),
 	CLOSED_SESSION(-202, "Session is closed"),
 	
