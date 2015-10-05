@@ -1,7 +1,6 @@
 package com.vn.dailycookapp.restmodel;
 
 import com.vn.dailycookapp.restmodel.model.CreateRecipeModel;
-import com.vn.dailycookapp.restmodel.model.GetCategories;
 import com.vn.dailycookapp.restmodel.model.GetIngredientTypesModel;
 import com.vn.dailycookapp.restmodel.model.GetRecipeModel;
 import com.vn.dailycookapp.restmodel.model.LoginModel;
@@ -10,7 +9,6 @@ import com.vn.dailycookapp.restmodel.model.RegisterModel;
 public enum ModelDefine {
 	
 	GET_INGREDIENT_TYPE("get_ingredient_type", GetIngredientTypesModel.class), 
-	GET_CATEGORY("get_category", GetCategories.class),
 	CREATE_RECIPE("create_recipe", CreateRecipeModel.class),
 	GET_RECIPE("get_recipe", GetRecipeModel.class),
 	REGISTER("register", RegisterModel.class),
