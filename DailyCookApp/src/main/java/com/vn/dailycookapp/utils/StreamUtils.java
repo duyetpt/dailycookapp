@@ -39,7 +39,7 @@ public class StreamUtils {
 		String relativePath = getRelativePath(imgFormat);
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append(ConfigurationLoader.getInstance().getImageDirectory()).append(File.separator);
+		sb.append(ConfigurationLoader.getInstance().getImageDirectory()).append("/");
 		sb.append(relativePath);
 		
 		try {
@@ -62,14 +62,14 @@ public class StreamUtils {
 	
 	private static String getRelativePath(String imgFormat) {
 		String folderName = TimeUtils.getDateyyyyMMdd();
-		String directory = ConfigurationLoader.getInstance().getImageDirectory() + File.separator + folderName;
+		String directory = ConfigurationLoader.getInstance().getImageDirectory() + "/" + folderName;
 		File file = new File(directory);
 		if (!file.exists()) {
 			file.mkdirs();
 		}
 		
 		StringBuilder sb = new StringBuilder(folderName);
-		sb.append(File.separator).append(generateFileName()).append(".").append(imgFormat);
+		sb.append("/").append(generateFileName()).append(".").append(imgFormat);
 		return sb.toString();
 	}
 	
