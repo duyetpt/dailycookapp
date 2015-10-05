@@ -3,6 +3,7 @@ package com.vn.dailycookapp.dao;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.Query;
 
+import com.mongodb.BasicDBObject;
 import com.vn.dailycookapp.entity.Favorited;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
 
@@ -33,9 +34,9 @@ public class FavoriteDAO extends AbstractDAO{
 	public boolean isFavorited(String userId, String recipeId) throws DAOException{
 		try {
 			Query<Favorited> query = datastore.createQuery(Favorited.class).field("_id").equal(new ObjectId(userId));
-			query.field("user_ids").hasThisElement(recipeId);
+			query.field("user_ids").hasThisElement(new BasicDBObject("$eq", recipeId));
 			
-			Favorited fav = query.retrievedFields(true, "_id").get();
+			Favorited fav = query.retrievedFields(false, "user_ids").get();
 			if (fav != null ) {
 				return fav.getId() != null;
 			}

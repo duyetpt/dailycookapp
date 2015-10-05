@@ -54,6 +54,7 @@ public class GetRecipeModel extends AbstractModel {
 		data.setIsFollowing(isFollowingOwner);
 		
 		// TODO
+		response.setData(data);
 		return response;
 	}
 	

@@ -3,6 +3,7 @@ package com.vn.dailycookapp.dao;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.Query;
 
+import com.mongodb.BasicDBObject;
 import com.vn.dailycookapp.entity.Following;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
 
@@ -33,7 +34,7 @@ public class FollowingDAO extends AbstractDAO{
 	public boolean isFollowing(String ownerId, String starId) throws DAOException{
 		try {
 			Query<Following> query = datastore.createQuery(Following.class).field("_id").equal(new ObjectId(ownerId));
-			query.field("user_ids").hasThisElement(ownerId);
+			query.field("following").hasThisElement(new BasicDBObject("$eq", starId));
 			
 			Following foll = query.retrievedFields(true, "_id").get();
 			if (foll != null ) {

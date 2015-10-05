@@ -1,6 +1,6 @@
 package com.vn.dailycookapp;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -88,7 +88,7 @@ public class AbstractTest extends JerseyTest {
 	@Override
 	protected Application configure() {
 		ConfigurationLoader.getInstance()
-				.setLanguagePath("E:\\git_daily_cook_repo\\DailyCookApp\\src\\resources\\lang");
+				.setLanguagePath(getClass().getResource("/lang/").getPath().substring(1));
 		return new ResourceConfig(UserService.class, RecipeService.class);
 	}
 	
@@ -152,7 +152,7 @@ public class AbstractTest extends JerseyTest {
 		assertEquals(ErrorCodeConstant.SUCCESSUL.getErrorCode(), errorCode);
 		CurrentUser user = JsonTransformer.getInstance().unmarshall(jsonObj.getJSONObject("data").toString(),
 				CurrentUser.class);
-		assertEquals(26, user.getToken().length());
+		assertNotNull(user.getToken());
 		
 		return user.getToken();
 	}

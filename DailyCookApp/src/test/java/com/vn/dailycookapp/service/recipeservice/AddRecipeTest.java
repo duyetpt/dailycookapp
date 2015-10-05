@@ -28,12 +28,6 @@ public class AddRecipeTest extends AbstractTest {
 	
 	@SuppressWarnings("unused")
 	public void test() {
-		try {
-			importData("Category", getClass().getResource("/Category.json").getFile().substring(1));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		Recipe recipe = new Recipe();
 		recipe.setIntervalCook(20);
 		recipe.setTitle("Mon mi xao");
@@ -92,16 +86,17 @@ public class AddRecipeTest extends AbstractTest {
 		}
 		
 		recipe.setSteps(steps);
-		List<String> categories = new ArrayList<String>();
-		categories.add("");
-		categories.add("");
+		List<String> tags = new ArrayList<String>();
+		tags.add("com rang");
+		tags.add("bo");
 		
-		recipe.setCategoryIds(categories);
+		recipe.setCategoryIds(tags);
 		
 		// request create recipe
 		getToken();
 		String userId = "560b3f83f128c211acc9eff5";
 		String recipeInfo = JsonTransformer.getInstance().marshall(recipe);
+		
 		Entity<String> entity = Entity.entity(recipeInfo, MediaType.APPLICATION_JSON_TYPE);
 		responseData = target("dailycook/recipe/add").request().header(HeaderField.USER_ID, userId)
 				.post(entity, String.class);

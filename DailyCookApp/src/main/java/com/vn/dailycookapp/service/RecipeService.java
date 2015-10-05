@@ -47,4 +47,12 @@ public class RecipeService {
 		String data = ModelResolver.getApi(ModelDefine.GET_INGREDIENT_TYPE).doProcess(language);
 		return Response.ok().entity(data).build();
 	}
+	
+	@GET
+	@Path("{recipeId}/comment/get")
+	@Produces(MediaTypeWithUtf8.APPLICATION_JSON_UTF8)
+	public Response getComment(@PathParam("recipeId") String recipeId, @QueryParam("skip") String skip, @QueryParam("take") String take) {
+		String data = ModelResolver.getApi(ModelDefine.GET_COMMENT).doProcess(recipeId, skip, take);
+		return Response.ok().entity(data).build();
+	}
 }
