@@ -2,8 +2,9 @@
 	"language" : "en",
 	"ingredient_type": [
 		"Meat",
-		"Vegetables",
+		"Seafood",
 		"Eggs",
+		"Vegetables",
 		"Milk",
 		"Cereals",
 		"Fruits",
@@ -42,5 +43,12 @@
 		"Breakfast":"Breakfast",
 		"Launch":"Launch",
 		"Dinner":"Dinner"
-	}   
+	},
+	"units":[
+		"Kg",
+		"Gram",
+		"Teaspoon",
+		"Lit",
+		"Mililit"
+	]         
 }

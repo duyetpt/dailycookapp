@@ -32,19 +32,19 @@ public class RecipeService {
 		return Response.ok().entity(responseData).build();
 	}
 	
-//	@GET
-//	@Path("/{lang}/categories")
-//	@Produces(MediaTypeWithUtf8.APPLICATION_JSON_UTF8)
-//	public Response getCategories(@PathParam("lang") String language, @QueryParam("parentId") String parentId) {
-//		String data = ModelResolver.getApi(ModelDefine.GET_CATEGORY).doProcess(language, parentId);
-//		return Response.ok().entity(data).build();
-//	}
-	
 	@GET
 	@Path("/{lang}/ingredient_type")
 	@Produces(MediaTypeWithUtf8.APPLICATION_JSON_UTF8)
 	public Response getIngredientType(@PathParam("lang") String language) {
 		String data = ModelResolver.getApi(ModelDefine.GET_INGREDIENT_TYPE).doProcess(language);
+		return Response.ok().entity(data).build();
+	}
+	
+	@GET
+	@Path("/{lang}/units")
+	@Produces(MediaTypeWithUtf8.APPLICATION_JSON_UTF8)
+	public Response getUnits(@PathParam("lang") String language) {
+		String data = ModelResolver.getApi(ModelDefine.GET_UNITS).doProcess(language);
 		return Response.ok().entity(data).build();
 	}
 	

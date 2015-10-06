@@ -1,10 +1,11 @@
 {
 	"language" : "vi",
 	"ingredient_type": [
-		"Thịt",
-		"Rau",
+		"Thịt",		
 		"Trứng",
-		"Sữa",
+		"Hải sản",
+		"Sản phẩm từ sữa",
+		"Rau",
 		"Ngũ cốc",
 		"Hoa quả",
 		"Rau thơm"
@@ -42,5 +43,14 @@
 		"Breakfast":"Bữa sáng",
 		"Launch":"Bữa trưa",
 		"Dinner":"Bữa tối"
-	}   
+	},
+	"units":[
+		"Kg",
+		"Gram",
+		"Thìa cà phê",
+		"Lạng",
+		"Quả",
+		"Lit",
+		"Mililit"
+	]      
 }

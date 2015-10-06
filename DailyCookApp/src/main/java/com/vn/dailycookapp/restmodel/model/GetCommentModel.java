@@ -3,7 +3,7 @@ package com.vn.dailycookapp.restmodel.model;
 import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.restmodel.AbstractModel;
 
-public class GetComment extends AbstractModel {
+public class GetCommentModel extends AbstractModel {
 	
 	@Override
 	protected void preExecute(String... data) throws Exception {

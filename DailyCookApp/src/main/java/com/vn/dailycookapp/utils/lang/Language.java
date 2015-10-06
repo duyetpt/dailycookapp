@@ -21,9 +21,9 @@ public class Language {
 	public static final String			VIETNAMESE	= "vi";
 	
 	private Map<String, List<String>>	ingredientTypes;
-	private Map<String, JSONObject>		categories;
+	private Map<String, List<String>>	units;
 	
-	private final Logger logger = LoggerFactory.getLogger(getClass());
+	private final Logger				logger		= LoggerFactory.getLogger(getClass());
 	private static final Language		instance	= new Language();
 	
 	private Language() {
@@ -38,9 +38,9 @@ public class Language {
 		return instance;
 	}
 	
-	private void init() throws Exception{
-//		URL url = ClassLoader.getSystemClassLoader().getResource("lang/");
-//		logger.error("-------- " + url.getPath() + "---------");
+	private void init() throws Exception {
+		// URL url = ClassLoader.getSystemClassLoader().getResource("lang/");
+		// logger.error("-------- " + url.getPath() + "---------");
 		File directory = new File(ConfigurationLoader.getInstance().getLanguagePath());
 		File[] files = directory.listFiles();
 		Map<String, JSONObject> language = new HashMap<>();
@@ -50,10 +50,10 @@ public class Language {
 			language.put(lang, json);
 		}
 		getIngredientTyes(language);
-		getCategory(language);
+		getUnits(language);
 	}
 	
-	private JSONObject readFile(File file) throws Exception{
+	private JSONObject readFile(File file) throws Exception {
 		FileUtils fileUtils = new FileUtils();
 		String data = fileUtils.readFile(file);
 		JSONObject json = new JSONObject(data);
@@ -61,7 +61,7 @@ public class Language {
 		
 	}
 	
-	private void getIngredientTyes(Map<String, JSONObject> data) throws Exception{
+	private void getIngredientTyes(Map<String, JSONObject> data) throws Exception {
 		ingredientTypes = new HashMap<String, List<String>>();
 		for (Entry<String, JSONObject> entry : data.entrySet()) {
 			List<String> result = new ArrayList<>();
@@ -75,32 +75,52 @@ public class Language {
 		}
 	}
 	
-	private void getCategory(Map<String, JSONObject> data) throws Exception{
-		categories = new HashMap<String, JSONObject>();
+	private void getUnits(Map<String, JSONObject> data) throws Exception {
+		units = new HashMap<String, List<String>>();
 		for (Entry<String, JSONObject> entry : data.entrySet()) {
+			List<String> result = new ArrayList<>();
 			String lang = entry.getKey();
-			JSONObject obj = entry.getValue().getJSONObject("categories");
-			categories.put(lang, obj);
+			JSONArray arr = entry.getValue().getJSONArray("units");
+			
+			for (int i = 0; i < arr.length(); i++) {
+				result.add(arr.getString(i));
+			}
+			units.put(lang, result);
 		}
 	}
 	
-	public List<String> listIngredientType(String language) throws Exception{
+	public List<String> listIngredientType(String language) throws Exception {
 		return ingredientTypes.get(language);
 	}
 	
-	public String getCategoryName(String language, String key) throws Exception{
-		JSONObject category = this.categories.get(language);
-		return category.getString(key);
+	public List<String> listUnit(String language) throws Exception {
+		return units.get(language);
 	}
 	
-	public Map<String, String> getCategoryNames(String language, List<String> keys) throws Exception{
-		Map<String, String> names = new HashMap<String, String>();
-		
-		JSONObject categories = this.categories.get(language);
-		for (String key : keys) {
-			names.put(key, categories.getString(key));
-		}
-		
-		return names;
-	}
+	// private void getCategory(Map<String, JSONObject> data) throws Exception{
+	// categories = new HashMap<String, JSONObject>();
+	// for (Entry<String, JSONObject> entry : data.entrySet()) {
+	// String lang = entry.getKey();
+	// JSONObject obj = entry.getValue().getJSONObject("categories");
+	// categories.put(lang, obj);
+	// }
+	// }
+	
+	// public String getCategoryName(String language, String key) throws
+	// Exception{
+	// JSONObject category = this.categories.get(language);
+	// return category.getString(key);
+	// }
+	//
+	// public Map<String, String> getCategoryNames(String language, List<String>
+	// keys) throws Exception{
+	// Map<String, String> names = new HashMap<String, String>();
+	//
+	// JSONObject categories = this.categories.get(language);
+	// for (String key : keys) {
+	// names.put(key, categories.getString(key));
+	// }
+	//
+	// return names;
+	// }
 }
