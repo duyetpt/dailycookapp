@@ -9,7 +9,6 @@ import javax.ws.rs.core.Response;
 
 import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.service.mediatypeopen.MediaTypeWithUtf8;
-import com.vn.dailycookapp.utils.ErrorCodeConstant;
 import com.vn.dailycookapp.utils.FileUtils;
 import com.vn.dailycookapp.utils.json.JsonTransformer;
 

@@ -6,3 +6,4 @@ Servers/
 RemoteSystemsTempFiles/
 .metadata/
 *.prefs
+DailyCookApp/src/test/java/com/vn/dailycookapp/utils/JsonTransformTest.java
