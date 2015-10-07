@@ -16,7 +16,11 @@ public abstract class AbstractModel {
 	protected abstract DCAResponse execute() throws Exception;
 	
 	public String doProcess(String... data) {
-		logger.info("AbstractModel:doProcess = " + data.toString());
+		StringBuilder sb = new  StringBuilder();
+		for (String str : data) {
+			sb.append(str).append("-");
+		}
+		logger.info("AbstractModel:doProcess = " + sb.toString());
 		DCAResponse response = null;
 		try {
 			preExecute(data);

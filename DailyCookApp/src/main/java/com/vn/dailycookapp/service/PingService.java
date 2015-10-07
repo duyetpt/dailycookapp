@@ -1,6 +1,5 @@
 package com.vn.dailycookapp.service;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -9,6 +8,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.vn.dailycookapp.entity.response.DCAResponse;
+import com.vn.dailycookapp.service.mediatypeopen.MediaTypeWithUtf8;
+import com.vn.dailycookapp.utils.ErrorCodeConstant;
+import com.vn.dailycookapp.utils.FileUtils;
 import com.vn.dailycookapp.utils.json.JsonTransformer;
 
 @Path("/dailycook")
@@ -16,7 +18,6 @@ public class PingService {
 	
 	@GET
 	@Path("/ping")
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response ping() {
 		
@@ -29,7 +30,6 @@ public class PingService {
 	
 	@GET
 	@Path("/hello")
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response sayHello(@QueryParam(value = "name") String name) {
 		String msg = null;
@@ -45,10 +45,12 @@ public class PingService {
 	}
 	
 	@GET
-	@Path("/demo")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/policy")
+	@Produces(MediaTypeWithUtf8.TEXT_HTML_UTF8)
 	public Response demo() {
-		return Response.ok("demo").status(Response.Status.OK).build();
+		FileUtils fileUtils = new FileUtils();
+		String policy = fileUtils.readFile(getClass().getResource("/policy.txt").getPath().substring(1));
+		
+		return Response.ok(policy).status(Response.Status.OK).build();
 	}
 }
