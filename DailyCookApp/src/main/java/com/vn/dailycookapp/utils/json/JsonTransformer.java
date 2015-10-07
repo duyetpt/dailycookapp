@@ -83,7 +83,7 @@ public class JsonTransformer {
 				
 				// check type of field
 				if (!(currentClass.isPrimitive() || currentClass.equals(String.class) || Number.class
-						.isAssignableFrom(currentClass))) {
+						.isAssignableFrom(currentClass)|| currentClass.equals(Boolean.class))) {
 					// if is array
 					if (currentClass.isArray()) {
 						valueOfField = marshallArray(valueOfField);

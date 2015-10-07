@@ -20,7 +20,7 @@ public abstract class AbstractModel {
 		for (String str : data) {
 			sb.append(str).append("-");
 		}
-		logger.info("AbstractModel:doProcess = " + sb.toString());
+		logger.info("##### AbstractModel:doProcess = " + sb.toString());
 		DCAResponse response = null;
 		try {
 			preExecute(data);

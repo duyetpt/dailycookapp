@@ -218,6 +218,7 @@ public class Recipe {
 		
 		@Property(value = "normalize_name")
 		@Indexed(background = true)
+		@JsonIgnoreProperty
 		private String	normalizedName;
 		
 		private String	unit;
