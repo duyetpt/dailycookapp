@@ -33,7 +33,7 @@ public class ImageService {
 	@Produces(MediaType.APPLICATION_JSON)
 	// @FormDataParam("image") FormDataContentDisposition contentDisposition
 	public Response addImage(@FormDataParam("image") InputStream inputStream) {
-		String host = ConfigurationLoader.getInstance().getPublicIpAddress();
+		String host = "http://" + ConfigurationLoader.getInstance().getPublicIpAddress();
 		String pathFile = StreamUtils.saveImage(inputStream, "jpg");
 		StringBuilder sb = new StringBuilder();
 		sb.append(host).append("/").append("dailycook/image/").append(pathFile);
