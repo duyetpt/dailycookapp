@@ -1,5 +1,8 @@
 package com.vn.dailycookapp.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
@@ -52,6 +55,18 @@ public class UserDAO extends AbstractDAO {
 		} catch (Exception ex) {
 			throw new DAOException(ErrorCodeConstant.DAO_EXCEPTION);
 		}
+	}
+	
+	public List<User> list(List<String> userIds) throws DAOException {
+		List<ObjectId> objIds = new ArrayList<>();
+		for (String userId : userIds) {
+			ObjectId objId = new ObjectId(userId);
+			objIds.add(objId);
+		}
+		
+		Query<User> query = datastore.createQuery(User.class).field("_id").in(objIds);
+		
+		return query.asList();
 	}
 	
 	public boolean increateRecipeNumber(String userId) throws DAOException {

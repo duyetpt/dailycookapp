@@ -34,7 +34,7 @@ public class ImageService {
 	@Produces(MediaType.APPLICATION_JSON)
 	// @FormDataParam("image") FormDataContentDisposition contentDisposition
 	public Response addImage(@FormDataParam("image") InputStream inputStream, @Context HttpServletRequest request) {
-		String host = request.getRemoteAddr();
+		String host = request.getLocalAddr();
 		String pathFile = StreamUtils.saveImage(inputStream, "jpg");
 		StringBuilder sb = new StringBuilder();
 		sb.append(host).append("/").append("dailycook/image/").append(pathFile);
