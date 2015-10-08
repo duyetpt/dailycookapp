@@ -19,10 +19,8 @@ public class GetCategoryTest extends AbstractTest {
 		try {
 			importData("Category", getClass().getResource("/Category.json").getFile().substring(1));
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) { 
 			e.printStackTrace();
 		}
 		String parentId = "";

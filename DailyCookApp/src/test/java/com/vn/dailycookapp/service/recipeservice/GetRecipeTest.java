@@ -17,7 +17,6 @@ public class GetRecipeTest extends AbstractTest {
 		try {
 			importData("Recipe", getClass().getResource("/recipes.json").getPath().substring(1));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		getToken();
