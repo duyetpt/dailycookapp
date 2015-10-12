@@ -50,7 +50,7 @@ public class PingService {
 	@Produces(MediaTypeWithUtf8.TEXT_HTML_UTF8)
 	public Response demo() {
 		FileUtils fileUtils = new FileUtils();
-		String policy = fileUtils.readFile(ClassLoader.getSystemClassLoader().getResource("policy.txt").getPath().substring(1));
+		String policy = fileUtils.readFile(ClassLoader.getSystemClassLoader().getResourceAsStream("policy.txt"));
 		
 		return Response.ok(policy).status(Response.Status.OK).build();
 	}

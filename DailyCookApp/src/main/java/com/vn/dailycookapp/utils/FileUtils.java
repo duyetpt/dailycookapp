@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import org.slf4j.Logger;
@@ -25,6 +26,38 @@ public class FileUtils {
 		try {
 			StringBuilder sb = new StringBuilder();
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF8"));
+			// br.mark(1);
+			// br.reset();
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
+			}
+			result = sb.toString();
+		} catch (FileNotFoundException e) {
+			logger.error("file not found", e);
+			result = null;
+		} catch (IOException e) {
+			logger.error("IO exception", e);
+			result = null;
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					logger.error("IO exception", e);
+					result = null;
+				}
+			}
+		}
+		return result;
+	}
+	
+	public String readFile(InputStream inputStream) {
+		BufferedReader br = null;
+		String result = null;
+		try {
+			StringBuilder sb = new StringBuilder();
+			br = new BufferedReader(new InputStreamReader(inputStream, "UTF8"));
 			// br.mark(1);
 			// br.reset();
 			String line = null;
@@ -87,7 +120,7 @@ public class FileUtils {
 	
 	private static String removeUTF8BOM(String s) {
 		if (s.startsWith(UTF8_BOM)) {
-//			System.out.println(s);
+			// System.out.println(s);
 			s = s.substring(UTF8_BOM.length());
 		}
 		return s;
