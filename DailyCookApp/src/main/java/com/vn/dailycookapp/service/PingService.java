@@ -1,5 +1,7 @@
 package com.vn.dailycookapp.service;
 
+import java.io.InputStream;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -48,7 +50,7 @@ public class PingService {
 	@Produces(MediaTypeWithUtf8.TEXT_HTML_UTF8)
 	public Response demo() {
 		FileUtils fileUtils = new FileUtils();
-		String policy = fileUtils.readFile(getClass().getResource("/policy.txt").getPath().substring(1));
+		String policy = fileUtils.readFile(ClassLoader.getSystemClassLoader().getResource("policy.txt").getPath().substring(1));
 		
 		return Response.ok(policy).status(Response.Status.OK).build();
 	}
