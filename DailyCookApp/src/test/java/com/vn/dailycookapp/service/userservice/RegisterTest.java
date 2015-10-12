@@ -5,9 +5,11 @@ import static org.junit.Assert.assertEquals;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 
+import org.bson.Document;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import com.mongodb.client.FindIterable;
 import com.vn.dailycookapp.AbstractTest;
 import com.vn.dailycookapp.entity.request.RegisterInfo;
 import com.vn.dailycookapp.security.authentication.CurrentUser;
@@ -36,5 +38,11 @@ public class RegisterTest extends AbstractTest{
 		JSONObject jsonObj = getResponse();
 		CurrentUser user =JsonTransformer.getInstance().unmarshall(jsonObj.getJSONObject("data").toString(), CurrentUser.class);
 		assertEquals(26, user.getToken().length());
+		
+		System.out.println("--->   Favorited collection data   <---");
+		FindIterable<Document> result1 = _mongo.getCollection("User").find();
+		for (Document doc : result1) {
+			System.out.println("--> " + doc.toJson());
+		}
 	}	
 }

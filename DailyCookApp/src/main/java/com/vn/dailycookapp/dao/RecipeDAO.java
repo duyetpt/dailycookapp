@@ -6,7 +6,7 @@ import org.mongodb.morphia.query.Query;
 import com.vn.dailycookapp.entity.Recipe;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
 
-public class RecipeDAO extends AbstractDAO {
+public class RecipeDAO extends AbstractDAO<Recipe> {
 	
 	private static final RecipeDAO	instance	= new RecipeDAO();
 	
@@ -25,6 +25,14 @@ public class RecipeDAO extends AbstractDAO {
 			logger.error("save recipe error", ex);
 			throw new DAOException(ErrorCodeConstant.DAO_EXCEPTION);
 		}
+	}
+	
+	public boolean increateFavoriteNumber(String recipeId) throws DAOException {
+		return increaseForField(recipeId, 1, Recipe.class, "favorite_number");
+	}
+	
+	public boolean decreateFavoriteNumber(String recipeId) throws DAOException {
+		return increaseForField(recipeId, -1, Recipe.class, "favorite_number");
 	}
 	
 	public Recipe getRecipe(String recipeId) throws DAOException {

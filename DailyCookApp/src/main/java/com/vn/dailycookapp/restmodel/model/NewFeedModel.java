@@ -13,10 +13,10 @@ import com.vn.dailycookapp.restmodel.AbstractModel;
  *         Response data
  */
 public class NewFeedModel extends AbstractModel {
-	private String	userId;
-	private int		skip;
-	private int		take;
-	private String	sort;
+//	private String	userId;
+//	private int		skip;
+//	private int		take;
+//	private String	sort;
 	
 	@Override
 	protected void preExecute(String... data) throws Exception {

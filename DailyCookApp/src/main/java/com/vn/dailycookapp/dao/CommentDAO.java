@@ -7,7 +7,7 @@ import org.mongodb.morphia.query.Query;
 import com.vn.dailycookapp.entity.Comment;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
 
-public class CommentDAO extends AbstractDAO {
+public class CommentDAO extends AbstractDAO <Comment>{
 	
 	private static final CommentDAO	instance	= new CommentDAO();
 	

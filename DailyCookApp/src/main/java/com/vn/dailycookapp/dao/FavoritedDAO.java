@@ -1,14 +1,22 @@
 package com.vn.dailycookapp.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.query.Query;
+
+import com.vn.dailycookapp.entity.Favorited;
 
 /**
  * 
  * @author duyetpt
- * recipe is favorited by
+ *         recipe is favorited by
  */
-public class FavoritedDAO extends AbstractDAO{
+public class FavoritedDAO extends AbstractDAO<Favorited> {
 	
-	private static final FavoritedDAO instance = new FavoritedDAO();
+	private static final FavoritedDAO	instance	= new FavoritedDAO();
+	
 	private FavoritedDAO() {
 		
 	}
@@ -17,11 +25,24 @@ public class FavoritedDAO extends AbstractDAO{
 		return instance;
 	}
 	
-	public void push(String recipeId, String userId) {
+	public void push(String recipeId, String userId) throws DAOException {
+		Query<Favorited> query = datastore.createQuery(Favorited.class).field("_id").equal(new ObjectId(recipeId));
 		
+		if (query.get() == null) {
+			Favorited fav = new Favorited();
+			fav.setId(new ObjectId(recipeId));
+			
+			List<String> userIds = new ArrayList<>();
+			userIds.add(userId);
+			fav.setUserIds(userIds);
+			
+			save(fav);
+		} else {
+			pushToArray(recipeId, "user_ids", recipeId, Favorited.class);
+		}
 	}
 	
-	public void pull(String recipeId, String userId) {
-		
+	public void pull(String recipeId, String userId) throws DAOException {
+		pullToArray(recipeId, "user_ids", recipeId, Favorited.class);
 	}
 }

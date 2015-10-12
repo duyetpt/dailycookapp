@@ -16,6 +16,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.testng.annotations.AfterClass;
 
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoDatabase;
 import com.vn.dailycookapp.security.authentication.CurrentUser;
 import com.vn.dailycookapp.security.authentication.LoginMethod;
 import com.vn.dailycookapp.service.HeaderField;
@@ -54,6 +56,7 @@ public class AbstractTest extends JerseyTest {
 	protected static final int		PORT				= 27017;
 	
 	private static MongodProcess	_mongod;
+	protected static MongoDatabase  _mongo;
 	
 	static IRuntimeConfig			runtimeConfig		= new RuntimeConfigBuilder()
 																.defaults(command)
@@ -71,12 +74,14 @@ public class AbstractTest extends JerseyTest {
 	static MongodStarter			runtime				= MongodStarter.getInstance(runtimeConfig);
 	static MongodExecutable			mongodExecutable	= null;
 	
+	@SuppressWarnings("resource")
 	@BeforeClass
 	public static void set() throws Exception {
 		IMongodConfig mongodConfig = new MongodConfigBuilder().version(Version.Main.PRODUCTION)
 				.net(new Net(PORT, Network.localhostIsIPv6())).build();
 		mongodExecutable = runtime.prepare(mongodConfig);
 		_mongod = mongodExecutable.start();
+		 _mongo = new MongoClient("localhost", PORT).getDatabase("dailycook");
 	}
 	
 	@AfterClass

@@ -1,6 +1,8 @@
 package com.vn.dailycookapp.restmodel;
 
 import com.vn.dailycookapp.restmodel.model.CreateRecipeModel;
+import com.vn.dailycookapp.restmodel.model.FavoriteRecipeModel;
+import com.vn.dailycookapp.restmodel.model.FollowUserModel;
 import com.vn.dailycookapp.restmodel.model.GetCommentModel;
 import com.vn.dailycookapp.restmodel.model.GetIngredientTypesModel;
 import com.vn.dailycookapp.restmodel.model.GetRecipeModel;
@@ -17,9 +19,11 @@ public enum ModelDefine {
 	GET_RECIPE("get_recipe", GetRecipeModel.class),
 	REGISTER("register", RegisterModel.class),
 	LOGIN("login", LoginModel.class),
+	FOLLOW("follow_user", FollowUserModel.class),
 	
 	GET_COMMENT("get_comment", GetCommentModel.class),
-	NEW_FEED("new_feed", NewFeedModel.class);
+	NEW_FEED("new_feed", NewFeedModel.class),
+	Favorite("favorite", FavoriteRecipeModel.class);
 	
 	private final String							name;
 	private final Class<? extends AbstractModel>	model;

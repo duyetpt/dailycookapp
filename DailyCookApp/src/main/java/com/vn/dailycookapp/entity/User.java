@@ -91,14 +91,6 @@ public class User {
 		this.displayName = displayName;
 	}
 	
-	// public String getFbId() {
-	// return fbId;
-	// }
-	//
-	// public void setFbId(String fbId) {
-	// this.fbId = fbId;
-	// }
-	
 	public String getEmail() {
 		return email;
 	}

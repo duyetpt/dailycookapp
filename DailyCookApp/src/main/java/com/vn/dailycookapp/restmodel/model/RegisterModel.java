@@ -52,7 +52,7 @@ public class RegisterModel extends AbstractModel {
 		user.setDisplayName(regInfo.getEmail().split("@")[0]);
 		user.setLanguage(regInfo.getLanguage());
 		// save to db
-		UserDAO.getInstance().save(user);
+		UserDAO.getInstance().saveWithSynchronized(user);
 		// get session token
 		String token = SessionManager.getInstance().addSession(user.getId());
 		

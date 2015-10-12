@@ -3,6 +3,7 @@ package com.vn.dailycookapp.service;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -49,10 +50,18 @@ public class RecipeService {
 	}
 	
 	@GET
-	@Path("{recipeId}/comment/get")
+	@Path("/{recipeId}/comment/get")
 	@Produces(MediaTypeWithUtf8.APPLICATION_JSON_UTF8)
 	public Response getComment(@PathParam("recipeId") String recipeId, @QueryParam("skip") String skip, @QueryParam("take") String take) {
 		String data = ModelResolver.getApi(ModelDefine.GET_COMMENT).doProcess(recipeId, skip, take);
+		return Response.ok().entity(data).build();
+	}
+	
+	@PUT
+	@Path("/{recipeId}/favorite")
+	@Produces(MediaTypeWithUtf8.APPLICATION_JSON_UTF8)
+	public Response favorite(@HeaderParam(HeaderField.USER_ID) String userId, @PathParam("recipeId") String recipeId, @QueryParam("flag") String flag) {
+		String data = ModelResolver.getApi(ModelDefine.Favorite).doProcess(recipeId, flag, userId);
 		return Response.ok().entity(data).build();
 	}
 }

@@ -3,9 +3,12 @@ package com.vn.dailycookapp.service;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.vn.dailycookapp.restmodel.ModelDefine;
@@ -41,6 +44,15 @@ public class UserService {
 	public Response getNewFeed(@HeaderParam(HeaderField.USER_ID) String userId, @QueryParam("skip") String skip,
 			@QueryParam("take") String take, @QueryParam("sort") String sort) {
 		String data = ModelResolver.getApi(ModelDefine.NEW_FEED).doProcess(userId, skip, take, sort);
+		return Response.ok(data).build();
+	}
+	
+	// http://dailycookapp.cloudapp.net:8181/dailycook/user/follow/{userId}?flag={flag}
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/follow/{userId}")
+	public Response follow(@HeaderParam(HeaderField.USER_ID) String owner, @QueryParam("flag") String flag, @PathParam("userId") String userId) {
+		String data = ModelResolver.getApi(ModelDefine.FOLLOW).doProcess(owner, userId, flag);
 		return Response.ok(data).build();
 	}
 }
