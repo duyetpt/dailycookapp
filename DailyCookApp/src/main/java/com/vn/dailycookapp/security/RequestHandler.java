@@ -1,6 +1,8 @@
 package com.vn.dailycookapp.security;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Priority;
 import javax.ws.rs.Priorities;
@@ -33,15 +35,17 @@ public class RequestHandler implements ContainerRequestFilter {
 		
 		MultivaluedMap<String, String> headers = requestContext.getHeaders();
 		JSONObject json = new JSONObject(headers);
-		logger.info(json.toString());
+		logger.info("=> => => Request header => " + json.toString());
 		
-		String url = requestContext.getUriInfo().getPath();// .equals("user/login")
+		String url = requestContext.getUriInfo().getPath();
+		logger.info("=> => => Request Url => " + url);
+		
 		String query = requestContext.getUriInfo().getRequestUri().getQuery();
-//		System.out.println(query);
+		
 		if (query != null && query.endsWith("testMode=true")) {
 			logger.info("run in test mode...");
 		} else {
-			if (url.equals("dailycook/user/login") || url.equals("dailycook/user/register")) {
+			if (NotAuthUrls.isNotAuth(url)) {
 				logger.info("user login or register...");
 			} else {
 				logger.info("authorzation...");
