@@ -4,7 +4,7 @@ public class RegisterInfo {
 	
 	private String	email;
 	private String	password;
-	private String	re_passowrd;
+	private String	re_password;
 	private String	language;
 	
 	public String getEmail() {
@@ -23,20 +23,20 @@ public class RegisterInfo {
 		this.password = password;
 	}
 	
-	public String getRe_passowrd() {
-		return re_passowrd;
-	}
-	
-	public void setRe_passowrd(String re_passowrd) {
-		this.re_passowrd = re_passowrd;
-	}
-	
 	public String getLanguage() {
 		return language;
 	}
 	
 	public void setLanguage(String language) {
 		this.language = language;
+	}
+	
+	public String getRe_password() {
+		return re_password;
+	}
+	
+	public void setRe_password(String re_password) {
+		this.re_password = re_password;
 	}
 	
 }
