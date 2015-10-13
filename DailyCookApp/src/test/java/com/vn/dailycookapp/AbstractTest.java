@@ -1,6 +1,7 @@
 package com.vn.dailycookapp;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -13,7 +14,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.json.JSONObject;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import org.testng.annotations.AfterClass;
 
 import com.mongodb.MongoClient;
