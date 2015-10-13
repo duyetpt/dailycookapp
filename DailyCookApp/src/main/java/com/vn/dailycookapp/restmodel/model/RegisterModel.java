@@ -69,7 +69,7 @@ public class RegisterModel extends AbstractModel {
 	private void validateInfo() throws DCAException {
 		Validator.getInstance().validateEmail(regInfo.getEmail());
 		Validator.getInstance().validatePassword(regInfo.getPassword());
-		if (!regInfo.getPassword().equals(regInfo.getRe_passowrd())) {
+		if (!regInfo.getPassword().equals(regInfo.getRe_password())) {
 			throw new InvalidParamException();
 		}
 	}

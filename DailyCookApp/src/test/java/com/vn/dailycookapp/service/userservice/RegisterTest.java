@@ -29,7 +29,7 @@ public class RegisterTest extends AbstractTest{
 //		regInfo.setLanguage(Language.ENGLISH);
 		regInfo.setLanguage(Language.VIETNAMESE);
 		regInfo.setPassword(password);
-		regInfo.setRe_passowrd(re_passowrd);
+		regInfo.setRe_password(re_passowrd);
 		
 		String userInfo = JsonTransformer.getInstance().marshall(regInfo);
 		Entity<String> entity = Entity.entity(userInfo, MediaType.APPLICATION_JSON_TYPE); 
