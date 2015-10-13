@@ -7,6 +7,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 
 import org.json.JSONObject;
+import org.junit.Test;
 
 import com.vn.dailycookapp.AbstractTest;
 import com.vn.dailycookapp.entity.Recipe;
@@ -26,6 +27,7 @@ import com.vn.dailycookapp.utils.json.JsonTransformer;
  */
 public class AddRecipeTest extends AbstractTest {
 	
+	@Test
 	@SuppressWarnings("unused")
 	public void test() {
 		Recipe recipe = new Recipe();

@@ -5,6 +5,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 
 import org.json.JSONObject;
+import org.junit.Test;
 
 import com.vn.dailycookapp.AbstractTest;
 import com.vn.dailycookapp.utils.lang.Language;
@@ -12,7 +13,7 @@ import com.vn.dailycookapp.utils.lang.Language;
 public class GetUnitsTest extends AbstractTest {
 	
 	@SuppressWarnings("unused")
-	@Override
+	@Test
 	public void test() {
 		String lang = Language.VIETNAMESE;
 		

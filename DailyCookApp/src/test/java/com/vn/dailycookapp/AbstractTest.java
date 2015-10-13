@@ -105,10 +105,6 @@ public class AbstractTest extends JerseyTest {
 		return jsonObj;
 	}
 	
-	@Test
-	public void test() {
-	};
-	
 	/**
 	 * import data for test but not close mongod
 	 * 

@@ -5,13 +5,14 @@ import java.io.IOException;
 import javax.ws.rs.core.MediaType;
 
 import org.json.JSONObject;
+import org.junit.Test;
 
 import com.vn.dailycookapp.AbstractTest;
 import com.vn.dailycookapp.service.HeaderField;
 
 public class GetRecipeTest extends AbstractTest {
 	
-	@Override
+	@Test
 	public void test() {
 		// request create recipe
 		try {

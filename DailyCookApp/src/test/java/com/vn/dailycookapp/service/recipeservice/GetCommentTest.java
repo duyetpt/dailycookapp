@@ -4,12 +4,15 @@ import java.io.IOException;
 
 import javax.ws.rs.core.MediaType;
 
+import org.junit.Test;
+
 import com.vn.dailycookapp.AbstractTest;
 
 public class GetCommentTest extends AbstractTest {
 	
 	private final String	recipeId	= "5612a3df432ac0716cd94971";
 	
+	@Test
 	public void test() {
 		// import data
 		getToken();
