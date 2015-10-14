@@ -2,6 +2,7 @@ package com.vn.dailycookapp.dao;
 
 import com.vn.dailycookapp.entity.HelloMessage;
 
+@SuppressWarnings("rawtypes")
 public class HelloMessageDAO extends AbstractDAO{
 	
 	private static HelloMessageDAO instance;

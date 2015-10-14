@@ -4,15 +4,21 @@ import java.util.List;
 
 import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.restmodel.AbstractModel;
+import com.vn.dailycookapp.restmodel.InvalidParamException;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
 import com.vn.dailycookapp.utils.lang.Language;
 
 public class GetUnitsModel extends AbstractModel {
-private String	language;
+	private String	language;
 	
 	@Override
 	protected void preExecute(String... data) throws Exception {
-		language = data[0];
+		try {
+			language = data[0];
+		} catch (Exception ex) {
+			throw new InvalidParamException();
+		}
+		
 	}
 	
 	@Override

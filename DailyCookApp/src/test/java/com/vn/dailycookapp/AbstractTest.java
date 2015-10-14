@@ -138,7 +138,7 @@ public class AbstractTest extends JerseyTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String email = "test1@dailycook.vn";
+		String email = "ki1@gmail.com";
 		String password = "123456789";
 		String token = email + ":" + password;
 		String token64 = Base64.encodeAsString(token);

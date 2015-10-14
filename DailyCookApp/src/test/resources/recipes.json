@@ -27,18 +27,18 @@
         "com rang", 
         "bo"
     ],
-    "pictureUrl" : "http://www.wn.com.vn/product_images/uploaded_images/cach-rang-com-ngon-8-.jpg",
-    "createdTime" : NumberLong(1444061104366),
+    "picture_url" : "http://www.wn.com.vn/product_images/uploaded_images/cach-rang-com-ngon-8-.jpg",
+    "createdTime" : NumberLong(1444061104396),
     "favoriteNumber" : 0,
     "intervalCook" : 20,
     "steps" : [ 
         {
-            "pictureUrl" : "http://yeunoitro.net/wp-content/uploads/2015/03/thit-bo-thai-mieng.jpg",
+            "picture_url" : "http://yeunoitro.net/wp-content/uploads/2015/03/thit-bo-thai-mieng.jpg",
             "description" : "Bam thi bo",
             "stepNo" : 1
         }, 
         {
-            "pictureUrl" : "http://media.tinmoi.vn/2015/01/08/an-dua-ca-muoi.jpg",
+            "picture_url" : "http://media.tinmoi.vn/2015/01/08/an-dua-ca-muoi.jpg",
             "description" : "Rua rua => giam bot do chua",
             "stepNo" : 1
         }, 
@@ -85,23 +85,23 @@
         "mang", 
         "ca nau"
     ],
-    "pictureUrl" : "http://www.wn.com.vn/product_images/uploaded_images/cach-rang-com-ngon-8-.jpg",
-    "createdTime" : NumberLong(1444061104366),
+    "picture_url" : "http://www.wn.com.vn/product_images/uploaded_images/cach-rang-com-ngon-8-.jpg",
+    "createdTime" : NumberLong(1444061104368),
     "favoriteNumber" : 0,
     "intervalCook" : 20,
     "steps" : [ 
         {
-            "pictureUrl" : "http://yeunoitro.net/wp-content/uploads/2015/03/thit-bo-thai-mieng.jpg",
+            "picture_url" : "http://yeunoitro.net/wp-content/uploads/2015/03/thit-bo-thai-mieng.jpg",
             "description" : "Bam thi bo",
             "stepNo" : 1
         }, 
         {
-            "pictureUrl" : "http://media.tinmoi.vn/2015/01/08/an-dua-ca-muoi.jpg",
+            "picture_url" : "http://media.tinmoi.vn/2015/01/08/an-dua-ca-muoi.jpg",
             "description" : "Rua rua => giam bot do chua",
             "stepNo" : 1
         }, 
         {
-            "pictureUrl" : "http://media.tinmoi.vn/2015/01/08/an-dua-ca-muoi.jpg",
+            "picture_url" : "http://media.tinmoi.vn/2015/01/08/an-dua-ca-muoi.jpg",
             "description" : "Rua rua => giam bot do chua",
             "stepNo" : 1
         }, 
@@ -129,13 +129,13 @@
         "Ca", 
         "ca nau"
     ],
-    "pictureUrl" : "http://www.wn.com.vn/product_images/uploaded_images/cach-rang-com-ngon-8-.jpg",
+    "picture_url" : "http://www.wn.com.vn/product_images/uploaded_images/cach-rang-com-ngon-8-.jpg",
     "createdTime" : NumberLong(1444061104366),
     "favoriteNumber" : 100,
     "intervalCook" : 20,
     "steps" : [ 
         {
-            "pictureUrl" : "http://media.tinmoi.vn/2015/01/08/an-dua-ca-muoi.jpg",
+            "picture_url" : "http://media.tinmoi.vn/2015/01/08/an-dua-ca-muoi.jpg",
             "description" : "Rua rua => giam bot do chua",
             "stepNo" : 1
         }, 

@@ -20,15 +20,9 @@ public class CreateRecipeModel extends AbstractModel {
 	
 	@Override
 	protected void preExecute(String... data) throws Exception {
-		try {
 			userId = data[0];
 			recipe = JsonTransformer.getInstance().unmarshall(data[1], Recipe.class);
 			validateRecipe();
-		} catch (Exception ex) {
-			logger.error("preExecute error", ex);
-			throw new InvalidParamException();
-		}
-		
 	}
 	
 	@Override

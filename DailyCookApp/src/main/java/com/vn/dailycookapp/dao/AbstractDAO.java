@@ -18,6 +18,7 @@ abstract class AbstractDAO<T> {
 		try {
 			datastore.save(t);
 		} catch (Exception ex) {
+			logger.error("save error", ex);
 			throw new DAOException(ErrorCodeConstant.DAO_EXCEPTION);
 		}
 	}
@@ -26,6 +27,7 @@ abstract class AbstractDAO<T> {
 		try {
 			return datastore.createQuery(entityClass).field("_id").equal(new ObjectId(id)).get();
 		} catch (Exception ex) {
+			logger.error("get error", ex);
 			throw new DAOException(ErrorCodeConstant.DAO_EXCEPTION);
 		}
 	}

@@ -32,17 +32,17 @@ public class GetRecipeModel extends AbstractModel {
 		try {
 			userId = data[0];
 			recipeId = data[1];
-			validateData();
 		} catch (Exception ex) {
 			throw new InvalidParamException();
 		}
+		validateData();
 		
 	}
 	
 	@Override
 	protected DCAResponse execute() throws Exception {
 		DCAResponse response = new DCAResponse(ErrorCodeConstant.SUCCESSUL.getErrorCode());
-		Recipe recipe = RecipeDAO.getInstance().getRecipe(recipeId);
+		Recipe recipe = RecipeDAO.getInstance().get(recipeId);
 		User owner = UserDAO.getInstance().getUser(recipe.getOwner());
 		
 		// check user favorite recipe

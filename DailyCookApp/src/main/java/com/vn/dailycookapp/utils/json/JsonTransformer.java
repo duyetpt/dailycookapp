@@ -22,10 +22,18 @@ public class JsonTransformer {
 	
 	public <T> String marshall(T t) {
 		// long s = System.currentTimeMillis();
-		JSONObject jsonObj = marshallChild(t);
-		// long e = System.currentTimeMillis();
-		// System.out.println(e-s);
-		return jsonObj == null ? null : jsonObj.toString();
+		if (t.getClass().isArray()) {
+			JSONArray jsonArr = marshallArray(t);
+			return jsonArr == null ? null : jsonArr.toString();
+		} else if (t.getClass().isAssignableFrom(List.class)) {
+			JSONArray jsonArr = marshallList(t);
+			return jsonArr == null ? null : jsonArr.toString();
+		} else {
+			JSONObject jsonObj = marshallChild(t);
+			// long e = System.currentTimeMillis();
+			// System.out.println(e-s);
+			return jsonObj == null ? null : jsonObj.toString();
+		}
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -82,8 +90,8 @@ public class JsonTransformer {
 				Class currentClass = valueOfField.getClass();
 				
 				// check type of field
-				if (!(currentClass.isPrimitive() || currentClass.equals(String.class) || Number.class
-						.isAssignableFrom(currentClass)|| currentClass.equals(Boolean.class))) {
+				if (!(currentClass.isPrimitive() || currentClass.equals(String.class)
+						|| Number.class.isAssignableFrom(currentClass) || currentClass.equals(Boolean.class))) {
 					// if is array
 					if (currentClass.isArray()) {
 						valueOfField = marshallArray(valueOfField);
@@ -144,7 +152,6 @@ public class JsonTransformer {
 					jsonArr.put(obj);
 				} else {
 					JSONObject jsonObj = marshallChild(obj);
-					// System.out.println(jsonObj.toJSONString());
 					jsonArr.put(jsonObj);
 				}
 			}

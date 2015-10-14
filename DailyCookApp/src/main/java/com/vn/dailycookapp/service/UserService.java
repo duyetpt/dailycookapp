@@ -37,7 +37,7 @@ public class UserService {
 		return Response.ok(data).build();
 	}
 	
-	// http://168.63.239.92:8181/dailycook/user/newfeed?skip={skip}&take={take}&sort={sort
+	// http://168.63.239.92:8181/dailycook/user/newfeed?skip={skip}&take={take}&sort={sort}
 	@GET
 	@Produces(MediaTypeWithUtf8.APPLICATION_JSON_UTF8)
 	@Path("/newfeed")
@@ -51,8 +51,10 @@ public class UserService {
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/follow/{userId}")
-	public Response follow(@HeaderParam(HeaderField.USER_ID) String owner, @QueryParam("flag") String flag, @PathParam("userId") String userId) {
+	public Response follow(@HeaderParam(HeaderField.USER_ID) String owner, @QueryParam("flag") String flag,
+			@PathParam("userId") String userId) {
 		String data = ModelResolver.getApi(ModelDefine.FOLLOW).doProcess(owner, userId, flag);
 		return Response.ok(data).build();
 	}
+	
 }

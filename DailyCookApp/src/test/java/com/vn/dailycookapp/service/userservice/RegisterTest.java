@@ -31,6 +31,8 @@ public class RegisterTest extends AbstractTest{
 		regInfo.setPassword(password);
 		regInfo.setRe_password(re_passowrd);
 		
+		
+		
 		String userInfo = JsonTransformer.getInstance().marshall(regInfo);
 		Entity<String> entity = Entity.entity(userInfo, MediaType.APPLICATION_JSON_TYPE); 
 		responseData = target("dailycook/user/register").request().post(entity, String.class);
@@ -45,4 +47,20 @@ public class RegisterTest extends AbstractTest{
 			System.out.println("--> " + doc.toJson());
 		}
 	}	
+	
+	public static void main(String[] args) {
+		String email = "duyetpt" + System.currentTimeMillis() + "@dailycook.vn";
+		String password = "979565268772394:";
+		String re_passowrd = password;
+		
+		RegisterInfo regInfo = new RegisterInfo();
+		regInfo.setEmail(email);
+//		regInfo.setLanguage(Language.ENGLISH);
+		regInfo.setLanguage(Language.VIETNAMESE);
+		regInfo.setPassword(password);
+		regInfo.setRe_password(re_passowrd);
+		
+		String userInfo = JsonTransformer.getInstance().marshall(regInfo);
+		System.out.println(userInfo);
+	}
 }

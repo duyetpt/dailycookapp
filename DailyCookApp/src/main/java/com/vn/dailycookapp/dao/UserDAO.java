@@ -1,7 +1,9 @@
 package com.vn.dailycookapp.dao;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.Query;
@@ -55,8 +57,8 @@ public class UserDAO extends AbstractDAO<User> {
 		}
 	}
 	
-	public List<User> list(List<String> userIds) throws DAOException {
-		List<ObjectId> objIds = new ArrayList<>();
+	public List<User> list(Collection<String> userIds) throws DAOException {
+		Set<ObjectId> objIds = new TreeSet<>();
 		for (String userId : userIds) {
 			ObjectId objId = new ObjectId(userId);
 			objIds.add(objId);

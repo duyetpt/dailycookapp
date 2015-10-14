@@ -1,10 +1,14 @@
 package com.vn.dailycookapp.dao;
 
-import org.bson.types.ObjectId;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mongodb.morphia.query.Query;
 
 import com.vn.dailycookapp.entity.Recipe;
+import com.vn.dailycookapp.restmodel.model.NewFeedModel;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
+import com.vn.dailycookapp.utils.TimeUtils;
 
 public class RecipeDAO extends AbstractDAO<Recipe> {
 	
@@ -18,15 +22,6 @@ public class RecipeDAO extends AbstractDAO<Recipe> {
 		return instance;
 	}
 	
-	public void save(Recipe recipe) throws DAOException {
-		try {
-			datastore.save(recipe);
-		} catch (Exception ex) {
-			logger.error("save recipe error", ex);
-			throw new DAOException(ErrorCodeConstant.DAO_EXCEPTION);
-		}
-	}
-	
 	public boolean increateFavoriteNumber(String recipeId) throws DAOException {
 		return increaseForField(recipeId, 1, Recipe.class, "favorite_number");
 	}
@@ -35,12 +30,33 @@ public class RecipeDAO extends AbstractDAO<Recipe> {
 		return increaseForField(recipeId, -1, Recipe.class, "favorite_number");
 	}
 	
-	public Recipe getRecipe(String recipeId) throws DAOException {
+	public Recipe get(String recipeId) throws DAOException {
+		return get(recipeId, Recipe.class);
+	}
+	
+	public List<Recipe> getRecipes(int skip, int take, String sort, List<String> followingIds) throws DAOException {
 		try {
-			Query<Recipe> query = datastore.createQuery(Recipe.class).field("_id").equal(new ObjectId(recipeId));
-			return query.get();
+			Query<Recipe> query = datastore.createQuery(Recipe.class).offset(skip).limit(take);
+			switch (sort) {
+				case NewFeedModel.SORT_BY_FOLLOWING:
+					if (followingIds != null) {
+						query.field("owner").in(followingIds).order("-create_time");
+					} else {
+						return new ArrayList<>();
+					}
+					break;
+				case NewFeedModel.SORT_BY_HOTEST:
+					query.field("created_time").greaterThanOrEq(TimeUtils.getCurrentGMTTime() - TimeUtils.A_MONTH_MILI)
+							.order("-favorite_number");
+					break;
+				case NewFeedModel.SORT_BY_NEWEST:
+					query.order("-created_time");
+					break;
+			}
+			
+			return query.asList();
 		} catch (Exception ex) {
-			logger.error("get recipe error", ex);
+			logger.error("get recipes error", ex);
 			throw new DAOException(ErrorCodeConstant.DAO_EXCEPTION);
 		}
 	}

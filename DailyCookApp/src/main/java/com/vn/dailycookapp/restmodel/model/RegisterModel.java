@@ -13,15 +13,16 @@ import com.vn.dailycookapp.utils.EncryptHelper;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
 import com.vn.dailycookapp.utils.json.JsonTransformer;
 import com.vn.dailycookapp.utils.validate.Validator;
+
 /**
  * 
  * @author duyetpt
- * transform data to RegisterInfo
- * Validate data
- * Encrypt password
- * Save to DB
- * Get session
- * Response
+ *         transform data to RegisterInfo
+ *         Validate data
+ *         Encrypt password
+ *         Save to DB
+ *         Get session
+ *         Response
  */
 public class RegisterModel extends AbstractModel {
 	
@@ -34,10 +35,10 @@ public class RegisterModel extends AbstractModel {
 		try {
 			userInfo = data[0];
 			regInfo = JsonTransformer.getInstance().unmarshall(userInfo, RegisterInfo.class);
-			validateInfo();
 		} catch (Exception ex) {
 			throw new InvalidParamException();
 		}
+		validateInfo();
 		
 	}
 	

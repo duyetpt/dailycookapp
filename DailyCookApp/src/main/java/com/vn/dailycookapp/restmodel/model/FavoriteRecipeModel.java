@@ -55,7 +55,7 @@ public class FavoriteRecipeModel extends AbstractModel {
 				FavoritedDAO.getInstance().pull(recipeId, userId);
 				RecipeDAO.getInstance().decreateFavoriteNumber(recipeId);
 		}
-		Recipe recipe = RecipeDAO.getInstance().getRecipe(recipeId);
+		Recipe recipe = RecipeDAO.getInstance().get(recipeId);
 		
 		FavoriteResponseData data = new FavoriteResponseData();
 		data.setFavoriteNumber(recipe.getFavoriteNumber());
