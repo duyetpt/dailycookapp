@@ -14,11 +14,11 @@ import com.vn.dailycookapp.utils.json.JsonIgnoreProperty;
 
 @Entity(value = "Recipe", noClassnameStored = true)
 public class Recipe {
-	public static final int			APPROVED_FLAG	= 1;
-	public static final int			REPORTED_FLAG	= 0;
-	public static final int			REMOVED_FLAG	= -1;
+	public static final int			APPROVED_FLAG		= 1;
+	public static final int			REPORTED_FLAG		= 0;
+	public static final int			REMOVED_FLAG		= -1;
 	
-	public static final int MAX_CATEGORY_NUMBER = 5;
+	public static final int			MAX_CATEGORY_NUMBER	= 5;
 	
 	@Id
 	@JsonIgnoreEmpty
@@ -46,21 +46,21 @@ public class Recipe {
 	
 	@Property(value = "status_flag")
 	@JsonIgnoreProperty
-	private int						statusFlag		= APPROVED_FLAG;
+	private int						statusFlag			= APPROVED_FLAG;
 	
 	@Property(value = "interval_cook")
 	private int						intervalCook;
 	
 	private String					story;
 	
-	private boolean					selected		= false;
+	private boolean					selected			= false;
 	
 	@Property(value = "deleted_time")
 	@JsonIgnoreProperty
 	private Long					deletedTime;
 	
 	@Property(value = "created_time")
-	private Long					createdTime = TimeUtils.getCurrentGMTTime();
+	private Long					createdTime			= TimeUtils.getCurrentGMTTime();
 	
 	private List<Recipe.Ingredient>	ingredients;
 	
@@ -222,7 +222,7 @@ public class Recipe {
 		private String	normalizedName;
 		
 		private String	unit;
-		private int		quantity;
+		private String	quantity;
 		private String	group;
 		
 		public String getName() {
@@ -241,11 +241,11 @@ public class Recipe {
 			this.unit = unit;
 		}
 		
-		public int getQuantity() {
+		public String getQuantity() {
 			return quantity;
 		}
 		
-		public void setQuantity(int quantity) {
+		public void setQuantity(String quantity) {
 			this.quantity = quantity;
 		}
 		
