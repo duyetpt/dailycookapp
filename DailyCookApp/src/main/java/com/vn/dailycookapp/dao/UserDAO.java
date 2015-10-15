@@ -70,12 +70,12 @@ public class UserDAO extends AbstractDAO<User> {
 	}
 	
 	public boolean increateRecipeNumber(String userId) throws DAOException {
-		return increaseForField(userId, 1, User.class, "n_recipe");
+		return increaseForField(userId, 1, User.class, "n_recipes");
 	}
 	
 	public boolean decreaseRecipeNumber(String userId) throws DAOException {
 		// return updateRecipeNumber(userId, -1);
-		return increaseForField(userId, -1, User.class, "n_recipe");
+		return increaseForField(userId, -1, User.class, "n_recipes");
 	}
 	
 	public boolean increateFollowingNumber(String userId) throws DAOException {
