@@ -11,6 +11,9 @@ import com.vn.dailycookapp.utils.json.JsonTransformer;
 public abstract class AbstractModel {
 	protected final Logger	logger	= LoggerFactory.getLogger(getClass());
 	
+	protected String userId;
+	protected String	recipeId;
+	
 	protected abstract void preExecute(String... data) throws Exception;
 	
 	protected abstract DCAResponse execute() throws Exception;
@@ -36,6 +39,9 @@ public abstract class AbstractModel {
 			logger.error("Execute api error", ex);
 		}
 		
-		return JsonTransformer.getInstance().marshall(response);
+		String strResponse = JsonTransformer.getInstance().marshall(response); 
+		logger.info(":| => => => Response => " + strResponse);
+		
+		return strResponse;
 	}
 }

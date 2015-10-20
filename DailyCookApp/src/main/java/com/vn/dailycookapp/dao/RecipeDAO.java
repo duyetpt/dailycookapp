@@ -30,6 +30,10 @@ public class RecipeDAO extends AbstractDAO<Recipe> {
 		return increaseForField(recipeId, -1, Recipe.class, "favorite_number");
 	}
 	
+	public boolean increateCommentNumber(String recipeId) throws DAOException {
+		return increaseForField(recipeId, 1, Recipe.class, "comment_number");
+	}
+	
 	public Recipe get(String recipeId) throws DAOException {
 		return get(recipeId, Recipe.class);
 	}

@@ -19,19 +19,19 @@ public class DCAServer {
 	 */
 	public static void main(String[] args) {
 		logger.info("starting config server...");
-		if (args == null || args.length == 0) {
-			logger.error("not has language folder, please add it as the first arguments !");
-			logger.warn("\\//=== Server stoped! ==\\//");
-			return;
-		}
-		String languageFolder = args[0];
-		if (languageFolder == null || languageFolder.isEmpty()) {
-			logger.error("not has language folder, please add it as the first arguments !");
-			logger.warn("\\//=== Server stoped! ==\\//");
-			return;
-		}
-		logger.warn("language_path: " + languageFolder);
-		ConfigurationLoader.getInstance().setLanguagePath(languageFolder);
+//		if (args == null || args.length == 0) {
+//			logger.error("not has language folder, please add it as the first arguments !");
+//			logger.warn("\\//=== Server stoped! ==\\//");
+//			return;
+//		}
+//		String languageFolder = args[0];
+//		if (languageFolder == null || languageFolder.isEmpty()) {
+//			logger.error("not has language folder, please add it as the first arguments !");
+//			logger.warn("\\//=== Server stoped! ==\\//");
+//			return;
+//		}
+//		logger.warn("language_path: " + languageFolder);
+		ConfigurationLoader.getInstance().setLanguagePath("");
 		
 		// config for jetty server
 		ResourceConfig resourceConfig = new ResourceConfig();

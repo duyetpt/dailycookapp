@@ -12,7 +12,6 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.vn.dailycookapp.utils.ConfigurationLoader;
 import com.vn.dailycookapp.utils.FileUtils;
 
 public class Language {
@@ -39,15 +38,17 @@ public class Language {
 	}
 	
 	private void init() throws Exception {
-		// URL url = ClassLoader.getSystemClassLoader().getResource("lang/");
-		// logger.error("-------- " + url.getPath() + "---------");
-		File directory = new File(ConfigurationLoader.getInstance().getLanguagePath());
-		File[] files = directory.listFiles();
+		File directory = new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+		String langDirectoryPath = directory.getParent() + File.separator + "lang"; 
+		System.out.println(langDirectoryPath);
+		File langDir = new File(langDirectoryPath);
+		File[] files = langDir.listFiles();
 		Map<String, JSONObject> language = new HashMap<>();
 		for (File file : files) {
+			System.out.println(file.getPath());
 			JSONObject json = readFile(file);
 			String lang = json.getString("language");
-			language.put(lang, json);
+			language.put(lang, json); 
 		}
 		getIngredientTyes(language);
 		getUnits(language);

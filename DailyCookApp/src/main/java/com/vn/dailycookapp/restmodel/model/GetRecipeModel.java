@@ -24,8 +24,6 @@ import com.vn.dailycookapp.utils.ErrorCodeConstant;
  *         Do user following this owner
  */
 public class GetRecipeModel extends AbstractModel {
-	private String	userId;
-	private String	recipeId;
 	
 	@Override
 	protected void preExecute(String... data) throws Exception {

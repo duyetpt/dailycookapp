@@ -2,12 +2,12 @@ package com.vn.dailycookapp.entity.response;
 
 import java.util.List;
 
-public class CommnetResponseData {
+public class ListCommnetResponseData {
 	
 	private int					totalCommentNumber;
-	private List<CommentInfo>	list;
+	private List<CommentResponseInfo>	list;
 	
-	public static class CommentInfo {
+	public static class CommentResponseInfo {
 		private String	commentId;
 		private String	content;
 		private String	userName;
@@ -54,11 +54,11 @@ public class CommnetResponseData {
 		this.totalCommentNumber = totalCommentNumber;
 	}
 	
-	public List<CommentInfo> getList() {
+	public List<CommentResponseInfo> getList() {
 		return list;
 	}
 	
-	public void setList(List<CommentInfo> list) {
+	public void setList(List<CommentResponseInfo> list) {
 		this.list = list;
 	}
 	

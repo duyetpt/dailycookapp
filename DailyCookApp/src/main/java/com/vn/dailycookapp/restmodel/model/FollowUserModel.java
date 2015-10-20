@@ -14,7 +14,6 @@ public class FollowUserModel extends AbstractModel {
 	private static final String	UNFOLLOW_FLAG	= "-1";
 	
 	private String				owner;
-	private String				userId;
 	private String				flag;
 	
 	@Override

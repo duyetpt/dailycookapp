@@ -1,5 +1,6 @@
 package com.vn.dailycookapp.restmodel;
 
+import com.vn.dailycookapp.restmodel.model.CommentModel;
 import com.vn.dailycookapp.restmodel.model.CreateRecipeModel;
 import com.vn.dailycookapp.restmodel.model.FavoriteRecipeModel;
 import com.vn.dailycookapp.restmodel.model.FollowUserModel;
@@ -23,7 +24,8 @@ public enum ModelDefine {
 	
 	GET_COMMENT("get_comment", GetCommentModel.class),
 	NEW_FEED("new_feed", NewFeedModel.class),
-	Favorite("favorite", FavoriteRecipeModel.class);
+	FAVORITE("favorite", FavoriteRecipeModel.class),
+	COMMENT("comment", CommentModel.class);
 	
 	private final String							name;
 	private final Class<? extends AbstractModel>	model;

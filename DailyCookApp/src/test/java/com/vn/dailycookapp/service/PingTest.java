@@ -45,7 +45,7 @@ public class PingTest extends JerseyTest {
 			Ingredient indient1 = new Ingredient();
 			indient1.setGroup("test");
 			indient1.setName("thit bo");
-			indient1.setQuantity(100);
+			indient1.setQuantity("100");
 			indient1.setUnit("gram");
 			ingredients.add(indient1);
 		}
@@ -53,7 +53,7 @@ public class PingTest extends JerseyTest {
 			Ingredient indient1 = new Ingredient();
 			indient1.setGroup("test");
 			indient1.setName("com thoi");
-			indient1.setQuantity(3);
+			indient1.setQuantity("234");
 			indient1.setUnit("bat");
 			ingredients.add(indient1);
 		}
@@ -61,7 +61,7 @@ public class PingTest extends JerseyTest {
 			Ingredient indient1 = new Ingredient();
 			indient1.setGroup("test");
 			indient1.setName("dua chua");
-			indient1.setQuantity(100);
+			indient1.setQuantity("234");
 			indient1.setUnit("gram");
 			ingredients.add(indient1);
 		}

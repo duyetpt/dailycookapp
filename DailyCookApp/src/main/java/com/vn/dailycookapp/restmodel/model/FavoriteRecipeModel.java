@@ -14,8 +14,6 @@ public class FavoriteRecipeModel extends AbstractModel {
 	private static final String	FAVORITE_FLAG	= "1";
 	private static final String	UNFAVORITE_FLAG	= "-1";
 	
-	private String				userId;
-	private String				recipeId;
 	private String				flag;
 	
 	@Override

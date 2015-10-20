@@ -4,6 +4,8 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 
+import com.vn.dailycookapp.utils.TimeUtils;
+
 @Entity(value = "Comment", noClassnameStored = true)
 public class Comment {
 	
@@ -20,7 +22,7 @@ public class Comment {
 	private String	content;
 	
 	@Property("create_time")
-	private long	createTime;
+	private long	createTime	= TimeUtils.getCurrentGMTTime();
 	
 	public String getId() {
 		return id;

@@ -63,7 +63,16 @@ public class RecipeService {
 	@Produces(MediaTypeWithUtf8.APPLICATION_JSON_UTF8)
 	public Response favorite(@HeaderParam(HeaderField.USER_ID) String userId, @PathParam("recipeId") String recipeId,
 			@QueryParam("flag") String flag) {
-		String data = ModelResolver.getApi(ModelDefine.Favorite).doProcess(recipeId, flag, userId);
+		String data = ModelResolver.getApi(ModelDefine.FAVORITE).doProcess(recipeId, flag, userId);
+		return Response.ok().entity(data).build();
+	}
+	
+	//http://dailycookapp.cloudapp.net:8181/dailycook/recipe/{recipeId}/comment
+	@POST
+	@Path("/{recipeId}/comment")
+	@Produces(MediaTypeWithUtf8.APPLICATION_JSON_UTF8)
+	public Response comment(@HeaderParam(HeaderField.USER_ID) String userId, @PathParam("recipeId") String recipeId, String content) {
+		String data = ModelResolver.getApi(ModelDefine.COMMENT).doProcess(recipeId, userId, content);
 		return Response.ok().entity(data).build();
 	}
 }

@@ -9,8 +9,8 @@ import com.vn.dailycookapp.dao.CommentDAO;
 import com.vn.dailycookapp.dao.UserDAO;
 import com.vn.dailycookapp.entity.Comment;
 import com.vn.dailycookapp.entity.User;
-import com.vn.dailycookapp.entity.response.CommnetResponseData;
-import com.vn.dailycookapp.entity.response.CommnetResponseData.CommentInfo;
+import com.vn.dailycookapp.entity.response.ListCommnetResponseData;
+import com.vn.dailycookapp.entity.response.ListCommnetResponseData.CommentResponseInfo;
 import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.restmodel.AbstractModel;
 import com.vn.dailycookapp.restmodel.InvalidParamException;
@@ -25,7 +25,6 @@ import com.vn.dailycookapp.utils.ErrorCodeConstant;
  *         Convert to data for response
  */
 public class GetCommentModel extends AbstractModel {
-	private String	recipeId;
 	private int		skip;
 	private int		take;
 	
@@ -48,10 +47,10 @@ public class GetCommentModel extends AbstractModel {
 		List<String> userIds = new ArrayList<String>();
 		Map<String, String> userComment = new HashMap<>();
 		
-		List<CommentInfo> listCommentInfo = new ArrayList<CommnetResponseData.CommentInfo>();
+		List<CommentResponseInfo> listCommentInfo = new ArrayList<ListCommnetResponseData.CommentResponseInfo>();
 		// Get comment info
 		for (Comment comment : listComment) {
-			CommentInfo commentInfo = new CommentInfo();
+			CommentResponseInfo commentInfo = new CommentResponseInfo();
 			commentInfo.setCommentId(comment.getId());
 			commentInfo.setContent(comment.getContent());
 			
@@ -65,7 +64,7 @@ public class GetCommentModel extends AbstractModel {
 		
 		// get User Info
 		List<User> users = UserDAO.getInstance().list(userIds);
-		for (CommentInfo info : listCommentInfo) {
+		for (CommentResponseInfo info : listCommentInfo) {
 			String userId = userComment.get(info.getCommentId());
 			User user = null;
 			for (User usr : users) {
@@ -79,7 +78,7 @@ public class GetCommentModel extends AbstractModel {
 			info.setUserName(user.getDisplayName());
 		}
 		
-		CommnetResponseData responseData = new CommnetResponseData();
+		ListCommnetResponseData responseData = new ListCommnetResponseData();
 		responseData.setList(listCommentInfo);
 		responseData.setTotalCommentNumber(CommentDAO.getInstance().getTotalNumber(recipeId));
 		

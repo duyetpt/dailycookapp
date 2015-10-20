@@ -41,7 +41,7 @@ public class AddRecipeTest extends AbstractTest {
 			Ingredient indient1 = new Ingredient();
 			indient1.setGroup("test");
 			indient1.setName("thit bo");
-			indient1.setQuantity(100);
+			indient1.setQuantity("1321");
 			indient1.setUnit("gram");
 			ingredients.add(indient1);
 		}
@@ -49,7 +49,7 @@ public class AddRecipeTest extends AbstractTest {
 			Ingredient indient1 = new Ingredient();
 			indient1.setGroup("test");
 			indient1.setName("com thoi");
-			indient1.setQuantity(3);
+			indient1.setQuantity("23");
 			indient1.setUnit("bat");
 			ingredients.add(indient1);
 		}
@@ -57,7 +57,7 @@ public class AddRecipeTest extends AbstractTest {
 			Ingredient indient1 = new Ingredient();
 			indient1.setGroup("test");
 			indient1.setName("dua chua");
-			indient1.setQuantity(100);
+			indient1.setQuantity("33");
 			indient1.setUnit("gram");
 			ingredients.add(indient1);
 		}

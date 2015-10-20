@@ -15,7 +15,6 @@ import com.vn.dailycookapp.utils.json.JsonTransformer;
 import com.vn.dailycookapp.utils.validate.Validator;
 
 public class CreateRecipeModel extends AbstractModel {
-	private String	userId;
 	private Recipe	recipe;
 	
 	@Override

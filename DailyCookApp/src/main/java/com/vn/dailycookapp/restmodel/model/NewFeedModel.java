@@ -32,7 +32,6 @@ public class NewFeedModel extends AbstractModel {
 	public static final String	SORT_BY_HOTEST		= "hot";
 	public static final String	SORT_BY_FOLLOWING	= "following";
 	
-	private String				userId;
 	private int					skip;
 	private int					take;
 	private String				sort;
