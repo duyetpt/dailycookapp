@@ -10,6 +10,7 @@ class NotAuthUrls {
 	static {
 		list = new ArrayList<String>();
 		list.add("dailycook/user/login");
+		list.add("dailycook/user/newfeed");
 		list.add("dailycook/user/register");
 		list.add("dailycook/ping");
 		list.add("dailycook/hello");

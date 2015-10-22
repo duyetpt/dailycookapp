@@ -6,7 +6,7 @@
 	
 	<appender name="FILE-AUDIT"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/opt/dailycook/logs/daily_cook.debug.log</file>
+		<file>/opt/jenkins/DailyCookApp/target/logs/daily_cook.debug.log</file>
 		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 			<Pattern>
 				%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
