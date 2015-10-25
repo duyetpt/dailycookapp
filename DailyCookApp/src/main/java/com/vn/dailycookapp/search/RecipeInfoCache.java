@@ -3,11 +3,7 @@ package com.vn.dailycookapp.search;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.TreeMap;
-import java.util.concurrent.ConcurrentLinkedDeque;
-
-import com.vn.dailycookapp.entity.Recipe;
 
 public class RecipeInfoCache{
 	
@@ -24,7 +20,7 @@ public class RecipeInfoCache{
 	private RecipeInfoCache() {
 		nameMap = new HashMap<>();
 		tagsMap = new TreeMap<>();
-		ingredientMaps = new TreeMap<String, Integer>();
+		ingredientMaps = new TreeMap<>();
 		tagRecipeIdMap = new TreeMap<String, List<String>>();
 		recipeIngredientsMap = new TreeMap<String, List<String>>();
 	}
