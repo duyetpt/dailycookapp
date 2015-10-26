@@ -14,7 +14,6 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.json.JSONObject;
 import org.junit.BeforeClass;
-import org.testng.annotations.AfterClass;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
@@ -84,7 +83,7 @@ public class AbstractTest extends JerseyTest {
 		 _mongo = new MongoClient("localhost", PORT).getDatabase("dailycook");
 	}
 	
-	@AfterClass
+	@org.junit.AfterClass
 	public static void tear() {
 		_mongod.stop();
 		mongodExecutable.stop();

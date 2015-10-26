@@ -21,7 +21,7 @@ public class TestSuggestIngredients {
 		RecipeInfoCache.getInstance().getIngredientMaps().put("recipe5", 30);
 		RecipeInfoCache.getInstance().getIngredientMaps().put("xxxx5", 30);
 		RecipeInfoCache.getInstance().getIngredientMaps().put("xrrrr5", 32);
-		RecipeManager manager = new RecipeManager();
+		RecipeManager manager = RecipeManager.getInstance();
 		List<String> result = manager.suggestIngredients("recipe");
 		System.out.println(result);
 		assertEquals(5, result.size());
@@ -52,7 +52,7 @@ public class TestSuggestIngredients {
 		
 		RecipeInfoCache.getInstance().getIngredientMaps().put("xxxx5", 30);
 		RecipeInfoCache.getInstance().getIngredientMaps().put("xrrrr5", 32);
-		RecipeManager manager = new RecipeManager();
+		RecipeManager manager = RecipeManager.getInstance();
 		List<String> result = manager.suggestIngredients("recipe");
 		System.out.println(result);
 		assertEquals(10, result.size());
@@ -83,7 +83,7 @@ public class TestSuggestIngredients {
 		RecipeInfoCache.getInstance().getTagsMap().put("recipe5", 30);
 		RecipeInfoCache.getInstance().getTagsMap().put("xxxx5", 30);
 		RecipeInfoCache.getInstance().getTagsMap().put("xrrrr5", 32);
-		RecipeManager manager = new RecipeManager();
+		RecipeManager manager = RecipeManager.getInstance();
 		List<String> result = manager.suggestTags("recipe");
 		System.out.println(result);
 		assertEquals(5, result.size());
@@ -114,7 +114,7 @@ public class TestSuggestIngredients {
 		
 		RecipeInfoCache.getInstance().getTagsMap().put("xxxx5", 30);
 		RecipeInfoCache.getInstance().getTagsMap().put("xrrrr5", 32);
-		RecipeManager manager = new RecipeManager();
+		RecipeManager manager = RecipeManager.getInstance();
 		List<String> result = manager.suggestTags("recipe");
 		System.out.println(result);
 		assertEquals(10, result.size());
@@ -141,7 +141,7 @@ public class TestSuggestIngredients {
 		
 		RecipeInfoCache.getInstance().getNameMap().put("XKJSDKJF ASJFK", new ArrayList<String>());
 		
-		RecipeManager manager = new RecipeManager();
+		RecipeManager manager = RecipeManager.getInstance();
 		List<String> result = manager.suggestName("recipe");
 		System.out.println(result);
 		assertEquals(4, result.size());

@@ -75,4 +75,22 @@ public class RecipeService {
 		String data = ModelResolver.getApi(ModelDefine.COMMENT).doProcess(recipeId, userId, content);
 		return Response.ok().entity(data).build();
 	}
+	
+	//http://dailycookapp.cloudapp.net:8181/dailycook/recipe/{name | ingredients | tags}/suggest?keyword={keyword}
+	@GET
+	@Path("/{suggestion}/suggest")
+	@Produces(MediaTypeWithUtf8.APPLICATION_JSON_UTF8)
+	public Response suggestSearching(@QueryParam("keyword") String keyword, @PathParam("suggestion") String type) {
+		String data = ModelResolver.getApi(ModelDefine.COMMENT).doProcess(type, keyword);
+		return Response.ok().entity(data).build();
+	}
+	
+	//http://dailycookapp.cloudapp.net:8181/dailycook/recipe/search?keyword={keyword}&filter={name | ingredients | tags}
+	@GET
+	@Path("/search")
+	@Produces(MediaTypeWithUtf8.APPLICATION_JSON_UTF8)
+	public Response search(@HeaderParam(HeaderField.USER_ID) String userId, @QueryParam("keyword") String keyword, @QueryParam("filter") String filter) {
+		String data = ModelResolver.getApi(ModelDefine.SEARCH).doProcess(filter, keyword, userId);
+		return Response.ok().entity(data).build();
+	}
 }

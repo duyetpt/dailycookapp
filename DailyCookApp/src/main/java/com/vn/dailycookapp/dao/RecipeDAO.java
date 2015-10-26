@@ -2,7 +2,9 @@ package com.vn.dailycookapp.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.query.Query;
 
 import com.vn.dailycookapp.entity.Recipe;
@@ -38,6 +40,17 @@ public class RecipeDAO extends AbstractDAO<Recipe> {
 		return get(recipeId, Recipe.class);
 	}
 	
+	/**
+	 * Get recipe for new feed api
+	 * 
+	 * @param skip
+	 * @param take
+	 * @param sort
+	 * @param followingIds
+	 *            : userIds of following user
+	 * @return
+	 * @throws DAOException
+	 */
 	public List<Recipe> getRecipes(int skip, int take, String sort, List<String> followingIds) throws DAOException {
 		try {
 			Query<Recipe> query = datastore.createQuery(Recipe.class).offset(skip).limit(take);
@@ -63,5 +76,23 @@ public class RecipeDAO extends AbstractDAO<Recipe> {
 			logger.error("get recipes error", ex);
 			throw new DAOException(ErrorCodeConstant.DAO_EXCEPTION);
 		}
+	}
+	
+	public List<Recipe> getRecipes(Set<String> recipeIds) throws DAOException {
+		try {
+			List<ObjectId> listObjId = new ArrayList<ObjectId>();
+			for (String recipeId : recipeIds) {
+				listObjId.add(new ObjectId(recipeId));
+			}
+			
+			Query<Recipe> query = datastore.createQuery(Recipe.class).field("_id").in(listObjId);
+			
+			return query.asList();
+			
+		} catch (Exception ex) {
+			logger.error("search recipes exception", ex);
+			throw new DAOException(ErrorCodeConstant.DAO_EXCEPTION);
+		}
+		
 	}
 }

@@ -3,20 +3,23 @@ package com.vn.dailycookapp.search;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.vn.dailycookapp.entity.Recipe;
 import com.vn.dailycookapp.entity.Recipe.Ingredient;
 
 public class AnalysisRecipeWorker extends Thread {
+	Logger	logger	= LoggerFactory.getLogger(getClass());
 	
 	public void run() {
 		while (true) {
-			Recipe recipe = RecipeManager.getRecipe();
+			Recipe recipe = RecipeManager.getInstance().getRecipe();
 			if (recipe == null) {
 				try {
 					Thread.sleep(1000 * 60);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					logger.error(e.getMessage(), e);
 				} // sleep a minus
 			}
 			// analysis name
@@ -65,7 +68,8 @@ public class AnalysisRecipeWorker extends Thread {
 					}
 					
 					// analysis for search
-					List<String> recipeIds = RecipeInfoCache.getInstance().getRecipeIngredientsMap().get(ing.getNormalizedName());
+					List<String> recipeIds = RecipeInfoCache.getInstance().getRecipeIngredientsMap()
+							.get(ing.getNormalizedName());
 					if (recipeIds == null) {
 						recipeIds = new LinkedList<>();
 						recipeIds.add(recipe.getId());

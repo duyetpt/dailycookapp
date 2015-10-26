@@ -1,6 +1,8 @@
 package com.vn.dailycookapp.search;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public interface Search {
 	
@@ -10,9 +12,9 @@ public interface Search {
 	
 	public List<String> suggestName(String keyword);
 	
-	public List<String> getRecipeByIngredients(List<String> ingredients);
+	public Map<String, Integer> getRecipeByIngredients(List<String> ingredients);
 	
-	public List<String> getRecipeByTags(List<String> tags);
+	public Set<String> getRecipeByTags(List<String> tags);
 	
-	public List<String> getRecipeByName(String name);
+	public Set<String> getRecipeByName(String name);
 }

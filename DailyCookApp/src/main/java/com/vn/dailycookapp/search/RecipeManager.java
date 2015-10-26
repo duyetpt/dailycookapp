@@ -2,26 +2,35 @@ package com.vn.dailycookapp.search;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
+import java.util.Set;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 import com.vn.dailycookapp.entity.Recipe;
 
 public class RecipeManager implements Search {
-	private static Queue<Recipe>	queueRecipes;
+	private Queue<Recipe>				queueRecipes;
 	
-	static {
+	private static final RecipeManager	instance	= new RecipeManager();
+	
+	private RecipeManager() {
 		queueRecipes = new ConcurrentLinkedDeque<>();
 	}
 	
-	public static void addRecipe(Recipe recipe) {
+	public static RecipeManager getInstance() {
+		return instance;
+	}
+	
+	public void addRecipe(Recipe recipe) {
 		queueRecipes.add(recipe);
 	}
 	
-	public static Recipe getRecipe() {
+	public Recipe getRecipe() {
 		return queueRecipes.poll();
 	}
 	
@@ -65,7 +74,8 @@ public class RecipeManager implements Search {
 		
 		List<String> result = new ArrayList<>();
 		for (String name : mapName.keySet()) {
-			if (result.size() >= 10) break;
+			if (result.size() >= 10)
+				break;
 			if (name.contains(keyword)) {
 				result.add(name);
 			}
@@ -74,21 +84,53 @@ public class RecipeManager implements Search {
 		return result;
 	}
 	
+	/**
+	 * get recipe ids by ingredients
+	 */
 	@Override
-	public List<String> getRecipeByIngredients(List<String> ingredients) {
-		// TODO Auto-generated method stub
-		return null;
+	public Map<String, Integer> getRecipeByIngredients(List<String> ingredients) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		for (String ingredient : ingredients) {
+			List<String> list = RecipeInfoCache.getInstance().getRecipeIngredientsMap().get(ingredient);
+			for (String recipeId : list) {
+				Integer count = map.get(recipeId);
+				if (count == null)
+					map.put(recipeId, 1);
+				else
+					map.put(recipeId, ++count);
+			}
+		}
+		
+		return map;
 	}
 	
+	/**
+	 * Get recipeIds by tags
+	 */
 	@Override
-	public List<String> getRecipeByTags(List<String> tags) {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<String> getRecipeByTags(List<String> tags) {
+		Set<String> recipeIds = new HashSet<String>();
+		for (String tag : tags) {
+			List<String> list = RecipeInfoCache.getInstance().getTagRecipeIdMap().get(tag);
+			recipeIds.addAll(list);
+		}
+		
+		return recipeIds;
 	}
-
+	
+	/**
+	 * search all suggest name
+	 * get all recipeIds by suggest name
+	 */
 	@Override
-	public List<String> getRecipeByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public Set<String> getRecipeByName(String name) {
+		Set<String> recipeIds = new HashSet<String>();
+		List<String> names = suggestName(name);
+		for (String nameKey : names) {
+			List<String> list = RecipeInfoCache.getInstance().getNameMap().get(nameKey);
+			recipeIds.addAll(list);
+		}
+		
+		return recipeIds;
 	}
 }
