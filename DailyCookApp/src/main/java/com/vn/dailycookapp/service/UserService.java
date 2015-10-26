@@ -48,7 +48,7 @@ public class UserService {
 	}
 	
 	// http://dailycookapp.cloudapp.net:8181/dailycook/user/follow/{userId}?flag={flag}
-	@PUT
+	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/follow/{userId}")
 	public Response follow(@HeaderParam(HeaderField.USER_ID) String owner, @QueryParam("flag") String flag,

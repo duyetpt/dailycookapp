@@ -58,7 +58,7 @@ public class RecipeService {
 		return Response.ok().entity(data).build();
 	}
 	
-	@PUT
+	@GET
 	@Path("/{recipeId}/favorite")
 	@Produces(MediaTypeWithUtf8.APPLICATION_JSON_UTF8)
 	public Response favorite(@HeaderParam(HeaderField.USER_ID) String userId, @PathParam("recipeId") String recipeId,
