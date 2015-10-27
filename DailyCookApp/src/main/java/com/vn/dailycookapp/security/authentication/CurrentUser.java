@@ -91,6 +91,9 @@ public class CurrentUser {
 				dob = user.getDob();
 				language = user.getLanguage();
 				this.token = SessionManager.getInstance().addSession(user.getId());
+				
+				// cache data
+				UserCache.getInstance().cache(user);
 			} else {
 				throw new LoginFailException(ErrorCodeConstant.PASSWORD_INCORRECT);
 			}

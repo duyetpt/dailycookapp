@@ -58,6 +58,7 @@ public class RegisterModel extends AbstractModel {
 		// get session token
 		String token = SessionManager.getInstance().addSession(user.getId());
 		
+		// login
 		CurrentUser cUser = new CurrentUser();
 		cUser.setDisplayName(user.getDisplayName());
 		cUser.setLanguage(user.getLanguage());

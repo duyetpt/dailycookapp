@@ -83,4 +83,27 @@ public class CompactUserInfo {
 		this.introduce = introduce;
 	}
 	
+	public void increaseNumberRecipe() {
+		this.numberRecipes++;
+	}
+	
+	public void increaseNumberFollowing() {
+		this.numberFollowing++;
+	}
+	
+	public void increaseNumberFollower() {
+		this.numberFollower++;
+	}
+	
+	public void decreaseNumberRecipe() {
+		this.numberRecipes--;
+	}
+	
+	public void decreaseNumberFollowing() {
+		this.numberFollowing--;
+	}
+	
+	public void decreaseNumberFollower() {
+		this.numberFollower--;
+	}
 }

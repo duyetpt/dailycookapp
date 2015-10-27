@@ -2,16 +2,18 @@ package com.vn.dailycookapp.restmodel.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import com.vn.dailycookapp.cache.user.CompactUserInfo;
+import com.vn.dailycookapp.cache.user.UserCache;
 import com.vn.dailycookapp.dao.CommentDAO;
-import com.vn.dailycookapp.dao.UserDAO;
 import com.vn.dailycookapp.entity.Comment;
-import com.vn.dailycookapp.entity.User;
+import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.entity.response.ListCommnetResponseData;
 import com.vn.dailycookapp.entity.response.ListCommnetResponseData.CommentResponseInfo;
-import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.restmodel.AbstractModel;
 import com.vn.dailycookapp.restmodel.InvalidParamException;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
@@ -53,7 +55,7 @@ public class GetCommentModel extends AbstractModel {
 			return response;
 		}
 		
-		List<String> userIds = new ArrayList<String>();
+		Set<String> userIds = new HashSet<String>();
 		Map<String, String> userComment = new HashMap<>();
 		
 		// Get comment info
@@ -71,12 +73,12 @@ public class GetCommentModel extends AbstractModel {
 		}
 		
 		// get User Info
-		List<User> users = UserDAO.getInstance().list(userIds);
+		List<CompactUserInfo> users = UserCache.getInstance().list(userIds);
 		for (CommentResponseInfo info : listCommentInfo) {
 			String userId = userComment.get(info.getCommentId());
-			User user = null;
-			for (User usr : users) {
-				if (usr.getId().equals(userId)) {
+			CompactUserInfo user = null;
+			for (CompactUserInfo usr : users) {
+				if (usr.getUserId().equals(userId)) {
 					user = usr;
 					break;
 				}

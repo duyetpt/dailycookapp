@@ -3,12 +3,14 @@ package com.vn.dailycookapp.cache.user;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
+import com.vn.dailycookapp.dao.DAOException;
+import com.vn.dailycookapp.dao.UserDAO;
 import com.vn.dailycookapp.entity.User;
 import com.vn.dailycookapp.utils.Unicode;
 
-// TODO
 public class UserCache {
 	private Map<String, CompactUserInfo>	userMap;
 	private Map<String, String>				emailMap;
@@ -25,6 +27,8 @@ public class UserCache {
 	}
 	
 	public void cache(User user) {
+		if (user == null)
+			return;
 		CompactUserInfo cUser = new CompactUserInfo();
 		cUser.setAvatarUrl(user.getAvatarUrl());
 		cUser.setCoverUrl(user.getCoverUrl());
@@ -41,23 +45,38 @@ public class UserCache {
 	}
 	
 	/**
-	 * Get user info by email
+	 * Get user info by userId. Check user is cached. If not cache, get info
+	 * from database => cache
 	 * 
 	 * @param userId
 	 * @return
+	 * @throws DAOException
 	 */
-	public CompactUserInfo get(String userId) {
-		return userMap.get(userId);
+	public CompactUserInfo get(String userId) throws DAOException {
+		CompactUserInfo cUser = userMap.get(userId);
+		if (cUser == null) {
+			User user = UserDAO.getInstance().get(userId, User.class);
+			cache(user);
+			cUser = get(userId);
+		}
+		
+		return cUser;
 	}
 	
 	/**
-	 * Get user info by email
+	 * Get user info by email. Check cache, if not find, get from data base => cache
 	 * 
 	 * @param email
 	 * @return
+	 * @throws DAOException
 	 */
-	public CompactUserInfo getInfoByEmail(String email) {
+	public CompactUserInfo getInfoByEmail(String email) throws DAOException {
 		String id = emailMap.get(email);
+		if (id == null) {
+			User user = UserDAO.getInstance().getUserInfoByEmail(email);
+			cache(user);
+			id = user.getId();
+		}
 		return id == null ? null : userMap.get(id);
 	}
 	
@@ -84,5 +103,15 @@ public class UserCache {
 		}
 		
 		return cUsers;
+	}
+	
+	public List<CompactUserInfo> list(Set<String> userIds) throws DAOException {
+		List<CompactUserInfo> users = new ArrayList<CompactUserInfo>();
+		for (String userId : userIds) {
+			CompactUserInfo user = get(userId);
+			users.add(user);
+		}
+		
+		return users;
 	}
 }

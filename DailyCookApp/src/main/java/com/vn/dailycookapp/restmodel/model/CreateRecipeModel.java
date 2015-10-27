@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vn.dailycookapp.cache.RecipeManager;
+import com.vn.dailycookapp.cache.user.CompactUserInfo;
+import com.vn.dailycookapp.cache.user.UserCache;
 import com.vn.dailycookapp.dao.RecipeDAO;
 import com.vn.dailycookapp.dao.UserDAO;
 import com.vn.dailycookapp.entity.Recipe;
-import com.vn.dailycookapp.entity.User;
 import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.entity.response.RecipeResponseData;
 import com.vn.dailycookapp.restmodel.AbstractModel;
@@ -47,13 +48,16 @@ public class CreateRecipeModel extends AbstractModel {
 		RecipeDAO.getInstance().save(recipe);
 		recipe.setIsFavorite(false);
 		// get user info
-		User user = UserDAO.getInstance().getUser(userId);
+		CompactUserInfo user = UserCache.getInstance().get(userId);
 		RecipeResponseData data = new RecipeResponseData(recipe, user);
 		data.setIsFollowing(true);
 		response.setData(data);
 		
 		// increate recipe number of user
 		UserDAO.getInstance().increateRecipeNumber(userId);
+		
+		// update user cache info
+		UserCache.getInstance().get(userId).increaseNumberRecipe();
 		
 		// Cache recipe infor for search
 		RecipeManager.getInstance().addRecipe(recipe);

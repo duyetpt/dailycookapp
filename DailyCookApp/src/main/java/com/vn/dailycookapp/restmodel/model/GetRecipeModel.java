@@ -2,12 +2,12 @@ package com.vn.dailycookapp.restmodel.model;
 
 import org.bson.types.ObjectId;
 
+import com.vn.dailycookapp.cache.user.CompactUserInfo;
+import com.vn.dailycookapp.cache.user.UserCache;
 import com.vn.dailycookapp.dao.FavoriteDAO;
 import com.vn.dailycookapp.dao.FollowingDAO;
 import com.vn.dailycookapp.dao.RecipeDAO;
-import com.vn.dailycookapp.dao.UserDAO;
 import com.vn.dailycookapp.entity.Recipe;
-import com.vn.dailycookapp.entity.User;
 import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.entity.response.RecipeResponseData;
 import com.vn.dailycookapp.restmodel.AbstractModel;
@@ -41,12 +41,12 @@ public class GetRecipeModel extends AbstractModel {
 	protected DCAResponse execute() throws Exception {
 		DCAResponse response = new DCAResponse(ErrorCodeConstant.SUCCESSUL.getErrorCode());
 		Recipe recipe = RecipeDAO.getInstance().get(recipeId);
-		User owner = UserDAO.getInstance().getUser(recipe.getOwner());
+		CompactUserInfo owner = UserCache.getInstance().get(recipe.getOwner());
 		
 		// check user favorite recipe
 		recipe.setIsFavorite(FavoriteDAO.getInstance().isFavorited(userId, recipeId));
 		// check userid is following owner of recipe
-		boolean isFollowingOwner = FollowingDAO.getInstance().isFollowing(userId, owner.getId());
+		boolean isFollowingOwner = FollowingDAO.getInstance().isFollowing(userId, owner.getUserId());
 		
 		RecipeResponseData data = new RecipeResponseData(recipe, owner);
 		data.setIsFollowing(isFollowingOwner);

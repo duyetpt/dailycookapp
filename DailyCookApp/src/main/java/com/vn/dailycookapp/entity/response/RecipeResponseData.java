@@ -1,7 +1,7 @@
 package com.vn.dailycookapp.entity.response;
 
+import com.vn.dailycookapp.cache.user.CompactUserInfo;
 import com.vn.dailycookapp.entity.Recipe;
-import com.vn.dailycookapp.entity.User;
 
 public class RecipeResponseData {
 	
@@ -11,7 +11,7 @@ public class RecipeResponseData {
 	private boolean	isFollowing;
 	private int		numberfollower;
 	
-	public RecipeResponseData(Recipe recipe, User user) {
+	public RecipeResponseData(Recipe recipe, CompactUserInfo user) {
 		this.recipe = recipe;
 		this.userName = user.getDisplayName();
 		this.avatarUrl = user.getAvatarUrl();

@@ -5,14 +5,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.vn.dailycookapp.cache.user.CompactUserInfo;
+import com.vn.dailycookapp.cache.user.UserCache;
 import com.vn.dailycookapp.dao.FavoriteDAO;
 import com.vn.dailycookapp.dao.FollowingDAO;
 import com.vn.dailycookapp.dao.RecipeDAO;
-import com.vn.dailycookapp.dao.UserDAO;
 import com.vn.dailycookapp.entity.Favorite;
 import com.vn.dailycookapp.entity.Following;
 import com.vn.dailycookapp.entity.Recipe;
-import com.vn.dailycookapp.entity.User;
 import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.entity.response.NewFeedResponseData;
 import com.vn.dailycookapp.restmodel.AbstractModel;
@@ -69,7 +69,7 @@ public class NewFeedModel extends AbstractModel {
 			}
 			
 			// Get owners for list recipe
-			List<User> users = UserDAO.getInstance().list(userIds);
+			List<CompactUserInfo> users = UserCache.getInstance().list(userIds);
 			
 			// Get list favorite recipe of this user
 			Favorite favorite = null;
@@ -87,8 +87,8 @@ public class NewFeedModel extends AbstractModel {
 				if (favorite != null)
 					data.setIsFavorite(favorite.getRecipeIds().contains(recipe.getId()));
 				
-				for (User user : users) {
-					if (user.getId().equals(recipe.getOwner())) {
+				for (CompactUserInfo user : users) {
+					if (user.getUserId().equals(recipe.getOwner())) {
 						data.setAvatarUrl(user.getAvatarUrl());
 						data.setUsername(user.getDisplayName());
 					}

@@ -1,8 +1,9 @@
 package com.vn.dailycookapp.restmodel.model;
 
+import com.vn.dailycookapp.cache.user.CompactUserInfo;
+import com.vn.dailycookapp.cache.user.UserCache;
 import com.vn.dailycookapp.dao.FollowingDAO;
 import com.vn.dailycookapp.dao.UserDAO;
-import com.vn.dailycookapp.entity.User;
 import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.entity.response.FollowResponseData;
 import com.vn.dailycookapp.restmodel.AbstractModel;
@@ -28,7 +29,7 @@ public class FollowUserModel extends AbstractModel {
 		
 	}
 	
-	// TODO : notification
+	// 	
 	@Override
 	protected DCAResponse execute() throws Exception {
 		DCAResponse response = new DCAResponse(ErrorCodeConstant.SUCCESSUL.getErrorCode());
@@ -43,6 +44,9 @@ public class FollowUserModel extends AbstractModel {
 				UserDAO.getInstance().increateFollowingNumber(owner);
 				// increase follower number
 				UserDAO.getInstance().increateFollowerNumber(userId);
+				// Cache update
+				UserCache.getInstance().get(owner).increaseNumberFollowing();
+				UserCache.getInstance().get(userId).increaseNumberFollower();
 				break;
 			case UNFOLLOW_FLAG:
 				// add following
@@ -54,10 +58,13 @@ public class FollowUserModel extends AbstractModel {
 				UserDAO.getInstance().decreaseFollowingNumber(owner);
 				// increase follower number
 				UserDAO.getInstance().decreaseFollowerNumber(userId);
+				// Cache update
+				UserCache.getInstance().get(owner).decreaseNumberFollowing();
+				UserCache.getInstance().get(userId).decreaseNumberFollower();
 				break;
 		}
 		
-		User user = UserDAO.getInstance().getUser(userId);
+		CompactUserInfo user = UserCache.getInstance().get(userId);
 		FollowResponseData data = new FollowResponseData();
 		data.setFollowingNumber(user.getNumberFollowing());
 		
