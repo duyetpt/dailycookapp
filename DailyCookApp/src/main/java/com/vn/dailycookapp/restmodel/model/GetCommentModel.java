@@ -43,10 +43,13 @@ public class GetCommentModel extends AbstractModel {
 	protected DCAResponse execute() throws Exception {
 		DCAResponse response = new DCAResponse(ErrorCodeConstant.SUCCESSUL.getErrorCode());
 		List<Comment> listComment = CommentDAO.getInstance().list(recipeId, skip, take);
+		ListCommnetResponseData responseData = new ListCommnetResponseData();
 		List<CommentResponseInfo> listCommentInfo = new ArrayList<ListCommnetResponseData.CommentResponseInfo>();
 		
 		if (listComment == null || listComment.isEmpty()) {
-			response.setData(listCommentInfo);
+			responseData.setList(listCommentInfo);
+			responseData.setTotalCommentNumber(0);
+			response.setData(responseData);
 			return response;
 		}
 		
@@ -83,7 +86,6 @@ public class GetCommentModel extends AbstractModel {
 			info.setUserName(user.getDisplayName());
 		}
 		
-		ListCommnetResponseData responseData = new ListCommnetResponseData();
 		responseData.setList(listCommentInfo);
 		responseData.setTotalCommentNumber(CommentDAO.getInstance().getTotalNumber(recipeId));
 		
