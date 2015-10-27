@@ -43,14 +43,16 @@ public class GetCommentModel extends AbstractModel {
 	protected DCAResponse execute() throws Exception {
 		DCAResponse response = new DCAResponse(ErrorCodeConstant.SUCCESSUL.getErrorCode());
 		List<Comment> listComment = CommentDAO.getInstance().list(recipeId, skip, take);
+		List<CommentResponseInfo> listCommentInfo = new ArrayList<ListCommnetResponseData.CommentResponseInfo>();
 		
-		if (listComment == null)
+		if (listComment == null || listComment.isEmpty()) {
+			response.setData(listCommentInfo);
 			return response;
+		}
 		
 		List<String> userIds = new ArrayList<String>();
 		Map<String, String> userComment = new HashMap<>();
 		
-		List<CommentResponseInfo> listCommentInfo = new ArrayList<ListCommnetResponseData.CommentResponseInfo>();
 		// Get comment info
 		for (Comment comment : listComment) {
 			CommentResponseInfo commentInfo = new CommentResponseInfo();
