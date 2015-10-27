@@ -1,11 +1,14 @@
 package com.vn.dailycookapp.search;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import com.vn.dailycookapp.cache.RecipeInfoCache;
+import com.vn.dailycookapp.cache.RecipeManager;
 
 public class TestSuggestIngredients {
 	

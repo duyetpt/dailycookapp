@@ -1,4 +1,4 @@
-package com.vn.dailycookapp.search;
+package com.vn.dailycookapp.cache;
 
 import java.util.Comparator;
 import java.util.Map.Entry;

@@ -1,5 +1,6 @@
 package com.vn.dailycookapp.security.authentication;
 
+import com.vn.dailycookapp.cache.user.UserCache;
 import com.vn.dailycookapp.dao.UserDAO;
 import com.vn.dailycookapp.entity.User;
 import com.vn.dailycookapp.entity.response.AccountInfo;
@@ -11,19 +12,20 @@ import com.vn.dailycookapp.utils.lang.Language;
 import com.vn.dailycookapp.utils.validate.Validator;
 
 public class CurrentUser {
-	private static final String FB_EMAIL = "@facebook.com";
+	private static final String	FB_EMAIL	= "@facebook.com";
 	
-	private String	displayName;
-	private String	avatarUrl;
-	private String	coverUrl;
-	private String	dob;
-	private String	language;
-	private String	token;
+	private String				displayName;
+	private String				avatarUrl;
+	private String				coverUrl;
+	private String				dob;
+	private String				language;
+	private String				token;
 	
 	public void login(FbToken fbToken) throws DCAException {
 		// get data into database
 		User user = UserDAO.getInstance().getUserInfoByEmail(fbToken.getFbId() + FB_EMAIL);
-		// User user = null;
+		
+		// not have account in system
 		if (user == null) {
 			AccountInfo acc = VerifyFacebookAccount.getInstance().sentGet(fbToken.getRefreshToken());
 			if (acc == null) {
@@ -60,9 +62,14 @@ public class CurrentUser {
 		user.setAvatarUrl(avatarUrl);
 		user.setCoverUrl(coverUrl);
 		user.setDob(dob);
-		user.setEmail(fbToken.getFbId()+ FB_EMAIL);
+		user.setEmail(fbToken.getFbId() + FB_EMAIL);
 		
+		// save to dao
 		UserDAO.getInstance().save(user);
+		
+		// Cache user info
+		UserCache.getInstance().cache(user);
+		
 		return user.getId();
 	}
 	

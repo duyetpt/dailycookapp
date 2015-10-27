@@ -1,4 +1,4 @@
-package com.vn.dailycookapp.search;
+package com.vn.dailycookapp.cache;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 
 import com.vn.dailycookapp.entity.Recipe;
 
-public class RecipeManager implements Search {
+public class RecipeManager implements RecipeSearch {
 	private Queue<Recipe>				queueRecipes;
 	private final AnalysisRecipeWorker worker;
 	

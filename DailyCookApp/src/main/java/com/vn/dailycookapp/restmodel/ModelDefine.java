@@ -11,7 +11,8 @@ import com.vn.dailycookapp.restmodel.model.GetUnitsModel;
 import com.vn.dailycookapp.restmodel.model.LoginModel;
 import com.vn.dailycookapp.restmodel.model.NewFeedModel;
 import com.vn.dailycookapp.restmodel.model.RegisterModel;
-import com.vn.dailycookapp.restmodel.model.SearchModel;
+import com.vn.dailycookapp.restmodel.model.SearchRecipeModel;
+import com.vn.dailycookapp.restmodel.model.SearchUserModel;
 import com.vn.dailycookapp.restmodel.model.suggestSearchingModel;
 
 public enum ModelDefine {
@@ -30,7 +31,8 @@ public enum ModelDefine {
 	COMMENT("comment", CommentModel.class),
 	
 	SUGGEST_SEARCHING("suggest_searching", suggestSearchingModel.class),
-	SEARCH("search", SearchModel.class);
+	SEARCH_RECIPE("search_recipe", SearchRecipeModel.class),
+	SEARCH_USER("search_user", SearchUserModel.class);
 	
 	private final String							name;
 	private final Class<? extends AbstractModel>	model;

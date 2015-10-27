@@ -1,11 +1,11 @@
-package com.vn.dailycookapp.search;
+package com.vn.dailycookapp.cache;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-class RecipeInfoCache{
+public class RecipeInfoCache{
 	
 	// Name -> list recipeId
 	private Map<String, List<String>> nameMap;

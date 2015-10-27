@@ -89,7 +89,7 @@ public class RecipeService {
 	@Path("/search")
 	@Produces(MediaTypeWithUtf8.APPLICATION_JSON_UTF8)
 	public Response search(@HeaderParam(HeaderField.USER_ID) String userId, @QueryParam("keyword") String keyword, @QueryParam("filter") String filter) {
-		String data = ModelResolver.getApi(ModelDefine.SEARCH).doProcess(filter, keyword, userId);
+		String data = ModelResolver.getApi(ModelDefine.SEARCH_RECIPE).doProcess(filter, keyword, userId);
 		return Response.ok().entity(data).build();
 	}
 }

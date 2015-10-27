@@ -1,10 +1,10 @@
-package com.vn.dailycookapp.search;
+package com.vn.dailycookapp.cache;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public interface Search {
+public interface RecipeSearch {
 	
 	public List<String> suggestIngredients(String keyword);
 	

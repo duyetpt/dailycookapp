@@ -2,9 +2,9 @@ package com.vn.dailycookapp.restmodel.model;
 
 import java.util.List;
 
+import com.vn.dailycookapp.cache.RecipeManager;
 import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.restmodel.AbstractModel;
-import com.vn.dailycookapp.search.RecipeManager;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
 import com.vn.dailycookapp.utils.Unicode;
 

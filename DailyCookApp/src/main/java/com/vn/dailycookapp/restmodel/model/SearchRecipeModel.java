@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.vn.dailycookapp.cache.RecipeManager;
 import com.vn.dailycookapp.dao.DAOException;
 import com.vn.dailycookapp.dao.FavoriteDAO;
 import com.vn.dailycookapp.dao.RecipeDAO;
@@ -14,11 +15,10 @@ import com.vn.dailycookapp.entity.Recipe;
 import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.entity.response.SearchRecipeResponseData;
 import com.vn.dailycookapp.restmodel.AbstractModel;
-import com.vn.dailycookapp.search.RecipeManager;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
 import com.vn.dailycookapp.utils.Unicode;
 
-public class SearchModel extends AbstractModel {
+public class SearchRecipeModel extends AbstractModel {
 	private static final String	INGREDIENT_TYPE	= "ingredients";
 	private static final String	TAG_TYPE		= "tags";
 	private static final String	NAME_TYPE		= "name";

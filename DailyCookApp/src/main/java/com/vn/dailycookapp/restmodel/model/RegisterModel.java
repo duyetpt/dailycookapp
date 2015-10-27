@@ -1,5 +1,6 @@
 package com.vn.dailycookapp.restmodel.model;
 
+import com.vn.dailycookapp.cache.user.UserCache;
 import com.vn.dailycookapp.dao.UserDAO;
 import com.vn.dailycookapp.entity.User;
 import com.vn.dailycookapp.entity.request.RegisterInfo;
@@ -62,6 +63,8 @@ public class RegisterModel extends AbstractModel {
 		cUser.setLanguage(user.getLanguage());
 		cUser.setToken(token);
 		
+		// Cache user info
+		UserCache.getInstance().cache(user);
 		// response
 		response.setData(cUser);
 		return response;
