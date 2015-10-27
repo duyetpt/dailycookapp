@@ -1,5 +1,8 @@
 package com.vn.dailycookapp.restmodel.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.vn.dailycookapp.dao.RecipeDAO;
 import com.vn.dailycookapp.dao.UserDAO;
 import com.vn.dailycookapp.entity.Recipe;
@@ -30,9 +33,15 @@ public class CreateRecipeModel extends AbstractModel {
 		DCAResponse response = new DCAResponse(ErrorCodeConstant.SUCCESSUL.getErrorCode());
 		recipe.setOwner(userId);
 		// normalize title, ingredient
-		recipe.setNormalizedTitle(Unicode.toAscii(recipe.getTitle()));
+		recipe.setNormalizedTitle(Unicode.toAscii(recipe.getTitle()).toLowerCase());
 		for (Recipe.Ingredient ing : recipe.getIngredients()) {
-			ing.setNormalizedName(Unicode.toAscii(ing.getName()));
+			ing.setNormalizedName(Unicode.toAscii(ing.getName()).toLowerCase());
+		}
+		// normalize tags
+		List<String> tags = recipe.getTags();
+		if (tags == null) tags = new ArrayList<String>();
+		for (String tag : recipe.getCategoryIds()) {
+			tags.add(Unicode.toAscii(tag).toLowerCase());
 		}
 		
 		RecipeDAO.getInstance().save(recipe);

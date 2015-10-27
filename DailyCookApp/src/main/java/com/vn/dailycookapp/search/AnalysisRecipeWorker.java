@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import com.vn.dailycookapp.entity.Recipe;
 import com.vn.dailycookapp.entity.Recipe.Ingredient;
 
-public class AnalysisRecipeWorker extends Thread {
+class AnalysisRecipeWorker extends Thread {
 	Logger	logger	= LoggerFactory.getLogger(getClass());
 	
 	public void run() {
@@ -17,17 +17,20 @@ public class AnalysisRecipeWorker extends Thread {
 			Recipe recipe = RecipeManager.getInstance().getRecipe();
 			if (recipe == null) {
 				try {
-					Thread.sleep(1000 * 60);
+					Thread.sleep(10);
+					continue;
 				} catch (InterruptedException e) {
 					logger.error(e.getMessage(), e);
 				} // sleep a minus
 			}
 			// analysis name
+			// System.out.println("cache: " + recipe.getId());
 			{
 				List<String> recipeIds = RecipeInfoCache.getInstance().getNameMap().get(recipe.getNormalizedTitle());
 				if (recipeIds == null) {
 					recipeIds = new LinkedList<>();
 					recipeIds.add(recipe.getId());
+					RecipeInfoCache.getInstance().getNameMap().put(recipe.getNormalizedTitle(), recipeIds);
 				} else {
 					recipeIds.add(recipe.getId());
 				}
@@ -49,6 +52,7 @@ public class AnalysisRecipeWorker extends Thread {
 					if (recipeIds == null) {
 						recipeIds = new LinkedList<>();
 						recipeIds.add(recipe.getId());
+						RecipeInfoCache.getInstance().getTagRecipeIdMap().put(tag, recipeIds);
 					} else {
 						recipeIds.add(recipe.getId());
 					}
@@ -73,6 +77,7 @@ public class AnalysisRecipeWorker extends Thread {
 					if (recipeIds == null) {
 						recipeIds = new LinkedList<>();
 						recipeIds.add(recipe.getId());
+						RecipeInfoCache.getInstance().getRecipeIngredientsMap().put(ing.getNormalizedName(), recipeIds);
 					} else {
 						recipeIds.add(recipe.getId());
 					}

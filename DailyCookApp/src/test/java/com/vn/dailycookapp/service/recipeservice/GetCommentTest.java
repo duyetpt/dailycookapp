@@ -17,8 +17,8 @@ public class GetCommentTest extends AbstractTest {
 		// import data
 		getToken();
 		try {
-			importData("Recipe", getClass().getResource("/recipes.json").getPath().substring(1));
-			importData("Comment", getClass().getResource("/Comment.json").getPath().substring(1));
+			importData("Recipe", getClass().getResource("/recipes.json").getPath());
+			importData("Comment", getClass().getResource("/Comment.json").getPath());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

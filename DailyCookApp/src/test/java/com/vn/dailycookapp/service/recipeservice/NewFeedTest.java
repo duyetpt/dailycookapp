@@ -21,7 +21,7 @@ public class NewFeedTest extends AbstractTest {
 		// import data
 		getToken();
 		try {
-			importData("Recipe", getClass().getResource("/recipes.json").getPath().substring(1));
+			importData("Recipe", getClass().getResource("/recipes.json").getPath());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

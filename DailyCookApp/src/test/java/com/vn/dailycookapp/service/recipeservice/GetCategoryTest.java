@@ -17,7 +17,7 @@ public class GetCategoryTest extends AbstractTest {
 	@Test
 	public void test() {
 		try {
-			importData("Category", getClass().getResource("/Category.json").getFile().substring(1));
+			importData("Category", getClass().getResource("/Category.json").getFile());
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		} catch (IOException e) { 

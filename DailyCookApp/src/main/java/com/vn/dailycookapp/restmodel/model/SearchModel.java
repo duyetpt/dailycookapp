@@ -29,7 +29,7 @@ public class SearchModel extends AbstractModel {
 	@Override
 	protected void preExecute(String... data) throws Exception {
 		filter = data[0];
-		keyword = Unicode.toAscii(data[1]);
+		keyword = Unicode.toAscii(data[1]).toLowerCase();
 		userId = data[2];
 	}
 	
@@ -73,6 +73,9 @@ public class SearchModel extends AbstractModel {
 	private List<SearchRecipeResponseData> getResult(Set<String> recipeIds, Map<String, Integer> nPercentMap)
 			throws DAOException {
 		List<SearchRecipeResponseData> result = new ArrayList<SearchRecipeResponseData>();
+		// return if recipeIds empty
+		if (recipeIds == null || recipeIds.isEmpty())
+			return result;
 		
 		List<Recipe> recipes = RecipeDAO.getInstance().getRecipes(recipeIds);
 		Favorite favorite = null;
@@ -82,8 +85,9 @@ public class SearchModel extends AbstractModel {
 		
 		for (Recipe recipe : recipes) {
 			SearchRecipeResponseData resData = new SearchRecipeResponseData();
+			resData.setUsername(recipe.getOwner()); // TODO - CACHE USER INFO
 			resData.setCreateTime(recipe.getCreatedTime());
-			resData.setnFavorite(recipe.getFavoriteNumber());
+			resData.setNFavorite(recipe.getFavoriteNumber());
 			resData.setRecipeId(recipe.getId());
 			resData.setTitlel(recipe.getTitle());
 			resData.setRecipePicture(recipe.getPictureUrl());
@@ -91,6 +95,8 @@ public class SearchModel extends AbstractModel {
 			resData.setFavorite(favorite == null ? false : favorite.getRecipeIds().contains(recipe.getId()));
 			if (nPercentMap != null)
 				resData.setPercentMatch(100 * nPercentMap.get(recipe.getId()) / recipe.getIngredients().size());
+			
+			result.add(resData);
 		}
 		
 		Collections.sort(result);

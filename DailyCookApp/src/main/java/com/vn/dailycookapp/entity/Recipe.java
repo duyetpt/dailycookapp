@@ -41,8 +41,13 @@ public class Recipe {
 	@Property(value = "picture_url")
 	private String					pictureUrl;
 	
+	// tags no normalize
 	@Property(value = "categories")
 	private List<String>			categoryIds;
+	
+	// Normalize of categoryIds
+	@JsonIgnoreProperty
+	private List<String>			tags;
 	
 	@Property(value = "status_flag")
 	@JsonIgnoreProperty
@@ -211,6 +216,14 @@ public class Recipe {
 	
 	public void setIsFavorite(boolean favorite) {
 		this.isFavorite = favorite;
+	}
+	
+	public List<String> getTags() {
+		return tags;
+	}
+	
+	public void setTags(List<String> tags) {
+		this.tags = tags;
 	}
 	
 	public static class Ingredient {

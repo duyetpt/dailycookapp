@@ -1,5 +1,6 @@
 package com.vn.dailycookapp.entity.response;
 
+import com.vn.dailycookapp.utils.json.JsonIgnoreEmpty;
 import com.vn.dailycookapp.utils.json.JsonIgnoreProperty;
 
 public class SearchRecipeResponseData implements Comparable<SearchRecipeResponseData> {
@@ -19,6 +20,7 @@ public class SearchRecipeResponseData implements Comparable<SearchRecipeResponse
 	private String	username;
 	private String	titlel;
 	private String	recipeStory;
+	@JsonIgnoreEmpty
 	private String	recipePicture;
 	private int		nFavorite;
 	private boolean	favorite;
@@ -69,15 +71,15 @@ public class SearchRecipeResponseData implements Comparable<SearchRecipeResponse
 		this.recipePicture = recipePicture;
 	}
 	
-	public int getnFavorite() {
+	public int getNFavorite() {
 		return nFavorite;
 	}
 	
-	public void setnFavorite(int nFavorite) {
+	public void setNFavorite(int nFavorite) {
 		this.nFavorite = nFavorite;
 	}
 	
-	public boolean isFavorite() {
+	public boolean getFavorite() {
 		return favorite;
 	}
 	

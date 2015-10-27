@@ -133,7 +133,7 @@ public class AbstractTest extends JerseyTest {
 	 */
 	public String getToken() {
 		try {
-			importData("User", getClass().getResource("/User.json").getFile().substring(1));
+			importData("User", getClass().getResource("/User.json").getFile());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -25,8 +25,8 @@ import com.vn.dailycookapp.utils.ErrorCodeConstant;
  *         Convert to data for response
  */
 public class GetCommentModel extends AbstractModel {
-	private int		skip;
-	private int		take;
+	private int	skip;
+	private int	take;
 	
 	@Override
 	protected void preExecute(String... data) throws Exception {
@@ -43,6 +43,9 @@ public class GetCommentModel extends AbstractModel {
 	protected DCAResponse execute() throws Exception {
 		DCAResponse response = new DCAResponse(ErrorCodeConstant.SUCCESSUL.getErrorCode());
 		List<Comment> listComment = CommentDAO.getInstance().list(recipeId, skip, take);
+		
+		if (listComment == null)
+			return response;
 		
 		List<String> userIds = new ArrayList<String>();
 		Map<String, String> userComment = new HashMap<>();

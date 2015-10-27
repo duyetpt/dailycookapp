@@ -40,11 +40,11 @@ public class LoginTest extends AbstractTest {
 	// }
 	public void testLoginWithEmail() {
 		try {
-			importData("User", getClass().getResource("/User.json").getFile().substring(1));
+			importData("User", getClass().getResource("/User.json").getFile());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		String email = "test1@dailycook.vn";
+		String email = "ki@gmail.com";
 		String password = "123456789";
 		String token = email + ":" + password;
 		String token64 = Base64.encodeAsString(token);

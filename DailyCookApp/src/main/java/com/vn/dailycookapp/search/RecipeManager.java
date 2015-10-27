@@ -15,11 +15,14 @@ import com.vn.dailycookapp.entity.Recipe;
 
 public class RecipeManager implements Search {
 	private Queue<Recipe>				queueRecipes;
+	private final AnalysisRecipeWorker worker;
 	
 	private static final RecipeManager	instance	= new RecipeManager();
 	
 	private RecipeManager() {
 		queueRecipes = new ConcurrentLinkedDeque<>();
+		worker = new AnalysisRecipeWorker();
+		worker.start();
 	}
 	
 	public static RecipeManager getInstance() {
@@ -92,13 +95,14 @@ public class RecipeManager implements Search {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		for (String ingredient : ingredients) {
 			List<String> list = RecipeInfoCache.getInstance().getRecipeIngredientsMap().get(ingredient);
-			for (String recipeId : list) {
-				Integer count = map.get(recipeId);
-				if (count == null)
-					map.put(recipeId, 1);
-				else
-					map.put(recipeId, ++count);
-			}
+			if (list != null)
+				for (String recipeId : list) {
+					Integer count = map.get(recipeId);
+					if (count == null)
+						map.put(recipeId, 1);
+					else
+						map.put(recipeId, ++count);
+				}
 		}
 		
 		return map;
@@ -111,8 +115,10 @@ public class RecipeManager implements Search {
 	public Set<String> getRecipeByTags(List<String> tags) {
 		Set<String> recipeIds = new HashSet<String>();
 		for (String tag : tags) {
-			List<String> list = RecipeInfoCache.getInstance().getTagRecipeIdMap().get(tag);
-			recipeIds.addAll(list);
+			Map<String, List<String>> map = RecipeInfoCache.getInstance().getTagRecipeIdMap(); 
+			List<String> list = map.get(tag);
+			if (list != null)
+				recipeIds.addAll(list);
 		}
 		
 		return recipeIds;
