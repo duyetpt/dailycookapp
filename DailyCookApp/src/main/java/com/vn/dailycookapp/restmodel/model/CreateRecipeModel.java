@@ -26,9 +26,9 @@ public class CreateRecipeModel extends AbstractModel {
 	
 	@Override
 	protected void preExecute(String... data) throws Exception {
-			userId = data[0];
-			recipe = JsonTransformer.getInstance().unmarshall(data[1], Recipe.class);
-			validateRecipe();
+		userId = data[0];
+		recipe = JsonTransformer.getInstance().unmarshall(data[1], Recipe.class);
+		validateRecipe();
 	}
 	
 	@Override
@@ -42,7 +42,8 @@ public class CreateRecipeModel extends AbstractModel {
 		}
 		// normalize tags
 		List<String> tags = recipe.getTags();
-		if (tags == null) tags = new ArrayList<String>();
+		if (tags == null)
+			tags = new ArrayList<String>();
 		for (String tag : recipe.getCategoryIds()) {
 			tags.add(Unicode.toAscii(tag).toLowerCase());
 		}
@@ -65,20 +66,36 @@ public class CreateRecipeModel extends AbstractModel {
 		RecipeManager.getInstance().addRecipe(recipe);
 		
 		// TODO notification, add recipe to user_recipe
-		NotificationActionImp.getInstance().addNotification(recipeId, userId, null, Notification.NEW_RECIPE_FROM_FOLLOWING_TYPE);
+		NotificationActionImp.getInstance().addNotification(recipeId, userId, null,
+				Notification.NEW_RECIPE_FROM_FOLLOWING_TYPE);
 		
 		return response;
 	}
 	
 	private void validateRecipe() throws DCAException {
-		if (Validator.getInstance().isNull(recipe.getTitle())
-				|| Validator.getInstance().isNull(recipe.getCategoryIds())
-				|| Validator.getInstance().isNull(recipe.getPictureUrl())
-				|| Validator.getInstance().isNull(recipe.getIngredients())
-				|| Validator.getInstance().isNull(recipe.getSteps())) {
+		if (Validator.getInstance().isNull(recipe.getTitle())) {
 			logger.error("Recipe title is null or empty error");
 			throw new InvalidParamException();
 		}
 		
+		if (Validator.getInstance().isNull(recipe.getCategoryIds())) {
+			logger.error("Recipe categories is null or empty error");
+			throw new InvalidParamException();
+		}
+		
+		if (Validator.getInstance().isNull(recipe.getPictureUrl())) {
+			logger.error("Recipe picture is null or empty error");
+			throw new InvalidParamException();
+		}
+		
+		if (Validator.getInstance().isNull(recipe.getIngredients())) {
+			logger.error("Recipe ingredient is null or empty error");
+			throw new InvalidParamException();
+		}
+		
+		if (Validator.getInstance().isNull(recipe.getSteps())) {
+			logger.error("Recipe steps is null or empty error");
+			throw new InvalidParamException();
+		}
 	}
 }

@@ -14,7 +14,6 @@ import com.vn.dailycookapp.entity.Recipe;
 import com.vn.dailycookapp.entity.Recipe.Ingredient;
 import com.vn.dailycookapp.entity.Recipe.Step;
 import com.vn.dailycookapp.service.HeaderField;
-import com.vn.dailycookapp.utils.json.JsonTransformer;
 
 /**
  * Create a recipe
@@ -97,7 +96,8 @@ public class AddRecipeTest extends AbstractTest {
 		// request create recipe
 		getToken();
 		String userId = "560b3f83f128c211acc9eff5";
-		String recipeInfo = JsonTransformer.getInstance().marshall(recipe);
+//		String recipeInfo = JsonTransformer.getInstance().marshall(recipe);
+		String recipeInfo = "{\"ingredients\" : [ { \"unit\" : \"gram\", \"name\" : \"thit bo\", \"quantity\" : \"100\" , \"group\" : \"test\" }, { \"unit\" : \"bat\", \"name\" : \"com thoi\", \"quantity\" : \"100\", \"group\" : \"test\" }, { \"unit\" : \"gram\", \"name\" : \"dua chua\", \"quantity\" : \"100\", \"group\" : \"test\" } ], \"story\" : \"Toi da hoc duoc no, khi di du lich o Italia. NGON, DEP VA BO DUONG\", \"title\" : \"Mon mi xao\", \"categoryIds\" : [ \"com rang\", \"bo\" ], \"pictureUrl\" : \"http://www.wn.com.vn/product_images/uploaded_images/cach-rang-com-ngon-8-.jpg\", \"intervalCook\" : 20, \"steps\" : [ { \"picture_url\" : \"http://yeunoitro.net/wp-content/uploads/2015/03/thit-bo-thai-mieng.jpg\", \"description\" : \"Bam thi bo\", \"stepNo\" : 1 }, { \"picture_url\" : \"http://media.tinmoi.vn/2015/01/08/an-dua-ca-muoi.jpg\", \"description\" : \"Rua rua => giam bot do chua\", \"stepNo\" : 1 }, { \"description\" : \"Rang com\", \"stepNo\" : 1 } ] }";
 		
 		Entity<String> entity = Entity.entity(recipeInfo, MediaType.APPLICATION_JSON_TYPE);
 		responseData = target("dailycook/recipe/add").request().header(HeaderField.USER_ID, userId)

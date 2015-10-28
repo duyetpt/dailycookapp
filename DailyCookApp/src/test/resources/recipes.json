@@ -5,7 +5,7 @@
         {
             "unit" : "gram",
             "name" : "thit bo",
-            "quantity" : 100,
+            "quantity" : "100",
             "group" : "test"
         }, 
         {
@@ -17,7 +17,7 @@
         {
             "unit" : "gram",
             "name" : "dua chua",
-            "quantity" : 100,
+            "quantity" : "100",
             "group" : "test"
         }
     ],
@@ -56,7 +56,7 @@
         {
             "unit" : "gram",
             "name" : "ca chuoi",
-            "quantity" : 300,
+            "quantity" : "300",
             "group" : "ca"
         }, 
         {
@@ -68,13 +68,13 @@
         {
             "unit" : "gram",
             "name" : "dua chua",
-            "quantity" : 100,
+            "quantity" : "100",
             "group" : "test"
         }, 
         {
             "unit" : "gram",
             "name" : "mang",
-            "quantity" : 200,
+            "quantity" : "200",
             "group" : "test"
         }
     ],
@@ -131,7 +131,7 @@
     ],
     "picture_url" : "http://www.wn.com.vn/product_images/uploaded_images/cach-rang-com-ngon-8-.jpg",
     "createdTime" : NumberLong(1444061104366),
-    "favoriteNumber" : 100,
+    "favoriteNumber" : "100",
     "intervalCook" : 20,
     "steps" : [ 
         {

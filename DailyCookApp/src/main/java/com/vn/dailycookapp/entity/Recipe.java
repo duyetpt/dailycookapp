@@ -32,6 +32,7 @@ public class Recipe {
 	
 	private String					owner;
 	
+	@JsonIgnoreProperty
 	@Property(value = "comment_number")
 	private int						commentNumber;
 	
@@ -58,6 +59,7 @@ public class Recipe {
 	
 	private String					story;
 	
+	@JsonIgnoreProperty
 	private boolean					selected			= false;
 	
 	@Property(value = "deleted_time")
@@ -65,6 +67,7 @@ public class Recipe {
 	private Long					deletedTime;
 	
 	@Property(value = "created_time")
+	@JsonIgnoreProperty
 	private Long					createdTime			= TimeUtils.getCurrentGMTTime();
 	
 	private List<Recipe.Ingredient>	ingredients;
