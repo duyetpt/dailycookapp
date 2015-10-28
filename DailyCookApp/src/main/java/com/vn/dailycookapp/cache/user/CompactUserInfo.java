@@ -10,6 +10,7 @@ public class CompactUserInfo {
 	private String	avatarUrl;
 	private String	coverUrl;
 	private String	introduce;
+	private String	language;
 	
 	public String getUserId() {
 		return userId;
@@ -105,5 +106,13 @@ public class CompactUserInfo {
 	
 	public void decreaseNumberFollower() {
 		this.numberFollower--;
+	}
+	
+	public String getLanguage() {
+		return language;
+	}
+	
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 }

@@ -2,7 +2,6 @@ package com.vn.dailycookapp.service.recipeservice;
 
 import java.io.IOException;
 
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 
 import org.bson.Document;
@@ -31,11 +30,9 @@ public class FavoriteRecipeTest extends AbstractTest {
 		String userId =     "560b3f83f128c211acc9eff5";
 		String recipeId =   "5612a3be432ac0716cd94970";
 		
-		Entity<String> entity = Entity.entity("", MediaType.APPLICATION_JSON_TYPE);
-		
 		{
 			responseData = target("dailycook/recipe/" + recipeId + "/favorite").queryParam("flag", 1)
-					.request(MediaType.APPLICATION_JSON_TYPE).header(HeaderField.USER_ID, userId).put(entity, String.class);
+					.request(MediaType.APPLICATION_JSON_TYPE).header(HeaderField.USER_ID, userId).get(String.class);
 			System.out.println(responseData);
 			@SuppressWarnings("unused")
 			JSONObject responseObj = getResponse();
@@ -58,7 +55,7 @@ public class FavoriteRecipeTest extends AbstractTest {
 		{
 			userId = "55f0feeadcb2fd437cdd0e2c";
 			responseData = target("dailycook/recipe/" + recipeId + "/favorite").queryParam("flag", 1)
-					.request(MediaType.APPLICATION_JSON_TYPE).header(HeaderField.USER_ID, userId).put(entity, String.class);
+					.request(MediaType.APPLICATION_JSON_TYPE).header(HeaderField.USER_ID, userId).get(String.class);
 			System.out.println(responseData);
 			@SuppressWarnings("unused")
 			JSONObject responseObj = getResponse();
@@ -86,10 +83,8 @@ public class FavoriteRecipeTest extends AbstractTest {
 		String userId = "560b3f83f128c211acc9eff5";
 		String recipeId = "5612a3be432ac0716cd94970";
 		
-		Entity<String> entity = Entity.entity("", MediaType.APPLICATION_JSON_TYPE);
-		
 		responseData = target("dailycook/recipe/" + recipeId + "/favorite").queryParam("flag", -1)
-				.request(MediaType.APPLICATION_JSON_TYPE).header(HeaderField.USER_ID, userId).put(entity, String.class);
+				.request(MediaType.APPLICATION_JSON_TYPE).header(HeaderField.USER_ID, userId).get(String.class);
 		System.out.println(responseData);
 		@SuppressWarnings("unused")
 		JSONObject responseObj = getResponse();

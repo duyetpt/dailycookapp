@@ -11,10 +11,10 @@
 		"Aromatic vegetables"
 	],
 	"notification_msg":{
-		"new_comment":"%s% was commented in your recipe",
+		"new_comment":"%s% was commented in your recipe(%s%)",
 		"new_follower":"%s% was followed you",
-		"new_favorite":"%s% was favorited a your recipe",
-		"new_recipe_of_following":"%s% added a new recipe",
+		"new_favorite":"%s% was favorited a your recipe(%s%)",
+		"new_recipe_of_following":"%s% added a new recipe(%s%)",
 		"warm":"%s%"
 	},
 	"categories": {

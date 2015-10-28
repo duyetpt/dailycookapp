@@ -4,8 +4,10 @@ import com.vn.dailycookapp.cache.user.CompactUserInfo;
 import com.vn.dailycookapp.cache.user.UserCache;
 import com.vn.dailycookapp.dao.FollowingDAO;
 import com.vn.dailycookapp.dao.UserDAO;
+import com.vn.dailycookapp.entity.Notification;
 import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.entity.response.FollowResponseData;
+import com.vn.dailycookapp.notification.NotificationActionImp;
 import com.vn.dailycookapp.restmodel.AbstractModel;
 import com.vn.dailycookapp.restmodel.InvalidParamException;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
@@ -47,6 +49,9 @@ public class FollowUserModel extends AbstractModel {
 				// Cache update
 				UserCache.getInstance().get(owner).increaseNumberFollowing();
 				UserCache.getInstance().get(userId).increaseNumberFollower();
+				
+				// Notification
+				NotificationActionImp.getInstance().addNotification(null, userId, owner, Notification.NEW_FOLLOWER_TYPE);
 				break;
 			case UNFOLLOW_FLAG:
 				// add following

@@ -6,12 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.vn.dailycookapp.entity.Notification;
 import com.vn.dailycookapp.utils.FileUtils;
 
 public class Language {
@@ -21,6 +23,8 @@ public class Language {
 	
 	private Map<String, List<String>>	ingredientTypes;
 	private Map<String, List<String>>	units;
+	private Map<String, String>			enNotiTypeMap;
+	private Map<String, String>			viNotiTypeMap;
 	
 	private final Logger				logger		= LoggerFactory.getLogger(getClass());
 	private static final Language		instance	= new Language();
@@ -39,7 +43,7 @@ public class Language {
 	
 	private void init() throws Exception {
 		File directory = new File(getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
-		String langDirectoryPath = directory.getParent() + File.separator + "lang"; 
+		String langDirectoryPath = directory.getParent() + File.separator + "lang";
 		System.out.println(langDirectoryPath);
 		File langDir = new File(langDirectoryPath);
 		File[] files = langDir.listFiles();
@@ -48,10 +52,11 @@ public class Language {
 			System.out.println(file.getPath());
 			JSONObject json = readFile(file);
 			String lang = json.getString("language");
-			language.put(lang, json); 
+			language.put(lang, json);
 		}
 		getIngredientTyes(language);
 		getUnits(language);
+		getMessage(language);
 	}
 	
 	private JSONObject readFile(File file) throws Exception {
@@ -90,12 +95,32 @@ public class Language {
 		}
 	}
 	
+	private void getMessage(Map<String, JSONObject> data) throws Exception {
+		enNotiTypeMap = new TreeMap<String, String>();
+		viNotiTypeMap = new TreeMap<String, String>();
+		for (Entry<String, JSONObject> entry : data.entrySet()) {
+			String lang = entry.getKey();
+			JSONObject arr = entry.getValue().getJSONObject("notification_msg");
+			Map<String, String> delegate = lang.equals(ENGLISH) ? enNotiTypeMap : viNotiTypeMap;
+			
+			delegate.put(Notification.NEW_COMMENT_TYPE, arr.getString("new_comment"));
+			delegate.put(Notification.NEW_FAVORITE_TYPE, arr.getString("new_favorite"));
+			delegate.put(Notification.NEW_FOLLOWER_TYPE, arr.getString("new_follower"));//
+			delegate.put(Notification.NEW_RECIPE_FROM_FOLLOWING_TYPE, arr.getString("new_recipe_of_following"));
+			delegate.put(Notification.WARM_TYPE, arr.getString("warm"));
+		}
+	}
+	
 	public List<String> listIngredientType(String language) throws Exception {
 		return ingredientTypes.get(language);
 	}
 	
 	public List<String> listUnit(String language) throws Exception {
 		return units.get(language);
+	}
+	
+	public String getMessage(String type, String language) {
+		return language.equals(ENGLISH) ? enNotiTypeMap.get(type) : viNotiTypeMap.get(type);
 	}
 	
 	// private void getCategory(Map<String, JSONObject> data) throws Exception{

@@ -4,10 +4,12 @@ import com.vn.dailycookapp.dao.CommentDAO;
 import com.vn.dailycookapp.dao.RecipeDAO;
 import com.vn.dailycookapp.dao.UserDAO;
 import com.vn.dailycookapp.entity.Comment;
+import com.vn.dailycookapp.entity.Notification;
 import com.vn.dailycookapp.entity.User;
 import com.vn.dailycookapp.entity.request.CommentInfo;
 import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.entity.response.ListCommnetResponseData.CommentResponseInfo;
+import com.vn.dailycookapp.notification.NotificationActionImp;
 import com.vn.dailycookapp.restmodel.AbstractModel;
 import com.vn.dailycookapp.restmodel.InvalidParamException;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
@@ -51,6 +53,8 @@ public class CommentModel extends AbstractModel {
 		cri.setContent(comment.getContent());
 		cri.setUserName(user.getDisplayName());
 		
+		// Notification
+		NotificationActionImp.getInstance().addNotification(recipeId, userId, null, Notification.NEW_COMMENT_TYPE);
 		response.setData(cri);
 		return response;
 	}

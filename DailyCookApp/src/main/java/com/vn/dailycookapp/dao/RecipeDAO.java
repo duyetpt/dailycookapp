@@ -17,7 +17,7 @@ public class RecipeDAO extends AbstractDAO<Recipe> {
 	private static final RecipeDAO	instance	= new RecipeDAO();
 	
 	private RecipeDAO() {
-		datastore.ensureIndexes();
+		datastore.ensureIndexes(Recipe.class);
 	}
 	
 	public static RecipeDAO getInstance() {

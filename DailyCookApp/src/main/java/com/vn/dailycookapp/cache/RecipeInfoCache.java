@@ -9,7 +9,9 @@ public class RecipeInfoCache{
 	
 	// Name -> list recipeId
 	private Map<String, List<String>> nameMap;
+	// tag name -> number of tag has same name
 	private Map<String, Integer> tagsMap;
+	// ingredient name -> number of ingredient has same name
 	private Map<String, Integer> ingredientMaps;
 	
 	// tag -> list recipeId

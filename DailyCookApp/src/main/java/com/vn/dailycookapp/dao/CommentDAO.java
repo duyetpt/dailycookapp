@@ -12,7 +12,7 @@ public class CommentDAO extends AbstractDAO <Comment>{
 	private static final CommentDAO	instance	= new CommentDAO();
 	
 	private CommentDAO() {
-		datastore.ensureIndexes();
+		datastore.ensureIndexes(Comment.class);
 	}
 	
 	public static CommentDAO getInstance() {

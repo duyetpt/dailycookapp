@@ -17,7 +17,7 @@ public class UserDAO extends AbstractDAO<User> {
 	private static final UserDAO	instance	= new UserDAO();
 	
 	private UserDAO() {
-		datastore.ensureIndexes();
+		datastore.ensureIndexes(User.class);
 	}
 	
 	public static final UserDAO getInstance() {

@@ -3,9 +3,11 @@ package com.vn.dailycookapp.restmodel.model;
 import com.vn.dailycookapp.dao.FavoriteDAO;
 import com.vn.dailycookapp.dao.FavoritedDAO;
 import com.vn.dailycookapp.dao.RecipeDAO;
+import com.vn.dailycookapp.entity.Notification;
 import com.vn.dailycookapp.entity.Recipe;
 import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.entity.response.FavoriteResponseData;
+import com.vn.dailycookapp.notification.NotificationActionImp;
 import com.vn.dailycookapp.restmodel.AbstractModel;
 import com.vn.dailycookapp.restmodel.InvalidParamException;
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
@@ -27,7 +29,6 @@ public class FavoriteRecipeModel extends AbstractModel {
 		}
 	}
 	
-	// TODO : NOTIFICATION
 	@Override
 	protected DCAResponse execute() throws Exception {
 		DCAResponse response = new DCAResponse(ErrorCodeConstant.SUCCESSUL.getErrorCode());
@@ -42,6 +43,9 @@ public class FavoriteRecipeModel extends AbstractModel {
 				FavoriteDAO.getInstance().push(userId, recipeId);
 				FavoritedDAO.getInstance().push(recipeId, userId);
 				RecipeDAO.getInstance().increateFavoriteNumber(recipeId);
+				
+				// Notification
+				NotificationActionImp.getInstance().addNotification(recipeId, userId, null, Notification.NEW_FAVORITE_TYPE);
 				break;
 			case UNFAVORITE_FLAG:
 				/**

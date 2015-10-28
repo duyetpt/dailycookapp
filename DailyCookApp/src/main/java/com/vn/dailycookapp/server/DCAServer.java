@@ -9,6 +9,7 @@ import org.glassfish.jersey.servlet.ServletContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.vn.dailycookapp.notification.NotificationWorker;
 import com.vn.dailycookapp.utils.ConfigurationLoader;
 
 public class DCAServer {
@@ -55,6 +56,10 @@ public class DCAServer {
 			server.start();
 			System.out.println("Start server ....");
 			server.join();
+			
+			// start notification worker
+			NotificationWorker worker = new NotificationWorker();
+			worker.start();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

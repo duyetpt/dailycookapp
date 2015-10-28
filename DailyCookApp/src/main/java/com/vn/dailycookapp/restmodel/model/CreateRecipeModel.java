@@ -8,9 +8,11 @@ import com.vn.dailycookapp.cache.user.CompactUserInfo;
 import com.vn.dailycookapp.cache.user.UserCache;
 import com.vn.dailycookapp.dao.RecipeDAO;
 import com.vn.dailycookapp.dao.UserDAO;
+import com.vn.dailycookapp.entity.Notification;
 import com.vn.dailycookapp.entity.Recipe;
 import com.vn.dailycookapp.entity.response.DCAResponse;
 import com.vn.dailycookapp.entity.response.RecipeResponseData;
+import com.vn.dailycookapp.notification.NotificationActionImp;
 import com.vn.dailycookapp.restmodel.AbstractModel;
 import com.vn.dailycookapp.restmodel.InvalidParamException;
 import com.vn.dailycookapp.utils.DCAException;
@@ -63,6 +65,7 @@ public class CreateRecipeModel extends AbstractModel {
 		RecipeManager.getInstance().addRecipe(recipe);
 		
 		// TODO notification, add recipe to user_recipe
+		NotificationActionImp.getInstance().addNotification(recipeId, userId, null, Notification.NEW_RECIPE_FROM_FOLLOWING_TYPE);
 		
 		return response;
 	}

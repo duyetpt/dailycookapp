@@ -39,6 +39,7 @@ public class UserCache {
 		cUser.setNumberRecipes(user.getNumberRecipes());
 		cUser.setUserId(user.getId());
 		cUser.setIntroduce(user.getIntroduce());
+		cUser.setLanguage(user.getLanguage());
 		
 		userMap.put(user.getId(), cUser);
 		emailMap.put(user.getEmail(), user.getId());
@@ -64,7 +65,8 @@ public class UserCache {
 	}
 	
 	/**
-	 * Get user info by email. Check cache, if not find, get from data base => cache
+	 * Get user info by email. Check cache, if not find, get from data base =>
+	 * cache
 	 * 
 	 * @param email
 	 * @return
