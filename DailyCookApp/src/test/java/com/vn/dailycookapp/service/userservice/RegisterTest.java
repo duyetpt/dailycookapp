@@ -49,8 +49,8 @@ public class RegisterTest extends AbstractTest{
 	}	
 	
 	public static void main(String[] args) {
-		String email = "duyetpt" + System.currentTimeMillis() + "@dailycook.vn";
-		String password = "979565268772394:";
+		String email = "duyetpt" + "@dailycook.vn";
+		String password = "12345678:";
 		String re_passowrd = password;
 		
 		RegisterInfo regInfo = new RegisterInfo();
