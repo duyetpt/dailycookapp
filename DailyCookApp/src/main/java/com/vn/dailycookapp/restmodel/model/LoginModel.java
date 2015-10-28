@@ -33,6 +33,7 @@ public class LoginModel extends AbstractModel {
 	protected DCAResponse execute() throws Exception {
 		DCAResponse response = null;
 		String[] infors = accountInfo.split(" ");
+		logger.info("!...!...! user:" + infors[0] + ", pass:" + infors[1] + " !...!...!");
 		if (infors.length != 2) {
 			response = new DCAResponse(ErrorCodeConstant.INVALID_DATA.getErrorCode());
 		} else {
