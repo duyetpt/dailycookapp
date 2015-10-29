@@ -9,6 +9,7 @@ import com.vn.dailycookapp.restmodel.model.GetIngredientTypesModel;
 import com.vn.dailycookapp.restmodel.model.GetRecipeModel;
 import com.vn.dailycookapp.restmodel.model.GetUnitsModel;
 import com.vn.dailycookapp.restmodel.model.LoginModel;
+import com.vn.dailycookapp.restmodel.model.LogoutModel;
 import com.vn.dailycookapp.restmodel.model.NewFeedModel;
 import com.vn.dailycookapp.restmodel.model.RegisterModel;
 import com.vn.dailycookapp.restmodel.model.SearchRecipeModel;
@@ -23,6 +24,7 @@ public enum ModelDefine {
 	GET_RECIPE("get_recipe", GetRecipeModel.class),
 	REGISTER("register", RegisterModel.class),
 	LOGIN("login", LoginModel.class),
+	LOGOUT("logout", LogoutModel.class),
 	FOLLOW("follow_user", FollowUserModel.class),
 	
 	GET_COMMENT("get_comment", GetCommentModel.class),

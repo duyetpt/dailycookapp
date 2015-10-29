@@ -3,10 +3,14 @@ package com.vn.dailycookapp.security.session;
 import java.util.Hashtable;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.vn.dailycookapp.utils.ErrorCodeConstant;
 import com.vn.dailycookapp.utils.TimeUtils;
 
 public class SessionManager implements Runnable {
+	private Logger						logger			= LoggerFactory.getLogger(getClass());
 	
 	private final int					TOKEN_LENGTH	= 26;
 	private final int					SLEEP_TIME		= 1000 * 60 * 10;
@@ -67,7 +71,16 @@ public class SessionManager implements Runnable {
 	}
 	
 	public void closeSessionOfUser(String userId) {
-		// TODO
+		for (Map.Entry<String, Session> entry : tokenMap.entrySet()) {
+			try {
+				Session session = entry.getValue();
+				if (session.getUserId().equals(userId)) {
+					tokenMap.remove(entry.getKey());
+				}
+			} catch (Exception e) {
+				logger.error("logout: remove session error", e);
+			}
+		}
 	}
 	
 	@Override
@@ -84,7 +97,7 @@ public class SessionManager implements Runnable {
 			try {
 				Thread.sleep(SLEEP_TIME);
 			} catch (InterruptedException e) {
-				// TODO
+				logger.error("expire session process exception", e);
 			}
 		}
 	}
