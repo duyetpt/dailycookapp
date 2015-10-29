@@ -22,7 +22,7 @@ public class CommentDAO extends AbstractDAO <Comment>{
 	public List<Comment> list(String recipeId, int skip, int take) throws DAOException {
 		List<Comment> comments = null;
 		try {
-			Query<Comment> query = datastore.createQuery(Comment.class).field("recipe_id").equal(recipeId).offset(skip)
+			Query<Comment> query = datastore.createQuery(Comment.class).field("recipe_id").equal(recipeId).order("-create_time").offset(skip)
 					.limit(take);
 			comments = query.asList();
 		} catch (Exception ex) {
